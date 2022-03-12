@@ -1,0 +1,38 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for the my RealWorld project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./build/server/app.js",
+    "dev": "ts-node-dev --respawn --transpile-only app.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "server",
+    "fullstack",
+    "realworld",
+    "conduit"
+  ],
+  "author": "Zoltán Völcsey",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "jose": "^4.3.7",
+    "pg": "^8.7.1",
+    "randomstring": "^1.2.1",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/nodemon": "^1.19.1",
+    "@types/pg": "^8.6.3",
+    "@types/randomstring": "^1.1.8",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  }
+}
