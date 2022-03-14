@@ -1,5 +1,4 @@
 .main-footer {
   grid-row: 3;
   grid-area: 'main-footer';
-  background: #fff;
 }
