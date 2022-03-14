@@ -7,7 +7,7 @@ import Container from '../UI/Container';
 const Footer: FC<{}> = () => {
   return (
     <footer className={styles['main-footer']}>
-      <Container>
+      <Container className={styles['main-footer__container']}>
         <Brand />
         <span className={styles.attribution}>
           An interactive learning project from{' '}

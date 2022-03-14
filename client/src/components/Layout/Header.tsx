@@ -7,7 +7,7 @@ import Container from '../UI/Container';
 const Header: FC<{}> = () => {
   return (
     <header className={styles['main-header']}>
-      <Container>
+      <Container className={styles['main-header__container']}>
         <Brand />
       </Container>
     </header>
