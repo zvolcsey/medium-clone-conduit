@@ -1,5 +1,6 @@
 :root {
   --main-color: #005f00;
+  --main-sudo-selector-color: #005f00;
   --background: #cacaca;
   --container-background: #fff;
 }
@@ -34,7 +35,18 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--main-color);
+  font-weight: 700;
+}
+
+a:hover,
+a:active {
+  filter: brightness(1.5);
+}
+
+a:focus {
+  outline: none;
+  filter: brightness(1.5);
 }
 
 .centered {
