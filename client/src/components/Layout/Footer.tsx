@@ -9,6 +9,13 @@ const Footer: FC<{}> = () => {
     <footer className={styles['main-footer']}>
       <Container>
         <Brand />
+        <span className={styles.attribution}>
+          An interactive learning project from{' '}
+          <a target='_blank' href='https://thinkster.io'>
+            Thinkster
+          </a>
+          . Code &amp; design licensed under MIT.
+        </span>
       </Container>
     </footer>
   );
