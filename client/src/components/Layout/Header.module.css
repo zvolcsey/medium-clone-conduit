@@ -12,6 +12,33 @@
 .main-header__container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.main-nav {
+  display: none;
+}
+
+.main-nav__items {
+  list-style: none;
+  display: flex;
+}
+
+.main-nav__item {
+  margin-right: 1rem;
+}
+
+.main-nav__item:last-of-type {
+  margin: 0;
+}
+
+.main-nav__item--active {
+  filter: brightness(1.8);
+}
+
+@media (min-width: 40rem) {
+  .main-nav {
+    display: inline-block;
+  }
 }
