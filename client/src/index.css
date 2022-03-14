@@ -35,7 +35,6 @@ body {
 a {
   text-decoration: none;
   color: var(--main-color);
-  font-weight: 700;
 }
 
 a:hover,
