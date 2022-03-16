@@ -1,7 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
+import commonReducer from './common-slice';
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    common: commonReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import '../../index.css';
 import styles from './Header.module.css';
-import Brand from '../UI/Brand';
+import Brand from '../Brand/Brand';
 import Container from '../UI/Container';
 import { NavLink } from 'react-router-dom';
 

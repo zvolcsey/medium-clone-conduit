@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import '../../index.css';
 import styles from './Footer.module.css';
-import Brand from '../UI/Brand';
+import Brand from '../Brand/Brand';
 import Container from '../UI/Container';
 
 const Footer: FC<{}> = () => {
