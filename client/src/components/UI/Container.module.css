@@ -1,4 +1,4 @@
 .container {
-  background: var(--container-background);
+  background: var(--element-background);
   height: 100%;
 }

@@ -1,0 +1,17 @@
+.popular-tags {
+  width: 90%;
+  max-width: 40rem;
+  margin: 1rem auto;
+}
+
+.popular-tags__card {
+  padding: 0.6rem;
+}
+
+.popular-tags__card > h1 {
+  font-size: 1.2rem;
+}
+
+.popular-tags__card > p {
+  margin-top: 1rem;
+}

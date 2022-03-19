@@ -1,7 +1,7 @@
 :root {
   --main-color: #005f00;
   --background: #cacaca;
-  --container-background: #fff;
+  --element-background: #fff;
 }
 
 * {
