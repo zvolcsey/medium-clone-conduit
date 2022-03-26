@@ -1,0 +1,12 @@
+.button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
