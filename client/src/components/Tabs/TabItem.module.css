@@ -1,0 +1,15 @@
+.tabs-item {
+  margin-right: 2rem;
+}
+
+.tabs-item:last-of-type {
+  margin: 0;
+}
+
+.tabs-item--active {
+  filter: brightness(1.8);
+}
+
+.tabs-item--displayNone {
+  display: none;
+}

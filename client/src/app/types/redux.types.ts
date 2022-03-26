@@ -1,4 +1,6 @@
-import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
+import { ArticleProperties } from '../../../../server/src/types/appClasses';
+
+export type Status = 'idle' | 'loading' | 'success' | 'failed';
 
 export interface CommonState {
   appName: string;
@@ -7,5 +9,27 @@ export interface CommonState {
 
 export interface PopularTagsState {
   tags: string[];
-  status: 'idle' | 'loading' | 'success' | 'failed';
+  status: Status;
+}
+
+export interface ArticlesState {
+  globalArticles: ArticleProperties[];
+  feedArticles: ArticleProperties[];
+  tagFilterArticles: ArticleProperties[];
+  globalArticlesCount: number;
+  feedArticlesCount: number;
+  tagFilterArticlesCount: number;
+  globalArticlesStatus: Status;
+  feedArticlesStatus: Status;
+  tagFilterArticlesStatus: Status;
+}
+
+export interface MultipleArticlesReqBody {
+  limit?: string;
+  offset?: string;
+}
+
+export interface MultipleTagFilterArticlesReqBody
+  extends MultipleArticlesReqBody {
+  tag: string;
 }
