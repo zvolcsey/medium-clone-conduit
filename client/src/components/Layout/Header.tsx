@@ -23,6 +23,16 @@ const Header: FC<{}> = () => {
                 Home
               </NavLink>
             </li>
+            <li className={`${styles['main-nav__item']} bold`}>
+              <NavLink
+                to='/feed'
+                className={({ isActive }) =>
+                  isActive ? styles['main-nav__item--active'] : undefined
+                }
+              >
+                Your Feed
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </Container>

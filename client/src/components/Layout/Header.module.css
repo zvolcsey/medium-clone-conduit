@@ -14,6 +14,7 @@
   align-items: center;
   justify-content: space-around;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
+  height: 100%;
 }
 
 .main-nav {
