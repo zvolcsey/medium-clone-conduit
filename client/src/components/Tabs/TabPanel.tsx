@@ -1,23 +1,43 @@
 import { FC } from 'react';
-import { ArticleProperties } from '../../../../server/src/types/appClasses';
-import { Status } from '../../app/types/redux.types';
+import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
+import {
+  selectArticles,
+  selectArticlesCount,
+  selectStatus,
+} from '../../features/Articles/articlesListSlice';
+import { DEFAULT_ARTICLES_LIMIT } from '../../app/constant';
 
 import '../../index.css';
 import styles from './TabPanel.module.css';
 import ArticlesList from '../../features/Articles/ArticlesList';
 import Loading from '../UI/Loading';
+import Pagination from '../../features/Pagination/Pagination';
 
-const TabPanel: FC<{ items: ArticleProperties[]; status: Status }> = (
-  props
-) => {
+const TabPanel: FC<{}> = () => {
+  const articles = useAppSelector(selectArticles);
+  const articlesCount = useAppSelector(selectArticlesCount);
+  const status = useAppSelector(selectStatus);
+
+  const [searchParam] = useSearchParams();
+
+  const pageSearchParam = Number(searchParam.get('page')) ?? 1;
+  const pages = Math.ceil((articlesCount ?? 0) / DEFAULT_ARTICLES_LIMIT);
+
   return (
     <section className={styles['tab-panel']}>
-      {props.status === 'loading' && <Loading />}
-      {props.status === 'success' && <ArticlesList articles={props.items} />}
-      {props.status === 'failed' && (
+      {pageSearchParam <= pages && <Pagination pages={pages} />}
+      {status === 'loading' && <Loading />}
+      {status === 'success' && <ArticlesList articles={articles} />}
+      {status === 'failed' && (
         <p className='centered bold'>Loading articles was not successfully!</p>
       )}
-      {/* TODO: Pagination */}
+      {pageSearchParam > pages &&
+        status !== 'loading' &&
+        status !== 'failed' && (
+          <p className='centered bold'>Page is not exist!</p>
+        )}
+      {pageSearchParam <= pages && <Pagination pages={pages} />}
     </section>
   );
 };

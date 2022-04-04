@@ -1,72 +1,69 @@
 import { FC, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useAppDispatch } from '../app/hooks';
 import {
+  articlesUnload,
   initGlobalArticlesAsync,
-  selectFeedArticles,
-  selectFeedArticlesStatus,
-  selectGlobalArticles,
-  selectGlobalArticlesStatus,
-  selectTagFilterArticles,
-  selectTagFilterArticlesStatus,
 } from '../features/Articles/articlesListSlice';
 import { initPopularTagsAsync } from '../features/PopularTags/popularTagsSlice';
 import { initTagFilterArticlesAsync } from '../features/Articles/articlesListSlice';
+import { setCurrentPage } from '../features/Pagination/paginationSlice';
+import { DEFAULT_ARTICLES_LIMIT } from '../app/constant';
 
 import Banner from '../components/Banner/Banner';
 import PopularTags from '../features/PopularTags/PopularTags';
-import Tabs from '../components/Tabs/Tabs';
-import TabItem from '../components/Tabs/TabItem';
-import TabsList from '../components/Tabs/TabsList';
+import HomeTabs from '../components/Tabs/HomeTabs';
 import TabPanel from '../components/Tabs/TabPanel';
 
 const Home: FC<{}> = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-
   const param = useParams();
+  const [searchParams] = useSearchParams();
 
-  const globalArticles = useAppSelector(selectGlobalArticles);
-  const globalArticlesStatus = useAppSelector(selectGlobalArticlesStatus);
-  const feedArticles = useAppSelector(selectFeedArticles);
-  const feedArticlesStatus = useAppSelector(selectFeedArticlesStatus);
-  const tagFilterArticles = useAppSelector(selectTagFilterArticles);
-  const tagFilterArticlesStatus = useAppSelector(selectTagFilterArticlesStatus);
-
-  useEffect(() => {
-    if (param.tagName)
-      dispatch(initTagFilterArticlesAsync({ tag: param.tagName }));
-  }, [param.tagName, dispatch]);
+  const pageSearchParam =
+    Number(searchParams.get('page')) === 0
+      ? 1
+      : Number(searchParams.get('page'));
+  const articlesOffset =
+    pageSearchParam === 1
+      ? 0
+      : pageSearchParam * DEFAULT_ARTICLES_LIMIT - DEFAULT_ARTICLES_LIMIT;
 
   useEffect(() => {
+    dispatch(setCurrentPage(pageSearchParam));
     dispatch(initPopularTagsAsync());
-    dispatch(initGlobalArticlesAsync({}));
-  }, [dispatch]);
+    if (location.pathname === '/') {
+      dispatch(
+        initGlobalArticlesAsync({
+          limit: DEFAULT_ARTICLES_LIMIT,
+          offset: articlesOffset,
+        })
+      );
+    }
+    if (location.pathname === '/feed') {
+      //TODO
+    }
+    if (param.tagName) {
+      dispatch(
+        initTagFilterArticlesAsync({
+          limit: DEFAULT_ARTICLES_LIMIT,
+          offset: articlesOffset,
+          tag: param.tagName,
+        })
+      );
+    }
+    return () => {
+      dispatch(articlesUnload());
+    };
+  }, [dispatch, location.pathname, param.tagName, pageSearchParam]);
 
   return (
     <>
       <Banner />
       <PopularTags />
-      <Tabs>
-        <TabsList>
-          <TabItem path='/'>Global Feed</TabItem>
-          <TabItem path='/feed'>Your Feed</TabItem>
-          {param.tagName && (
-            <TabItem path={`/tag/${param.tagName}`} displayIfActive={true}>
-              #{param.tagName}
-            </TabItem>
-          )}
-        </TabsList>
-      </Tabs>
-      {location.pathname === '/' && location.search.length === 0 && (
-        <TabPanel items={globalArticles} status={globalArticlesStatus} />
-      )}
-      {location.pathname === '/feed' && (
-        <TabPanel items={feedArticles} status={feedArticlesStatus} />
-      )}
-      {param.tagName && (
-        <TabPanel items={tagFilterArticles} status={tagFilterArticlesStatus} />
-      )}
+      <HomeTabs />
+      <TabPanel />
     </>
   );
 };

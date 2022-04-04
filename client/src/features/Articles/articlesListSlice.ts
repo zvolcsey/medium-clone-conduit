@@ -3,23 +3,17 @@ import { RootState } from '../../app/store';
 import { initGlobalArticles, initTagFilterArticles } from './articlesListAPI';
 
 import type {
-  ArticlesState,
+  ArticlesListState,
   MultipleArticlesReqBody,
   MultipleTagFilterArticlesReqBody,
 } from '../../app/types/redux.types';
 import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
 import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
 
-const initialState: ArticlesState = {
-  globalArticles: [],
-  feedArticles: [],
-  tagFilterArticles: [],
-  globalArticlesCount: 0,
-  feedArticlesCount: 0,
-  tagFilterArticlesCount: 0,
-  globalArticlesStatus: 'idle',
-  feedArticlesStatus: 'idle',
-  tagFilterArticlesStatus: 'idle',
+const initialState: ArticlesListState = {
+  articles: [],
+  articlesCount: null,
+  status: 'idle',
 };
 
 export const initGlobalArticlesAsync = createAsyncThunk<
@@ -43,51 +37,45 @@ export const initTagFilterArticlesAsync = createAsyncThunk<
 export const articlesListSlice = createSlice({
   name: 'articlesList',
   initialState,
-  reducers: {},
+  reducers: {
+    articlesUnload: (state) => {
+      state.articles = [];
+      state.articlesCount = null;
+      state.status = 'idle';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(initGlobalArticlesAsync.pending, (state) => {
-        state.globalArticlesStatus = 'loading';
+        state.status = 'loading';
       })
       .addCase(initGlobalArticlesAsync.fulfilled, (state, action) => {
-        state.globalArticlesStatus = 'success';
-        state.globalArticles = action.payload.articles;
-        state.globalArticlesCount = action.payload.articlesCount;
+        state.status = 'success';
+        state.articles = action.payload.articles;
+        state.articlesCount = action.payload.articlesCount;
       })
       .addCase(initGlobalArticlesAsync.rejected, (state) => {
-        state.globalArticlesStatus = 'failed';
+        state.status = 'failed';
       })
       .addCase(initTagFilterArticlesAsync.pending, (state) => {
-        state.tagFilterArticlesStatus = 'loading';
+        state.status = 'loading';
       })
       .addCase(initTagFilterArticlesAsync.fulfilled, (state, action) => {
-        state.tagFilterArticlesStatus = 'success';
-        state.tagFilterArticles = action.payload.articles;
-        state.tagFilterArticlesCount = action.payload.articlesCount;
+        state.status = 'success';
+        state.articles = action.payload.articles;
+        state.articlesCount = action.payload.articlesCount;
       })
       .addCase(initTagFilterArticlesAsync.rejected, (state) => {
-        state.tagFilterArticlesStatus = 'failed';
+        state.status = 'failed';
       });
   },
 });
 
-export const selectGlobalArticles = (state: RootState) =>
-  state.articlesList.globalArticles;
-export const selectFeedArticles = (state: RootState) =>
-  state.articlesList.feedArticles;
-export const selectTagFilterArticles = (state: RootState) =>
-  state.articlesList.tagFilterArticles;
-export const selectGlobalArticlesCount = (state: RootState) =>
-  state.articlesList.globalArticlesCount;
-export const selectFeedArticlesCount = (state: RootState) =>
-  state.articlesList.feedArticlesCount;
-export const selectTagFilterArticlesCount = (state: RootState) =>
-  state.articlesList.tagFilterArticlesCount;
-export const selectGlobalArticlesStatus = (state: RootState) =>
-  state.articlesList.globalArticlesStatus;
-export const selectFeedArticlesStatus = (state: RootState) =>
-  state.articlesList.feedArticlesStatus;
-export const selectTagFilterArticlesStatus = (state: RootState) =>
-  state.articlesList.tagFilterArticlesStatus;
+export const { articlesUnload } = articlesListSlice.actions;
+
+export const selectArticles = (state: RootState) => state.articlesList.articles;
+export const selectArticlesCount = (state: RootState) =>
+  state.articlesList.articlesCount;
+export const selectStatus = (state: RootState) => state.articlesList.status;
 
 export default articlesListSlice.reducer;

@@ -1,5 +1,9 @@
 import { AxiosResponse } from 'axios';
 import axiosInstance from '../../app/axios';
+import {
+  DEFAULT_ARTICLES_LIMIT,
+  DEFAULT_ARTICLES_OFFSET,
+} from '../../app/constant';
 
 import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
 import {
@@ -13,7 +17,9 @@ export const initGlobalArticles = async (
   const { limit, offset } = reqData;
   const { data }: AxiosResponse<MultipleArticlesResBody> =
     await axiosInstance.get(
-      `/api/articles?limit=${limit ?? '20'}&offset=${offset ?? '0'}`,
+      `/api/articles?limit=${limit ?? DEFAULT_ARTICLES_LIMIT}&offset=${
+        offset ?? DEFAULT_ARTICLES_OFFSET
+      }`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +36,9 @@ export const initTagFilterArticles = async (
   const { limit, offset, tag } = reqData;
   const { data }: AxiosResponse<MultipleArticlesResBody> =
     await axiosInstance.get(
-      `/api/articles?limit=${limit ?? '20'}&offset=${offset ?? '0'}&tag=${tag}`,
+      `/api/articles?limit=${limit ?? DEFAULT_ARTICLES_LIMIT}&offset=${
+        offset ?? DEFAULT_ARTICLES_OFFSET
+      }&tag=${tag}`,
       {
         headers: {
           'Content-Type': 'application/json',

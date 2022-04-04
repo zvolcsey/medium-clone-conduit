@@ -12,24 +12,22 @@ export interface PopularTagsState {
   status: Status;
 }
 
-export interface ArticlesState {
-  globalArticles: ArticleProperties[];
-  feedArticles: ArticleProperties[];
-  tagFilterArticles: ArticleProperties[];
-  globalArticlesCount: number;
-  feedArticlesCount: number;
-  tagFilterArticlesCount: number;
-  globalArticlesStatus: Status;
-  feedArticlesStatus: Status;
-  tagFilterArticlesStatus: Status;
+export interface ArticlesListState {
+  articles: ArticleProperties[];
+  articlesCount: number | null;
+  status: Status;
 }
 
 export interface MultipleArticlesReqBody {
-  limit?: string;
-  offset?: string;
+  limit?: number;
+  offset?: number;
 }
 
 export interface MultipleTagFilterArticlesReqBody
   extends MultipleArticlesReqBody {
   tag: string;
+}
+
+export interface PaginationState {
+  currentPage: number;
 }

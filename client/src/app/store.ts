@@ -3,12 +3,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import commonReducer from './common-slice';
 import popularTagsReducer from '../features/PopularTags/popularTagsSlice';
 import articlesListReducer from '../features/Articles/articlesListSlice';
+import paginationReducer from '../features/Pagination/paginationSlice';
 
 export const store = configureStore({
   reducer: {
     common: commonReducer,
     popularTags: popularTagsReducer,
     articlesList: articlesListReducer,
+    pagination: paginationReducer,
   },
 });
 

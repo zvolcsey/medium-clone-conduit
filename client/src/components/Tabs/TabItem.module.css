@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+.tabs-item > span {
+  color: var(--main-color);
+  filter: brightness(1.8);
+}
+
 .tabs-item--active {
   filter: brightness(1.8);
 }
