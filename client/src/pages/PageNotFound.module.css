@@ -1,4 +1,10 @@
 .page-not-found {
-  padding: 2rem 0;
-  font-size: 1.4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.page-not-found__title {
+  margin-bottom: 1rem;
 }
