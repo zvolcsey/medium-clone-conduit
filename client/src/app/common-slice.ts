@@ -4,7 +4,7 @@ import type { RootState } from './store';
 import type { CommonState } from './types/redux.types';
 
 const initialState: CommonState = {
-  appName: 'conduit',
+  appName: 'Conduit',
   appSlogan: 'A place to share your knowledge',
 };
 

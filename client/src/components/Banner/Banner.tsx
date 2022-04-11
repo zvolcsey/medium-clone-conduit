@@ -10,7 +10,7 @@ const Banner: FC<{}> = () => {
 
   return (
     <section className={styles.banner}>
-      <h1>{appName}</h1>
+      <h1>{appName.toLowerCase()}</h1>
       <p>{appSlogan}</p>
     </section>
   );

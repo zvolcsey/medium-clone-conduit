@@ -11,7 +11,7 @@ const Brand: FC<{}> = () => {
 
   return (
     <Link to='/' className={`${styles.brand} bold`}>
-      {appName}
+      {appName.toLowerCase()}
     </Link>
   );
 };
