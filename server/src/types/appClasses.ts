@@ -1,4 +1,7 @@
-import { UserFromDB, ArticleFromDB, CommentFromDB } from './db.types';
+import { generateId } from '../utils/utility';
+
+import type { AuthInputValidation } from './appResponse.types';
+import type { UserFromDB, ArticleFromDB, CommentFromDB } from './db.types';
 
 export class RequestUserProperties {
   id: string;
@@ -95,60 +98,72 @@ export class CommentProperties {
 // Error Classes
 
 export class AuthError {
+  id: string;
   name: string;
   message: string;
 
   constructor(message: string) {
+    this.id = generateId();
     this.name = 'Authorization Error';
     this.message = message;
   }
 }
 
 export class ForbiddenError {
+  id: string;
   name: string;
   message: string;
 
   constructor(message: string) {
+    this.id = generateId();
     this.name = 'Forbidden Error';
     this.message = message;
   }
 }
 
 export class ValidationError {
+  id: string;
   name: string;
-  message: string;
+  message: string | AuthInputValidation[];
 
-  constructor(message: string) {
+  constructor(message: string | AuthInputValidation[]) {
+    this.id = generateId();
     this.name = 'Validation Error';
     this.message = message;
   }
 }
 
 export class NotFoundError {
+  id: string;
   name: string;
   message: string;
 
   constructor(message: string) {
+    this.id = generateId();
     this.name = 'Not Found Error';
     this.message = message;
   }
 }
 
 export class FoundError {
+  id: string;
   name: string;
   message: string;
 
   constructor(message: string) {
+    this.id = generateId();
     this.name = 'Found Error';
     this.message = message;
   }
 }
 
 export class DatabaseError {
+  id: string;
   name: string;
   message: string;
 
   constructor(message: string) {
+    this.id = generateId();
     this.name = 'Database Error';
     this.message = message;
   }

@@ -40,6 +40,12 @@ export interface ErrorResBody {
 }
 
 export interface ErrorResBodyProperties {
+  id: string;
   name: string;
-  message: string;
+  message: string | AuthInputValidation[];
+}
+
+export interface AuthInputValidation {
+  id: string;
+  text: string;
 }

@@ -1,0 +1,11 @@
+.item {
+  margin-right: 1rem;
+}
+
+.item:last-of-type {
+  margin: 0;
+}
+
+.item--active {
+  filter: brightness(1.8);
+}

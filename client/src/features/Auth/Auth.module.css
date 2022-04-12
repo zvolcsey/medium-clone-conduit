@@ -1,0 +1,23 @@
+.card {
+  position: relative;
+  margin: 2rem auto 2rem auto;
+  padding: 0.6rem;
+  width: 90%;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card > h1 {
+  margin: 1rem 0;
+}
+
+.card > a {
+  margin-bottom: 1rem;
+}
+
+.errors {
+  margin-bottom: 1rem;
+}

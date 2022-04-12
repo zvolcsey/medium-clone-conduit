@@ -4,9 +4,11 @@ import { AuthError } from '../types/appClasses';
 import { compare, hash } from 'bcrypt';
 import dotenv from 'dotenv';
 import { ValidationError } from '../types/appClasses';
+import randomstring from 'randomstring';
 
 import type { SignTokenPayload } from '../types/appRequest.types';
 import type QueryString from 'qs';
+import type { AuthInputValidation } from '../types/appResponse.types';
 
 dotenv.config();
 
@@ -113,4 +115,63 @@ export const getQueryParam = (
       return s;
     }
   }
+};
+
+export const generateId = (): string => {
+  const id = randomstring.generate({
+    length: 10,
+    charset: 'alphabetic',
+    readable: true,
+  });
+  return id;
+};
+
+export const checkUsername = (
+  username: string,
+  usernameRegex: RegExp
+): AuthInputValidation[] => {
+  let errors: AuthInputValidation[] = [];
+
+  if (username.length === 0)
+    errors.push({ id: generateId(), text: 'Username is empty' });
+  if (username.length < 6 || username.length > 15)
+    errors.push({
+      id: generateId(),
+      text: 'Username must be between 6 and 15 characters',
+    });
+  if (!usernameRegex.test(username))
+    errors.push({
+      id: generateId(),
+      text: 'Username contain not allowed character',
+    });
+
+  return errors;
+};
+
+export const checkPassword = (
+  password: string,
+  passwordRegex: RegExp,
+  specialCharacterRegex: RegExp
+): AuthInputValidation[] => {
+  let errors: AuthInputValidation[] = [];
+
+  if (password.length === 0)
+    errors.push({ id: generateId(), text: 'Password is empty' });
+  if (password.length < 8 || password.length > 15)
+    errors.push({
+      id: generateId(),
+      text: 'Password must be between 8 and 15 characters',
+    });
+  if (!passwordRegex.test(password))
+    errors.push({
+      id: generateId(),
+      text: 'Password contain not allowed character',
+    });
+  if (!password.match(specialCharacterRegex))
+    errors.push({
+      id: generateId(),
+      text: 'Password must contain minimum 1 special character',
+    });
+
+  return errors;
 };

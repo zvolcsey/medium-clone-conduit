@@ -29,6 +29,9 @@ const TabPanel: FC<{}> = () => {
       {pageSearchParam <= pages && <Pagination pages={pages} />}
       {status === 'loading' && <Loading />}
       {status === 'success' && <ArticlesList articles={articles} />}
+      {status === 'success' && articles.length === 0 && (
+        <p className='centered bold'>No articles here... yet!</p>
+      )}
       {status === 'failed' && (
         <p className='centered bold'>Loading articles was not successfully!</p>
       )}

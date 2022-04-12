@@ -4,37 +4,14 @@ import '../../index.css';
 import styles from './Header.module.css';
 import Brand from '../Brand/Brand';
 import Container from '../UI/Container';
-import { NavLink } from 'react-router-dom';
+import MainNav from './MainNav';
 
 const Header: FC<{}> = () => {
   return (
     <header className={styles['main-header']}>
-      <Container className={styles['main-header__container']}>
+      <Container className={styles.container}>
         <Brand />
-        <nav aria-labelledby='main-navigation' className={styles['main-nav']}>
-          <ul id='main-navgation' className={styles['main-nav__items']}>
-            <li className={`${styles['main-nav__item']} bold`}>
-              <NavLink
-                to='/'
-                className={({ isActive }) =>
-                  isActive ? styles['main-nav__item--active'] : undefined
-                }
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className={`${styles['main-nav__item']} bold`}>
-              <NavLink
-                to='/feed'
-                className={({ isActive }) =>
-                  isActive ? styles['main-nav__item--active'] : undefined
-                }
-              >
-                Your Feed
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+        <MainNav />
       </Container>
     </header>
   );

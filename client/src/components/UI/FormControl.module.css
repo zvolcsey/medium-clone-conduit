@@ -1,0 +1,7 @@
+.controls {
+  border: none;
+  width: 80%;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  flex-direction: column;
+}

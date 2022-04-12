@@ -9,11 +9,7 @@ const usersRoutes = express.Router();
 
 // desc    Sign in the user
 // route   POST /api/users/sign-in
-usersRoutes.post(
-  '/users/sign-in',
-  authInputValidation,
-  userControllers.postSignInHandler
-);
+usersRoutes.post('/users/sign-in', userControllers.postSignInHandler);
 
 // desc    Sign up the user
 // route   POST /api/users

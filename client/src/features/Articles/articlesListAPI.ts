@@ -8,6 +8,7 @@ import {
 import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
 import {
   MultipleArticlesReqBody,
+  MultipleFeedArticlesReqBody,
   MultipleTagFilterArticlesReqBody,
 } from '../../app/types/redux.types';
 
@@ -23,6 +24,24 @@ export const initGlobalArticles = async (
       {
         headers: {
           'Content-Type': 'application/json',
+        },
+        responseType: 'json',
+      }
+    );
+  return data;
+};
+
+export const initFeedArticles = async (
+  reqData: MultipleFeedArticlesReqBody
+): Promise<MultipleArticlesResBody> => {
+  const { limit, offset, token } = reqData;
+  const { data }: AxiosResponse<MultipleArticlesResBody> =
+    await axiosInstance.get(
+      `/api/articles/feed?limit=${limit}&offset=${offset}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`,
         },
         responseType: 'json',
       }

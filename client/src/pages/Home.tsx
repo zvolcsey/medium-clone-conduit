@@ -1,13 +1,16 @@
 import { FC, useEffect } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   articlesUnload,
+  initFeedArticlesAsync,
   initGlobalArticlesAsync,
 } from '../features/Articles/articlesListSlice';
 import { initPopularTagsAsync } from '../features/PopularTags/popularTagsSlice';
 import { initTagFilterArticlesAsync } from '../features/Articles/articlesListSlice';
 import { setCurrentPage } from '../features/Pagination/paginationSlice';
+import { selectToken } from '../features/Auth/authSlice';
+import { selectAppName } from '../app/common-slice';
 import { DEFAULT_ARTICLES_LIMIT } from '../app/constant';
 
 import Banner from '../components/Banner/Banner';
@@ -21,6 +24,9 @@ const Home: FC<{}> = () => {
   const param = useParams();
   const [searchParams] = useSearchParams();
 
+  const token = useAppSelector(selectToken);
+  const appName = useAppSelector(selectAppName);
+
   const pageSearchParam =
     Number(searchParams.get('page')) === 0
       ? 1
@@ -29,6 +35,10 @@ const Home: FC<{}> = () => {
     pageSearchParam === 1
       ? 0
       : pageSearchParam * DEFAULT_ARTICLES_LIMIT - DEFAULT_ARTICLES_LIMIT;
+
+  useEffect(() => {
+    document.title = `Home | ${appName}`;
+  }, [appName]);
 
   useEffect(() => {
     dispatch(setCurrentPage(pageSearchParam));
@@ -41,8 +51,14 @@ const Home: FC<{}> = () => {
         })
       );
     }
-    if (location.pathname === '/feed') {
-      //TODO
+    if (location.pathname === '/feed' && token) {
+      dispatch(
+        initFeedArticlesAsync({
+          limit: DEFAULT_ARTICLES_LIMIT,
+          offset: articlesOffset,
+          token: token,
+        })
+      );
     }
     if (param.tagName) {
       dispatch(
@@ -56,7 +72,14 @@ const Home: FC<{}> = () => {
     return () => {
       dispatch(articlesUnload());
     };
-  }, [dispatch, location.pathname, param.tagName, pageSearchParam]);
+  }, [
+    dispatch,
+    location.pathname,
+    param.tagName,
+    pageSearchParam,
+    articlesOffset,
+    token,
+  ]);
 
   return (
     <>

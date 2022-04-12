@@ -1,0 +1,4 @@
+.items {
+  list-style: none;
+  display: flex;
+}

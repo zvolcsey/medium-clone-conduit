@@ -1,6 +1,7 @@
 import * as jwtMethods from '../utils/utility';
 import * as userService from '../models/users.model';
-import { ErrorResBody } from '../types/appResponse.types';
+import { checkUsername, checkPassword } from '../utils/utility';
+
 import {
   RequestUserProperties,
   AuthError,
@@ -8,7 +9,7 @@ import {
   FoundError,
   NotFoundError,
 } from '../types/appClasses';
-
+import type { ErrorResBody } from '../types/appResponse.types';
 import type { Response, NextFunction } from 'express';
 import type {
   ConduitRequest,
@@ -127,12 +128,24 @@ export const authInputValidation = (
   next: NextFunction
 ): void => {
   try {
-    if (!req.body.user || !req.body.user.username || !req.body.user.password)
-      throw new ValidationError('Missing Data from Request Body');
-    if (req.body.user.username.length < 6 || req.body.user.username.length > 15)
-      throw new ValidationError('Username must be between 6 and 15 characters');
-    if (req.body.user.password.length < 8 || req.body.user.password.length > 15)
-      throw new ValidationError('Password must be between 8 and 15 characters');
+    if (!req.body.user) {
+      console.log('Missing user object from request body');
+    }
+    const { username, password } = req.body.user;
+    const usernameRegex = /^[A-Za-z_0-9]+$/g;
+    const passwordRegex = /^[A-Za-z0-9!#$%&+-?@_~]+$/g;
+    const passwordSpecialCharactersRegex = /[!#$%&+\-?@_~]/g;
+
+    const usernameErrors = checkUsername(username, usernameRegex);
+
+    const errors = usernameErrors.concat(
+      checkPassword(password, passwordRegex, passwordSpecialCharactersRegex)
+    );
+
+    if (errors.length > 0) {
+      throw new ValidationError(errors);
+    }
+
     next();
   } catch (err) {
     next(err);

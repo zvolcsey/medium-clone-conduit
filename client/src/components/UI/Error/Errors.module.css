@@ -1,0 +1,12 @@
+.errors {
+  border: 0.1rem solid red;
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+  width: 80%;
+}
+
+.errors > h2 {
+  font-size: 1.2rem;
+  color: red;
+  margin-bottom: 0.6rem;
+}

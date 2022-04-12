@@ -4,6 +4,7 @@ import commonReducer from './common-slice';
 import popularTagsReducer from '../features/PopularTags/popularTagsSlice';
 import articlesListReducer from '../features/Articles/articlesListSlice';
 import paginationReducer from '../features/Pagination/paginationSlice';
+import authReducer from '../features/Auth/authSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     popularTags: popularTagsReducer,
     articlesList: articlesListReducer,
     pagination: paginationReducer,
+    auth: authReducer,
   },
 });
 

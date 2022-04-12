@@ -23,7 +23,7 @@
     "express": "^4.17.2",
     "jose": "^4.3.7",
     "pg": "^8.7.1",
-    "randomstring": "^1.2.1",
+    "randomstring": "^1.2.2",
     "slugify": "^1.6.5"
   },
   "devDependencies": {

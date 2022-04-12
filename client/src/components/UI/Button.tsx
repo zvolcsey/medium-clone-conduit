@@ -6,14 +6,14 @@ import styles from './Button.module.css';
 const Button: FC<{
   type?: ButtonType;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }> = (props) => {
   return (
     <button
       type={props.type || 'button'}
       className={`${styles.button} ${props.className || ''}`}
-      onClick={props.onClick}
+      onClick={props.type !== 'submit' ? props.onClick : undefined}
       disabled={props.disabled || false}
     >
       {props.children}

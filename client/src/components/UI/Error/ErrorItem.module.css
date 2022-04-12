@@ -1,0 +1,12 @@
+.item {
+  color: red;
+  margin-bottom: 0.6rem;
+}
+
+.item:last-of-type {
+  margin: 0;
+}
+
+.name {
+  font-weight: 700;
+}
