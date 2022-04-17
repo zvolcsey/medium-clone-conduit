@@ -1,13 +1,16 @@
 .button {
   padding: 0.5rem 1rem;
   background: var(--main-color);
-  border: 0.2rem solid var(--main-color);
+  border: 0.1rem solid var(--main-color);
   border-radius: 0.6rem;
   color: #fff;
 }
 
 .button:hover,
-.button:active,
+.button:active {
+  filter: brightness(1.8);
+}
+
 .button:focus {
-  filter: var(--main-brightness);
+  box-shadow: var(--focus-box-shadow);
 }
