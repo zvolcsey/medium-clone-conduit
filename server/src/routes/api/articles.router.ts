@@ -32,7 +32,7 @@ articlesRoutes.delete(
 );
 
 // desc    Favorite a article
-// route   article /api/articles/:articleResourceId/favorite
+// route   POST /api/articles/:articleResourceId/favorite
 articlesRoutes.post(
   '/:articleResourceId/favorite',
   authRequired,
