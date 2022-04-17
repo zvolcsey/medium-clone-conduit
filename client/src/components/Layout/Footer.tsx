@@ -12,7 +12,12 @@ const Footer: FC<{}> = () => {
         <Brand />
         <span className={styles.attribution}>
           An interactive learning project from{' '}
-          <a target='_blank' href='https://thinkster.io' className='bold'>
+          <a
+            target='_blank'
+            rel='noreferrer noopener'
+            href='https://thinkster.io'
+            className='bold'
+          >
             Thinkster
           </a>
           . Code &amp; design licensed under MIT.
