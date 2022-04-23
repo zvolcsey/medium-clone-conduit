@@ -1,6 +1,10 @@
 import * as jwtMethods from '../utils/utility';
 import * as userService from '../models/users.model';
-import { checkUsername, checkPassword } from '../utils/utility';
+import {
+  checkUsername,
+  checkPassword,
+  checkCommentBody,
+} from '../utils/utility';
 
 import {
   RequestUserProperties,
@@ -14,6 +18,7 @@ import type { Response, NextFunction } from 'express';
 import type {
   ConduitRequest,
   AuthUserReqBody,
+  CommentReqBody,
 } from '../types/appRequest.types';
 
 export const setHeader = (
@@ -141,6 +146,29 @@ export const authInputValidation = (
     const errors = usernameErrors.concat(
       checkPassword(password, passwordRegex, passwordSpecialCharactersRegex)
     );
+
+    if (errors.length > 0) {
+      throw new ValidationError(errors);
+    }
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const commentInputValidation = (
+  req: ConduitRequest<CommentReqBody>,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    if (!req.body.comment) {
+      console.log('Missing comment object from request body');
+    }
+    const { body } = req.body.comment;
+
+    const errors = checkCommentBody(body);
 
     if (errors.length > 0) {
       throw new ValidationError(errors);

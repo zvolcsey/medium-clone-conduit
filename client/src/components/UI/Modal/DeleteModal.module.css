@@ -1,0 +1,52 @@
+.card {
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button--close {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid var(--main-color);
+  background: #fff;
+  border-radius: 0.6rem;
+  color: var(--main-color);
+}
+
+.button--close:hover,
+.button--close:active,
+.button--close:focus {
+  filter: brightness(1.8);
+  background: var(--main-color);
+  color: #fff;
+}
+
+.button--confirm {
+  padding: 0.5rem 1rem;
+  background: var(--main-color);
+  border: 0.1rem solid var(--main-color);
+  border-radius: 0.6rem;
+  color: #fff;
+}
+
+.button--confirm:hover,
+.button--confirm:active,
+.button--confirm:focus {
+  filter: brightness(1.8);
+}
+
+.button--close:focus,
+.button--confirm:focus {
+  outline: none;
+  box-shadow: var(--focus-box-shadow);
+}

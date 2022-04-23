@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import styles from './ErrorsList.module.css';
 import ErrorItem from './ErrorItem';
-import type { AuthInputValidation } from '../../../../../server/src/types/appResponse.types';
+import type { InputValidation } from '../../../../../server/src/types/appResponse.types';
 
-const ErrorsList: FC<{ items: string | AuthInputValidation[] }> = (props) => {
+const ErrorsList: FC<{ items: string | InputValidation[] }> = (props) => {
   const { items } = props;
 
   let errorItems;

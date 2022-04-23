@@ -8,7 +8,7 @@ import randomstring from 'randomstring';
 
 import type { SignTokenPayload } from '../types/appRequest.types';
 import type QueryString from 'qs';
-import type { AuthInputValidation } from '../types/appResponse.types';
+import type { InputValidation } from '../types/appResponse.types';
 
 dotenv.config();
 
@@ -129,8 +129,8 @@ export const generateId = (): string => {
 export const checkUsername = (
   username: string,
   usernameRegex: RegExp
-): AuthInputValidation[] => {
-  let errors: AuthInputValidation[] = [];
+): InputValidation[] => {
+  let errors: InputValidation[] = [];
 
   if (username.length === 0)
     errors.push({ id: generateId(), text: 'Username is empty' });
@@ -152,8 +152,8 @@ export const checkPassword = (
   password: string,
   passwordRegex: RegExp,
   specialCharacterRegex: RegExp
-): AuthInputValidation[] => {
-  let errors: AuthInputValidation[] = [];
+): InputValidation[] => {
+  let errors: InputValidation[] = [];
 
   if (password.length === 0)
     errors.push({ id: generateId(), text: 'Password is empty' });
@@ -171,6 +171,20 @@ export const checkPassword = (
     errors.push({
       id: generateId(),
       text: 'Password must contain minimum 1 special character',
+    });
+
+  return errors;
+};
+
+export const checkCommentBody = (body: string): InputValidation[] => {
+  let errors: InputValidation[] = [];
+
+  if (body.length === 0)
+    errors.push({ id: generateId(), text: 'Length of the comment is 0' });
+  if (body.length < 8 || body.length > 2500)
+    errors.push({
+      id: generateId(),
+      text: 'Comment must be between 8 and 2500 characters',
     });
 
   return errors;

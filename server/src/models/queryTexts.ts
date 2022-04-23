@@ -462,8 +462,6 @@ LEFT JOIN (
 WHERE p.resource_id = $2
 ORDER BY created_at
 DESC
-LIMIT $3
-OFFSET $4;
 `;
 
 export const deleteCommentText = `

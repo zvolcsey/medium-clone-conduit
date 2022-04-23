@@ -1,15 +1,10 @@
-.favorite-button {
-  background: transparent;
-  border: none;
-  font-weight: 700;
-}
-
-.favorite-button > span {
+.button > span {
   margin-left: 0.4rem;
 }
 
-.favorite-button:hover,
-.favorite-button:active,
-.favorite-button:focus {
+.button:hover,
+.button:active,
+.button:focus {
   color: var(--main-color);
+  filter: brightness(1.8);
 }

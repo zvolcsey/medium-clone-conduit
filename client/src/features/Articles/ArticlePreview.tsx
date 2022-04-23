@@ -45,7 +45,7 @@ const ArticlePreview: FC<{ article: ArticleProperties }> = (props) => {
         {tagList}
         <footer className={styles['article-preview__actions']}>
           <Link
-            to={`/article/${slugWithResourceId}`}
+            to={`/article/${article.slug}-${article.resourceId}`}
             className={styles['article-preview__link']}
           >
             Read More

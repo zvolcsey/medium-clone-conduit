@@ -130,6 +130,7 @@ export const authSlice = createSlice({
 export const { authPageUnload, logout } = authSlice.actions;
 
 export const selectToken = (state: RootState) => state.auth.token;
+export const selectCurrentUser = (state: RootState) => state.auth.currentUser;
 export const selectError = (state: RootState) => state.auth.error;
 
 export default authSlice.reducer;

@@ -43,14 +43,12 @@ const findCommentByResourceId = async (
 
 const findComments = async (
   reqUserId: string | null,
-  articleResourceId: string,
-  limit: number,
-  offset: number
+  articleResourceId: string
 ): Promise<MultipleCommentsFromDB> => {
   try {
     const commentQueryResult: QueryResult<CommentFromDB> = await pool.query(
       findCommentsText,
-      [reqUserId, articleResourceId, limit, offset]
+      [reqUserId, articleResourceId]
     );
     const commentsCountQueryResult: QueryResult<Count> = await pool.query(
       countCommentsText,
@@ -73,7 +71,6 @@ const insertComment = async (
   commentResourceId: string
 ): Promise<CommentFromDB> => {
   try {
-    console.log(reqBody.body, authorId, articleResourceId, commentResourceId);
     const queryResult: QueryResult<CommentFromDB> = await pool.query(
       insertCommentText,
       [reqBody.body, authorId, articleResourceId, commentResourceId]
@@ -87,11 +84,11 @@ const insertComment = async (
 };
 
 const deleteComment = async (
-  articleResourceId: string,
-  commentResourceId: string
+  commentResourceId: string,
+  articleResourceId: string
 ): Promise<void> => {
   try {
-    await pool.query(deleteCommentText, [articleResourceId, commentResourceId]);
+    await pool.query(deleteCommentText, [commentResourceId, articleResourceId]);
   } catch (error) {
     console.log(error);
     throw new DatabaseError('Delete Comment from the DB was not successfully');
@@ -126,15 +123,11 @@ export const createComment = async (
 
 export const getComments = async (
   reqUserId: string | null,
-  articleResourceId: string,
-  limit: number,
-  offset: number
+  articleResourceId: string
 ): Promise<MultipleCommentsResBody> => {
   const { commentsFromDB, commentsCount } = await findComments(
     reqUserId,
-    articleResourceId,
-    limit,
-    offset
+    articleResourceId
   );
   const commentsData = [...commentsFromDB];
   const comments = commentsData.map((comment: CommentFromDB) => {

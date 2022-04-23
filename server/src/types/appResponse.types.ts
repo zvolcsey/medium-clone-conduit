@@ -42,10 +42,10 @@ export interface ErrorResBody {
 export interface ErrorResBodyProperties {
   id: string;
   name: string;
-  message: string | AuthInputValidation[];
+  message: string | InputValidation[];
 }
 
-export interface AuthInputValidation {
+export interface InputValidation {
   id: string;
   text: string;
 }

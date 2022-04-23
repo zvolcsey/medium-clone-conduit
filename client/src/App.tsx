@@ -23,6 +23,10 @@ const ArticlePage = lazy(() => {
   return import('./pages/ArticlePage');
 });
 
+const EditorPage = lazy(() => {
+  return import('./pages/EditorPage');
+});
+
 const SettingsPage = lazy(() => {
   return import('./pages/SettingsPage');
 });
@@ -71,11 +75,24 @@ const App: FC<{}> = () => {
           }
         />
         <Route path='profile/@:username' element={<ProfilePage />} />
-        <Route path='settings' element={<SettingsPage />} />
         <Route
-          path='article/:articleSlugWithResourceId'
-          element={<ArticlePage />}
+          path='editor'
+          element={
+            <Private>
+              <EditorPage />
+            </Private>
+          }
         />
+        <Route
+          path='editor/:slug-:resourceId'
+          element={
+            <Private>
+              <EditorPage />
+            </Private>
+          }
+        />
+        <Route path='settings' element={<SettingsPage />} />
+        <Route path='article/:slug-:resourceId/*' element={<ArticlePage />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
     </Routes>

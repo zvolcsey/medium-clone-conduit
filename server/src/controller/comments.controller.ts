@@ -40,20 +40,13 @@ export const getCommentsHandler = async (
 ): Promise<Response<MultipleCommentsResBody> | void> => {
   const reqUser = req.user;
   const { articleResourceId } = req.params;
-  const limit = getNumberQueryParamWithDefault(req.query, 'limit', 20);
-  const offset = getNumberQueryParamWithDefault(req.query, 'offset', 0);
 
   let reqUserId: string | null = null;
   if (reqUser) {
     reqUserId = reqUser.id;
   }
   try {
-    const response = await getComments(
-      reqUserId,
-      articleResourceId,
-      limit,
-      offset
-    );
+    const response = await getComments(reqUserId, articleResourceId);
 
     return res.status(200).json(response);
   } catch (err) {
@@ -65,7 +58,7 @@ export const deleteCommentHandler = async (
   res: Response<void>,
   next: NextFunction
 ): Promise<Response | void> => {
-  const { postResourceId, commentResourceId } = req.params;
+  const { articleResourceId, commentResourceId } = req.params;
   const reqUser = req.user;
 
   try {
@@ -73,7 +66,7 @@ export const deleteCommentHandler = async (
 
     const reqUserId = reqUser.id;
 
-    await removeComment(reqUserId, postResourceId, commentResourceId);
+    await removeComment(reqUserId, articleResourceId, commentResourceId);
 
     return res.status(204).json();
   } catch (err) {

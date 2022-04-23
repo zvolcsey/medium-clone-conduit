@@ -1,13 +1,18 @@
 import express from 'express';
 import * as commentsControllers from '../../controller/comments.controller';
-import { authRequired, authOptional } from '../../middleware/middlewares';
+import {
+  authRequired,
+  authOptional,
+  commentInputValidation,
+} from '../../middleware/middlewares';
 
 const commentsRoutes = express.Router();
 
 // desc    Create a comment
-// route   GET /api/articles/:articleResourceId/comments
+// route   POST /api/articles/:articleResourceId/comments
 commentsRoutes.post(
   '/:articleResourceId/comments',
+  commentInputValidation,
   authRequired,
   commentsControllers.createCommentHandler
 );
@@ -21,7 +26,7 @@ commentsRoutes.get(
 );
 
 // desc    Delete a comment
-// route   GET /api/articles/:articleResourceId/comments/:commentResourceId
+// route   DELETE /api/articles/:articleResourceId/comments/:commentResourceId
 commentsRoutes.delete(
   '/:articleResourceId/comments/:commentResourceId',
   authRequired,

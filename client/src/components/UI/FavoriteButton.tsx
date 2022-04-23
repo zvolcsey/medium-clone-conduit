@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import styles from './FavoriteButton.module.css';
-import Button from './Button';
+import PrimaryButton from './PrimaryButton';
 
 const FavoriteButton: FC<{ favoritesCount: number }> = (props) => {
   const { favoritesCount } = props;
@@ -12,9 +12,9 @@ const FavoriteButton: FC<{ favoritesCount: number }> = (props) => {
   };
 
   return (
-    <Button className={styles['favorite-button']} onClick={favoriteHandler}>
+    <PrimaryButton className={styles.button} onClick={favoriteHandler}>
       Favorite <span>{favoritesCount}</span>
-    </Button>
+    </PrimaryButton>
   );
 };
 

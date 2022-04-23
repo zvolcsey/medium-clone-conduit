@@ -1,6 +1,6 @@
 import { generateId } from '../utils/utility';
 
-import type { AuthInputValidation } from './appResponse.types';
+import type { InputValidation } from './appResponse.types';
 import type { UserFromDB, ArticleFromDB, CommentFromDB } from './db.types';
 
 export class RequestUserProperties {
@@ -124,9 +124,9 @@ export class ForbiddenError {
 export class ValidationError {
   id: string;
   name: string;
-  message: string | AuthInputValidation[];
+  message: string | InputValidation[];
 
-  constructor(message: string | AuthInputValidation[]) {
+  constructor(message: string | InputValidation[]) {
     this.id = generateId();
     this.name = 'Validation Error';
     this.message = message;

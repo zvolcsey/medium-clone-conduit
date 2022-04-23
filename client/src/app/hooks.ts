@@ -10,7 +10,11 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useInput = (): InputHookRes => {
   const [enteredValue, setEnteredValue] = useState('');
 
-  const valueChangedHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const valid = enteredValue.length > 0;
+
+  const valueChangedHandler = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setEnteredValue(event.target.value);
   };
 
@@ -21,6 +25,7 @@ export const useInput = (): InputHookRes => {
   return {
     value: enteredValue,
     valueChangedHandler,
+    valid,
     reset,
   };
 };

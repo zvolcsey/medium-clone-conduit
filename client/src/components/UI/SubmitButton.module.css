@@ -12,5 +12,16 @@
 }
 
 .button:focus {
+  outline: none;
   box-shadow: var(--focus-box-shadow);
+}
+
+.button:disabled {
+  background: #ccc;
+  border: 0.1rem solid #ccc;
+}
+
+.button:disabled:hover,
+.button:disabled:active {
+  filter: none;
 }

@@ -1,0 +1,30 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.item {
+  margin: 0 0 0.4rem 0;
+}
+
+.item:last-of-type {
+  margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .actions {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .item {
+    margin: 0 1rem 0 0;
+  }
+
+  .item:last-of-type {
+    margin: 0;
+  }
+}

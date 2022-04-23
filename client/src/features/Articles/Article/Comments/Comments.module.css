@@ -1,0 +1,14 @@
+.comments {
+  width: 90%;
+  max-width: 40rem;
+  margin: 2.5rem auto;
+}
+
+.comments > h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.comments > p {
+  margin: 2rem 0;
+}

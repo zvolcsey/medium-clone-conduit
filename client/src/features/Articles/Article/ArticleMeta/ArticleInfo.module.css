@@ -1,0 +1,29 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+}
+
+.info span {
+  font-size: 0.9rem;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.author > a {
+  margin-right: 0.6rem;
+}
+
+.author > span {
+  font-weight: 700;
+}
+
+@media (min-width: 40rem) {
+  .info {
+    margin: 0;
+  }
+}

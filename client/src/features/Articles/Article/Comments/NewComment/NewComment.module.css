@@ -1,0 +1,23 @@
+.card {
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card > h2 {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.card > p {
+  text-align: center;
+}
+
+.errors {
+  margin-bottom: 1rem;
+}
