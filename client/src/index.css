@@ -29,7 +29,6 @@ body {
 #root {
   display: grid;
   grid-template-rows: 4rem auto 8rem;
-  grid-template-areas: 'main-header' 'main' 'main-footer';
   height: 100%;
 }
 

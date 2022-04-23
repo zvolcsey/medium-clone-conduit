@@ -1,6 +1,5 @@
 .main-header {
   grid-row: 1;
-  grid-area: 'main-header';
   position: fixed;
   top: 0;
   left: 0;
