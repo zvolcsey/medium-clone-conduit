@@ -1,6 +1,7 @@
 import {
   ArticleProperties,
   CommentProperties,
+  ProfileProperties,
 } from '../../../../server/src/types/appClasses';
 import { CommentReqBody } from '../../../../server/src/types/appRequest.types';
 import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
@@ -23,18 +24,29 @@ export interface ArticlesListState {
   status: Status;
 }
 
-export interface MultipleArticlesReqBody {
+export interface MultipleArticlesPayload {
   limit?: number;
   offset?: number;
+  token: string | null;
 }
 
-export interface MultipleFeedArticlesReqBody extends MultipleArticlesReqBody {
+export interface MultipleFeedArticlesPayload extends MultipleArticlesPayload {
   token: string;
 }
 
-export interface MultipleTagFilterArticlesReqBody
-  extends MultipleArticlesReqBody {
+export interface MultipleTagFilterArticlesPayload
+  extends MultipleArticlesPayload {
   tag: string;
+}
+
+export interface MultipleAuthorFilterArticlesPayload
+  extends MultipleArticlesPayload {
+  author: string;
+}
+
+export interface MultipleFavoritedFilterArticlesPayload
+  extends MultipleArticlesPayload {
+  username: string;
 }
 
 export interface ArticleState {
@@ -92,5 +104,15 @@ export interface AuthState {
   token: string | null;
   currentUser: string | null;
   error: ErrorResBody | undefined;
+  status: Status;
+}
+
+export interface GetProfilePayload {
+  token: string | null;
+  username: string;
+}
+
+export interface ProfileState {
+  profile: ProfileProperties | null;
   status: Status;
 }

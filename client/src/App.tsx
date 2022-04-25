@@ -74,7 +74,7 @@ const App: FC<{}> = () => {
             </Auth>
           }
         />
-        <Route path='profile/@:username' element={<ProfilePage />} />
+        <Route path='profile/@:username/*' element={<ProfilePage />} />
         <Route
           path='editor'
           element={

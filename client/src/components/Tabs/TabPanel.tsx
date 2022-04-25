@@ -21,26 +21,41 @@ const TabPanel: FC<{}> = () => {
 
   const [searchParam] = useSearchParams();
 
-  const pageSearchParam = Number(searchParam.get('page')) ?? 1;
-  const pages = Math.ceil((articlesCount ?? 0) / DEFAULT_ARTICLES_LIMIT);
+  let pageSearchParam = searchParam.get('page') ?? 1;
+
+  const pages =
+    Math.ceil((articlesCount ?? 0) / DEFAULT_ARTICLES_LIMIT) === 0
+      ? 1
+      : Math.ceil((articlesCount ?? 0) / DEFAULT_ARTICLES_LIMIT);
+
+  const pageIsExist =
+    Number(pageSearchParam) >= 1 && Number(pageSearchParam) <= pages;
+
+  let content = <Loading />;
+
+  if (status === 'success' && articlesCount! > 0) {
+    content = <ArticlesList articles={articles} />;
+  }
+
+  if (status === 'success' && articlesCount === 0) {
+    content = <p className='centered bold'>No articles here... yet!</p>;
+  }
+
+  if (status === 'failed') {
+    content = (
+      <p className='centered bold'>Loading articles was not successfully!</p>
+    );
+  }
+
+  if (!pageIsExist) {
+    content = <p className='centered bold'>Page is not exist!</p>;
+  }
 
   return (
     <section className={styles['tab-panel']}>
-      {pageSearchParam <= pages && <Pagination pages={pages} />}
-      {status === 'loading' && <Loading />}
-      {status === 'success' && <ArticlesList articles={articles} />}
-      {status === 'success' && articles.length === 0 && (
-        <p className='centered bold'>No articles here... yet!</p>
-      )}
-      {status === 'failed' && (
-        <p className='centered bold'>Loading articles was not successfully!</p>
-      )}
-      {pageSearchParam > pages &&
-        status !== 'loading' &&
-        status !== 'failed' && (
-          <p className='centered bold'>Page is not exist!</p>
-        )}
-      {pageSearchParam <= pages && <Pagination pages={pages} />}
+      {pageIsExist && <Pagination pages={pages} />}
+      {content}
+      {pageIsExist && <Pagination pages={pages} />}
     </section>
   );
 };

@@ -1,0 +1,29 @@
+.username-container {
+  background: var(--main-color);
+  height: 10rem;
+  display: grid;
+  place-items: center;
+}
+
+.username-container > h1 {
+  color: #fff;
+}
+
+.actions-container {
+  background: none;
+  width: 90%;
+  max-width: 40rem;
+  margin: 1rem auto;
+  padding: 0.6rem;
+}
+
+.card {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.card > p {
+  line-height: 1.6;
+}

@@ -14,6 +14,7 @@ const TabItem: FC<{ path: string | undefined; displayIfActive?: boolean }> = (
     content = (
       <NavLink
         to={path}
+        end={true}
         className={({ isActive }) =>
           isActive
             ? styles['tabs-item--active']

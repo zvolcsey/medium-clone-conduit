@@ -4,13 +4,17 @@ import {
   initGlobalArticles,
   initFeedArticles,
   initTagFilterArticles,
+  initAuthorFilterArticles,
+  initFavoritedFilterArticles,
 } from './articlesListAPI';
 
 import type {
   ArticlesListState,
-  MultipleArticlesReqBody,
-  MultipleFeedArticlesReqBody,
-  MultipleTagFilterArticlesReqBody,
+  MultipleArticlesPayload,
+  MultipleAuthorFilterArticlesPayload,
+  MultipleFavoritedFilterArticlesPayload,
+  MultipleFeedArticlesPayload,
+  MultipleTagFilterArticlesPayload,
 } from '../../app/types/redux.types';
 import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
 import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
@@ -23,16 +27,16 @@ const initialState: ArticlesListState = {
 
 export const initGlobalArticlesAsync = createAsyncThunk<
   MultipleArticlesResBody,
-  MultipleArticlesReqBody,
+  MultipleArticlesPayload,
   { rejectValue: ErrorResBody }
->('articlesList/initGlobalArticles', async (reqData) => {
-  const response = await initGlobalArticles(reqData);
+>('articlesList/initGlobalArticles', async (payload) => {
+  const response = await initGlobalArticles(payload);
   return response;
 });
 
 export const initFeedArticlesAsync = createAsyncThunk<
   MultipleArticlesResBody,
-  MultipleFeedArticlesReqBody,
+  MultipleFeedArticlesPayload,
   { rejectValue: ErrorResBody }
 >('articleList/initFeedArticles', async (token) => {
   const response = await initFeedArticles(token);
@@ -41,10 +45,28 @@ export const initFeedArticlesAsync = createAsyncThunk<
 
 export const initTagFilterArticlesAsync = createAsyncThunk<
   MultipleArticlesResBody,
-  MultipleTagFilterArticlesReqBody,
+  MultipleTagFilterArticlesPayload,
   { rejectValue: ErrorResBody }
->('articlesList/initTagFilterArticles', async (reqData) => {
-  const response = await initTagFilterArticles(reqData);
+>('articlesList/initTagFilterArticles', async (payload) => {
+  const response = await initTagFilterArticles(payload);
+  return response;
+});
+
+export const initAuthorFilterArticlesAsync = createAsyncThunk<
+  MultipleArticlesResBody,
+  MultipleAuthorFilterArticlesPayload,
+  { rejectValue: ErrorResBody }
+>('articlesList/initAuthorFilterArticles', async (payload) => {
+  const response = await initAuthorFilterArticles(payload);
+  return response;
+});
+
+export const initFavoritedFilterArticlesAsync = createAsyncThunk<
+  MultipleArticlesResBody,
+  MultipleFavoritedFilterArticlesPayload,
+  { rejectValue: ErrorResBody }
+>('articlesList/initFavoritedFilterArticles', async (payload) => {
+  const response = await initFavoritedFilterArticles(payload);
   return response;
 });
 
@@ -91,6 +113,28 @@ export const articlesListSlice = createSlice({
         state.articlesCount = action.payload.articlesCount;
       })
       .addCase(initTagFilterArticlesAsync.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(initAuthorFilterArticlesAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(initAuthorFilterArticlesAsync.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.articles = action.payload.articles;
+        state.articlesCount = action.payload.articlesCount;
+      })
+      .addCase(initAuthorFilterArticlesAsync.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(initFavoritedFilterArticlesAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(initFavoritedFilterArticlesAsync.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.articles = action.payload.articles;
+        state.articlesCount = action.payload.articlesCount;
+      })
+      .addCase(initFavoritedFilterArticlesAsync.rejected, (state) => {
         state.status = 'failed';
       });
   },

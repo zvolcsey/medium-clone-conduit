@@ -48,6 +48,7 @@ const Home: FC<{}> = () => {
         initGlobalArticlesAsync({
           limit: DEFAULT_ARTICLES_LIMIT,
           offset: articlesOffset,
+          token: token,
         })
       );
     }
@@ -65,6 +66,7 @@ const Home: FC<{}> = () => {
         initTagFilterArticlesAsync({
           limit: DEFAULT_ARTICLES_LIMIT,
           offset: articlesOffset,
+          token: token,
           tag: param.tagName,
         })
       );

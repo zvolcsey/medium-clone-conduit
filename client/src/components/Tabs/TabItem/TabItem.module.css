@@ -1,5 +1,6 @@
 .tabs-item {
   margin-right: 2rem;
+  text-align: center;
 }
 
 .tabs-item:last-of-type {

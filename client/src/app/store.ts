@@ -9,6 +9,7 @@ import commentsListReducer from '../features/Articles/Article/Comments/CommentsL
 import newCommentReducer from '../features/Articles/Article/Comments/NewComment/newCommentSlice';
 import paginationReducer from '../features/Pagination/paginationSlice';
 import authReducer from '../features/Auth/authSlice';
+import profileReducer from '../features/Profile/profileSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     newComment: newCommentReducer,
     pagination: paginationReducer,
     auth: authReducer,
+    profile: profileReducer,
   },
 });
 
