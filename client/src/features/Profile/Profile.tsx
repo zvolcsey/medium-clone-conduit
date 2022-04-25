@@ -22,11 +22,17 @@ const Profile: FC<{ profile: ProfileProperties }> = (props) => {
         <h1>{profile.username}</h1>
       </Container>
       <Container className={styles['actions-container']}>
-        <ProfileActions username={profile.username} />
+        <ProfileActions
+          username={profile.username}
+          following={profile.following}
+        />
       </Container>
       <Card className={styles.card}>{bio}</Card>
       <Container className={styles['actions-container']}>
-        <ProfileActions username={profile.username} />
+        <ProfileActions
+          username={profile.username}
+          following={profile.following}
+        />
       </Container>
     </section>
   );

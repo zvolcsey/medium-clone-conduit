@@ -15,13 +15,15 @@ const ArticleMetaInfo: FC<{
 
   const currentUser = useAppSelector(selectCurrentUser);
 
+  const isYou = currentUser === authorUsername;
+
   return (
     <div className={styles.info}>
       <div className={styles.author}>
         <Link to={`/profile/@${authorUsername}`}>{authorUsername}</Link>
-        {currentUser === authorUsername && <span>You</span>}
-        {currentUser !== authorUsername && (
-          <FollowingButton following={following} />
+        {isYou && <span>You</span>}
+        {!isYou && (
+          <FollowingButton username={authorUsername} following={following} />
         )}
       </div>
       <span className={styles.date}>{new Date(createdAt).toDateString()}</span>

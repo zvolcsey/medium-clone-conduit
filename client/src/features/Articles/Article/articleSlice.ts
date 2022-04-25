@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
 import { initArticle, deleteArticle } from './articleAPI';
+import { followUserAsync, unfollowUserAsync } from '../../Profile/profileSlice';
 
 import type {
   SingleArticleResBody,
@@ -65,6 +66,16 @@ export const articleSlice = createSlice({
       })
       .addCase(deleteArticleAsync.rejected, (state) => {
         state.deleteStatus = 'failed';
+      })
+      .addCase(followUserAsync.fulfilled, (state, action) => {
+        if (state.article) {
+          state.article.author.following = action.payload.profile.following;
+        }
+      })
+      .addCase(unfollowUserAsync.fulfilled, (state, action) => {
+        if (state.article) {
+          state.article.author.following = action.payload.profile.following;
+        }
       });
   },
 });

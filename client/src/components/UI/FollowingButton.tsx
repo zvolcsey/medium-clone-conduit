@@ -1,13 +1,29 @@
 import { FC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectToken } from '../../features/Auth/authSlice';
+import {
+  followUserAsync,
+  unfollowUserAsync,
+} from '../../features/Profile/profileSlice';
 
 import PrimaryButton from './PrimaryButton';
 
-const FollowingButton: FC<{ following: boolean }> = (props) => {
-  const { following } = props;
+const FollowingButton: FC<{ username: string; following: boolean }> = (
+  props
+) => {
+  const { username, following } = props;
+
+  const dispatch = useAppDispatch();
+
+  const token = useAppSelector(selectToken);
 
   const followingHandler = () => {
-    //TODO
-    return;
+    if (token && !following) {
+      dispatch(followUserAsync({ token: token, username: username }));
+    }
+    if (token && following) {
+      dispatch(unfollowUserAsync({ token: token, username: username }));
+    }
   };
 
   return (

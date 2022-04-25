@@ -112,6 +112,11 @@ export interface GetProfilePayload {
   username: string;
 }
 
+export interface FollowingPayload {
+  token: string | null;
+  username: string;
+}
+
 export interface ProfileState {
   profile: ProfileProperties | null;
   status: Status;

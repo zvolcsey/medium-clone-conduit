@@ -7,8 +7,10 @@ import styles from './ProfileActions.module.css';
 import FollowingButton from '../../components/UI/FollowingButton';
 import EditArticleLink from './EditProfileLink';
 
-const ProfileActions: FC<{ username: string }> = (props) => {
-  const { username } = props;
+const ProfileActions: FC<{ username: string; following: boolean }> = (
+  props
+) => {
+  const { username, following } = props;
 
   const currentUser = useAppSelector(selectCurrentUser);
 
@@ -18,7 +20,9 @@ const ProfileActions: FC<{ username: string }> = (props) => {
     <ul className={styles.actions}>
       <li className={styles.item}>
         {isYou && <span className='bold'>You</span>}
-        {!isYou && <FollowingButton following={true} />}
+        {!isYou && (
+          <FollowingButton username={username} following={following} />
+        )}
       </li>
       {isYou && (
         <li className={styles.item}>
