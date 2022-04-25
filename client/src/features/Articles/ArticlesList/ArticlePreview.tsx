@@ -5,7 +5,7 @@ import styles from './ArticlePreview.module.css';
 import Card from '../../../components/UI/Card';
 import TagList from '../../../components/Tags/TagList';
 import { ArticleProperties } from '../../../../../server/src/types/appClasses';
-import FavoriteButton from '../../../components/UI/FavoriteButton';
+import FavoriteButton from '../../../components/UI/Buttons/FavoriteButton';
 
 const ArticlePreview: FC<{ article: ArticleProperties }> = (props) => {
   const { article } = props;

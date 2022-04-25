@@ -4,7 +4,7 @@ import { useAppSelector } from '../app/hooks';
 
 import styles from './SettingsPage.module.css';
 import Card from '../components/UI/Card';
-import LogoutButton from '../components/UI/LogoutButton';
+import LogoutButton from '../components/UI/Buttons/LogoutButton';
 
 const SettingsPage: FC<{}> = () => {
   const appName = useAppSelector(selectAppName);

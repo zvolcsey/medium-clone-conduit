@@ -5,9 +5,9 @@ import { selectCurrentUser, selectToken } from '../../../../Auth/authSlice';
 import { deleteArticleAsync } from '../../articleSlice';
 
 import styles from './ArticleActions.module.css';
-import FavoriteButton from '../../../../../components/UI/FavoriteButton';
+import FavoriteButton from '../../../../../components/UI/Buttons/FavoriteButton';
 import EditArticleLink from './EditArticleLink';
-import DeleteButton from '../../../../../components/UI/DeleteButton';
+import DeleteButton from '../../../../../components/UI/Buttons/DeleteButton';
 import DeleteModal from '../../../../../components/UI/Modal/DeleteModal';
 
 import type { DeleteArticlePayload } from '../../../../../app/types/redux.types';

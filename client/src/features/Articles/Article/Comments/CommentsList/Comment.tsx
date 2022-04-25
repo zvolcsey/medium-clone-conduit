@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './Comment.module.css';
 import Card from '../../../../../components/UI/Card';
-import DeleteButton from '../../../../../components/UI/DeleteButton';
+import DeleteButton from '../../../../../components/UI/Buttons/DeleteButton';
 
 import type { CommentProperties } from '../../../../../../../server/src/types/appClasses';
 

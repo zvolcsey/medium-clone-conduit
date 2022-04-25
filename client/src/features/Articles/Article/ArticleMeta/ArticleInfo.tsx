@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCurrentUser } from '../../../Auth/authSlice';
 
 import styles from './ArticleInfo.module.css';
-import FollowingButton from '../../../../components/UI/FollowingButton';
+import FollowingButton from '../../../../components/UI/Buttons/FollowingButton';
 
 const ArticleMetaInfo: FC<{
   authorUsername: string;

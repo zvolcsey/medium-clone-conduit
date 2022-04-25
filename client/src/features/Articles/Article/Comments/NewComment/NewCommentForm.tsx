@@ -14,7 +14,7 @@ import styles from './NewCommentForm.module.css';
 import FormControl from '../../../../../components/UI/FormControl';
 import FormLabel from '../../../../../components/UI/FormLabel';
 import TextArea from '../../../../../components/UI/Input/TextArea';
-import SubmitButton from '../../../../../components/UI/SubmitButton';
+import SubmitButton from '../../../../../components/UI/Buttons/SubmitButton';
 
 import type { CommentReqBody } from '../../../../../../../server/src/types/appRequest.types';
 import type { CreateCommentPayload } from '../../../../../app/types/redux.types';

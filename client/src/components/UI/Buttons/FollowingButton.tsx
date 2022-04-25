@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectToken } from '../../features/Auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectToken } from '../../../features/Auth/authSlice';
 import {
   followUserAsync,
   unfollowUserAsync,
-} from '../../features/Profile/profileSlice';
+} from '../../../features/Profile/profileSlice';
 
 import PrimaryButton from './PrimaryButton';
 

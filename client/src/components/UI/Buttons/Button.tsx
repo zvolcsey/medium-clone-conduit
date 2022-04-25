@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ButtonType } from '../../app/types/components.types';
+import { ButtonType } from '../../../app/types/components.types';
 
 import styles from './Button.module.css';
 

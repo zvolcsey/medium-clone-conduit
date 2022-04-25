@@ -4,7 +4,7 @@ import { selectCurrentUser } from '../Auth/authSlice';
 
 import '../../index.css';
 import styles from './ProfileActions.module.css';
-import FollowingButton from '../../components/UI/FollowingButton';
+import FollowingButton from '../../components/UI/Buttons/FollowingButton';
 import EditArticleLink from './EditProfileLink';
 
 const ProfileActions: FC<{ username: string; following: boolean }> = (

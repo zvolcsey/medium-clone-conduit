@@ -5,7 +5,7 @@ import { selectError, signInAsync, signUpAsync } from './authSlice';
 
 import '../../index.css';
 import styles from './AuthForm.module.css';
-import SubmitButton from '../../components/UI/SubmitButton';
+import SubmitButton from '../../components/UI/Buttons/SubmitButton';
 import InfoText from '../../components/UI/InfoText';
 import FormControl from '../../components/UI/FormControl';
 import FormLabel from '../../components/UI/FormLabel';

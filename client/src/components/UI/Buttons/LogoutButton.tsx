@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
-import { logout } from '../../features/Auth/authSlice';
+import { useAppDispatch } from '../../../app/hooks';
+import { logout } from '../../../features/Auth/authSlice';
 
 import styles from './LogoutButton.module.css';
 import Button from './Button';

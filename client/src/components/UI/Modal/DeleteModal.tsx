@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styles from './DeleteModal.module.css';
 import Card from '../Card';
-import Button from '../Button';
+import Button from '../Buttons/Button';
 import Modal from './Modal';
 
 const DeleteModal: FC<{
