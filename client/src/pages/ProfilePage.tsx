@@ -8,10 +8,12 @@ import {
 } from '../app/constant';
 import {
   getProfileAsync,
+  profileUnload,
   selectProfile,
   selectStatus,
 } from '../features/Profile/profileSlice';
 import {
+  articlesUnload,
   initAuthorFilterArticlesAsync,
   initFavoritedFilterArticlesAsync,
 } from '../features/Articles/articlesListSlice';
@@ -47,6 +49,9 @@ const ProfilePage: FC<{}> = () => {
 
   useEffect(() => {
     dispatch(getProfileAsync({ token, username }));
+    return () => {
+      dispatch(profileUnload());
+    };
   }, [dispatch, token, username]);
 
   useEffect(() => {
@@ -70,6 +75,9 @@ const ProfilePage: FC<{}> = () => {
         })
       );
     }
+    return () => {
+      dispatch(articlesUnload());
+    };
   }, [dispatch, pathname, username, token]);
 
   let profile = <Loading />;
