@@ -16,7 +16,7 @@ import {
   articlesUnload,
   initAuthorFilterArticlesAsync,
   initFavoritedFilterArticlesAsync,
-} from '../features/Articles/articlesListSlice';
+} from '../features/Articles/ArticlesList/articlesListSlice';
 import { selectToken } from '../features/Auth/authSlice';
 
 import '../index.css';

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { articlesUnload } from '../Articles/articlesListSlice';
+import { articlesUnload } from '../Articles/ArticlesList/articlesListSlice';
 
 import type { RootState } from '../../app/store';
 import type { PaginationState } from '../../app/types/redux.types';

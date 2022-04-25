@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { RootState } from '../../../app/store';
 import {
   initGlobalArticles,
   initFeedArticles,
@@ -15,9 +15,9 @@ import type {
   MultipleFavoritedFilterArticlesPayload,
   MultipleFeedArticlesPayload,
   MultipleTagFilterArticlesPayload,
-} from '../../app/types/redux.types';
-import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
-import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
+} from '../../../app/types/redux.types';
+import type { MultipleArticlesResBody } from '../../../../../server/src/types/appResponse.types';
+import { ErrorResBody } from '../../../../../server/src/types/appResponse.types';
 
 const initialState: ArticlesListState = {
   articles: [],

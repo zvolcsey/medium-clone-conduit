@@ -1,19 +1,19 @@
 import { AxiosResponse } from 'axios';
-import axiosInstance from '../../app/axios';
+import axiosInstance from '../../../app/axios';
 import {
   DEFAULT_ARTICLES_LIMIT,
   DEFAULT_ARTICLES_OFFSET,
-} from '../../app/constant';
+} from '../../../app/constant';
 
-import type { MultipleArticlesResBody } from '../../../../server/src/types/appResponse.types';
+import type { MultipleArticlesResBody } from '../../../../../server/src/types/appResponse.types';
 import {
   MultipleArticlesPayload,
   MultipleAuthorFilterArticlesPayload,
   MultipleFavoritedFilterArticlesPayload,
   MultipleFeedArticlesPayload,
   MultipleTagFilterArticlesPayload,
-} from '../../app/types/redux.types';
-import { createRequestHeaders } from '../../utils/utility';
+} from '../../../app/types/redux.types';
+import { createRequestHeaders } from '../../../utils/utility';
 
 export const initGlobalArticles = async (
   payload: MultipleArticlesPayload

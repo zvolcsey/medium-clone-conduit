@@ -5,12 +5,12 @@ import {
   selectArticles,
   selectArticlesCount,
   selectStatus,
-} from '../../features/Articles/articlesListSlice';
+} from '../../features/Articles/ArticlesList/articlesListSlice';
 import { DEFAULT_ARTICLES_LIMIT } from '../../app/constant';
 
 import '../../index.css';
 import styles from './TabPanel.module.css';
-import ArticlesList from '../../features/Articles/ArticlesList';
+import ArticlesList from '../../features/Articles/ArticlesList/ArticlesList';
 import Loading from '../UI/Loading';
 import Pagination from '../../features/Pagination/Pagination';
 

@@ -5,9 +5,9 @@ import {
   articlesUnload,
   initFeedArticlesAsync,
   initGlobalArticlesAsync,
-} from '../features/Articles/articlesListSlice';
+} from '../features/Articles/ArticlesList/articlesListSlice';
 import { initPopularTagsAsync } from '../features/PopularTags/popularTagsSlice';
-import { initTagFilterArticlesAsync } from '../features/Articles/articlesListSlice';
+import { initTagFilterArticlesAsync } from '../features/Articles/ArticlesList/articlesListSlice';
 import { setCurrentPage } from '../features/Pagination/paginationSlice';
 import { selectToken } from '../features/Auth/authSlice';
 import { selectAppName } from '../app/common-slice';

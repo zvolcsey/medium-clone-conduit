@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ArticleProperties } from '../../../../server/src/types/appClasses';
+import { ArticleProperties } from '../../../../../server/src/types/appClasses';
 import ArticlePreview from './ArticlePreview';
 
 const ArticlesList: FC<{ articles: ArticleProperties[] }> = (props) => (

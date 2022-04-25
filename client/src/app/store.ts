@@ -2,7 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 import commonReducer from './common-slice';
 import popularTagsReducer from '../features/PopularTags/popularTagsSlice';
-import articlesListReducer from '../features/Articles/articlesListSlice';
+import articlesListReducer from '../features/Articles/ArticlesList/articlesListSlice';
 import articleReducer from '../features/Articles/Article/articleSlice';
 import commentReducer from '../features/Articles/Article/Comments/commentSlice';
 import commentsListReducer from '../features/Articles/Article/Comments/CommentsList/commentsListSlice';
