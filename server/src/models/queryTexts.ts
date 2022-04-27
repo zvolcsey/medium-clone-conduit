@@ -98,14 +98,14 @@ INNER JOIN (
 `;
 
 export const findArticlesText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at,
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at,
 u.id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following,
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+COALESCE(selectedFavorited.favorited, false) AS favorited,
 COALESCE(hashtags.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 LEFT JOIN (
 	SELECT leader_id, follower_id, (
 		SELECT true
@@ -113,18 +113,19 @@ LEFT JOIN (
 	FROM followers f
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id AND selectedFollowers.follower_id = $1
 LEFT JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited 
-	FROM articles_favorites pf 
-	GROUP BY pf.article_id) AS favorites ON favorites.article_id = p.id
-LEFT JOIN articles_favorites pf ON pf.article_id = p.id
+	SELECT af.article_id, af.user_id, true AS favorited
+	FROM articles_favorites af 
+	WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = a.id
 LEFT JOIN (
-	SELECT hp.article_id, array_agg(h.title) AS hashtags
-	FROM hashtags_articles hp
-	INNER JOIN hashtags h ON h.id = hp.hashtag_id
-	GROUP BY hp.article_id
-) AS hashtags ON hashtags.article_id = p.id
+	SELECT af.article_id, COUNT(*) AS favorites_count
+	FROM articles_favorites af 
+	GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = a.id
+LEFT JOIN (
+	SELECT ha.article_id, array_agg(h.title) AS hashtags
+	FROM hashtags_articles ha
+	INNER JOIN hashtags h ON h.id = ha.hashtag_id
+	GROUP BY ha.article_id
+) AS hashtags ON hashtags.article_id = a.id
 ORDER BY created_at
 DESC
 LIMIT $2
@@ -132,14 +133,14 @@ OFFSET $3;
 `;
 
 export const findArticlesByAuthorText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at,
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at,
 u.id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following,
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+COALESCE(selectedFavorited.favorited, false) AS favorited,
 COALESCE(hashtags.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 LEFT JOIN (
 	SELECT leader_id, follower_id, (
 		SELECT true
@@ -147,18 +148,19 @@ LEFT JOIN (
 	FROM followers f
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id AND selectedFollowers.follower_id = $1
 LEFT JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited 
-	FROM articles_favorites pf 
-	GROUP BY pf.article_id) AS favorites ON favorites.article_id = p.id
-LEFT JOIN articles_favorites pf ON pf.article_id = p.id
+	SELECT af.article_id, af.user_id, true AS favorited
+	FROM articles_favorites af 
+	WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = a.id
 LEFT JOIN (
-	SELECT hp.article_id, array_agg(h.title) AS hashtags
-	FROM hashtags_articles hp
-	INNER JOIN hashtags h ON h.id = hp.hashtag_id
-	GROUP BY hp.article_id
-) AS hashtags ON hashtags.article_id = p.id
+	SELECT af.article_id, COUNT(*) AS favorites_count
+	FROM articles_favorites af 
+	GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = a.id
+LEFT JOIN (
+	SELECT ha.article_id, array_agg(h.title) AS hashtags
+	FROM hashtags_articles ha
+	INNER JOIN hashtags h ON h.id = ha.hashtag_id
+	GROUP BY ha.article_id
+) AS hashtags ON hashtags.article_id = a.id
 WHERE u.username = $2
 ORDER BY created_at
 DESC
@@ -167,14 +169,14 @@ OFFSET $4;
 `;
 
 export const findArticlesFavoritedByUserText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at,
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at,
 u.id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following,
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(favorites_count, 0) AS favorites_count, 
+COALESCE(favorited, false) AS favorited,
 COALESCE(hashtags.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 LEFT JOIN (
 	SELECT leader_id, follower_id, (
 		SELECT true
@@ -182,25 +184,29 @@ LEFT JOIN (
 	FROM followers f
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id AND selectedFollowers.follower_id = $1
 INNER JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited
-	FROM articles_favorites pf
-	WHERE pf.user_id = (
-		SELECT id
-		FROM users
-		WHERE users.username = $2
-		)
-	GROUP BY pf.article_id
-) AS favorites ON favorites.article_id = p.id
-
+    SELECT af.article_id, af.user_id, COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+    COALESCE(selectedFavorited.favorited, false) AS favorited
+    FROM articles_favorites af
+    LEFT JOIN (
+        SELECT af.article_id, af.user_id, true AS favorited
+        FROM articles_favorites af 
+        WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = af.article_id
+    LEFT JOIN (
+        SELECT af.article_id, COUNT(*) AS favorites_count
+        FROM articles_favorites af 
+        GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = af.article_id
+    WHERE af.user_id = (
+        SELECT id
+        FROM users
+        WHERE users.username = $2
+    )
+) AS favorite ON favorite.article_id = a.id
 LEFT JOIN (
-	SELECT hp.article_id, array_agg(h.title) AS hashtags
-	FROM hashtags_articles hp
-	INNER JOIN hashtags h ON h.id = hp.hashtag_id
-	GROUP BY hp.article_id
-) AS hashtags ON hashtags.article_id = p.id
-
+	SELECT ha.article_id, array_agg(h.title) AS hashtags
+	FROM hashtags_articles ha
+	INNER JOIN hashtags h ON h.id = ha.hashtag_id
+	GROUP BY ha.article_id
+) AS hashtags ON hashtags.article_id = a.id
 ORDER BY created_at
 DESC
 LIMIT $3
@@ -208,14 +214,14 @@ OFFSET $4;
 `;
 
 export const findArticlesByTagText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at,
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at,
 u.id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following,
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+COALESCE(selectedFavorited.favorited, false) AS favorited,
 COALESCE(filtered_tag_arrays.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 LEFT JOIN (
 	SELECT leader_id, follower_id, (
 		SELECT true
@@ -223,22 +229,23 @@ LEFT JOIN (
 	FROM followers f
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id AND selectedFollowers.follower_id = $1
 LEFT JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited 
-	FROM articles_favorites pf 
-	GROUP BY pf.article_id) AS favorites ON favorites.article_id = p.id
-LEFT JOIN articles_favorites pf ON pf.article_id = p.id
+	SELECT af.article_id, af.user_id, true AS favorited
+	FROM articles_favorites af 
+	WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = a.id
+LEFT JOIN (
+	SELECT af.article_id, COUNT(*) AS favorites_count
+	FROM articles_favorites af 
+	GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = a.id
 INNER JOIN (
 	SELECT tag_arrays.article_id, tag_arrays.hashtags
 	FROM(
-		SELECT hp.article_id, array_agg(h.title) AS hashtags
-		FROM hashtags_articles hp
-		INNER JOIN hashtags h ON h.id = hp.hashtag_id
-		GROUP BY hp.article_id
+		SELECT ha.article_id, array_agg(h.title) AS hashtags
+		FROM hashtags_articles ha
+		INNER JOIN hashtags h ON h.id = ha.hashtag_id
+		GROUP BY ha.article_id
 	) as tag_arrays
 	WHERE $2 = ANY(hashtags)
-) AS filtered_tag_arrays ON filtered_tag_arrays.article_id = p.id
+) AS filtered_tag_arrays ON filtered_tag_arrays.article_id = a.id
 ORDER BY created_at
 DESC
 LIMIT $3
@@ -246,14 +253,14 @@ OFFSET $4;
 `;
 
 export const findFeedArticlesText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at, u.id AS author_id, 
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, u.id AS author_id, 
 u.username, u.bio, 
 COALESCE(selectedFollowers.following, false) AS following, 
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+COALESCE(selectedFavorited.favorited, false) AS favorited,
 COALESCE(hashtags.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 INNER JOIN (
 	SELECT leader_id, (
 		SELECT true
@@ -262,18 +269,19 @@ INNER JOIN (
 	WHERE follower_id = $1
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id
 LEFT JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited 
-	FROM articles_favorites pf 
-	GROUP BY pf.article_id) AS favorites ON favorites.article_id = p.id
-LEFT JOIN articles_favorites pf ON pf.article_id = p.id
+	SELECT af.article_id, af.user_id, true AS favorited
+	FROM articles_favorites af 
+	WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = a.id
 LEFT JOIN (
-	SELECT hp.article_id, array_agg(h.title) AS hashtags
-	FROM hashtags_articles hp
-	INNER JOIN hashtags h ON h.id = hp.hashtag_id
-	GROUP BY hp.article_id
-) AS hashtags ON hashtags.article_id = p.id
+	SELECT af.article_id, COUNT(*) AS favorites_count
+	FROM articles_favorites af 
+	GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = a.id
+LEFT JOIN (
+	SELECT ha.article_id, array_agg(h.title) AS hashtags
+	FROM hashtags_articles ha
+	INNER JOIN hashtags h ON h.id = ha.hashtag_id
+	GROUP BY ha.article_id
+) AS hashtags ON hashtags.article_id = a.id
 ORDER BY created_at
 DESC
 LIMIT $2
@@ -281,13 +289,13 @@ OFFSET $3;
 `;
 
 export const findArticleByResourceIdText = `
-SELECT p.id, p.resource_id, p.slug, p.title, p.description, p.body, p.created_at, p.updated_at, u.id AS author_id, u.username, u.bio, favorites.favorites_count,
+SELECT a.id, a.resource_id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, u.id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following,
-COALESCE(favorites.favorites_count, 0) AS favorites_count, 
-COALESCE(favorites.favorited, false) AS favorited,
+COALESCE(selectedFavoritesCount.favorites_count, 0) AS favorites_count, 
+COALESCE(selectedFavorited.favorited, false) AS favorited,
 COALESCE(hashtags.hashtags, ARRAY[]::text[]) AS tag_list
-FROM articles p
-INNER JOIN users u ON u.id = p.user_id
+FROM articles a
+INNER JOIN users u ON u.id = a.user_id
 LEFT JOIN (
 	SELECT leader_id, follower_id, (
 		SELECT true
@@ -295,18 +303,20 @@ LEFT JOIN (
 	FROM followers f
 ) AS selectedFollowers ON selectedFollowers.leader_id = u.id AND selectedFollowers.follower_id = $1
 LEFT JOIN (
-	SELECT pf.article_id, COUNT(*) AS favorites_count, (
-		SELECT true
-	) AS favorited 
-	FROM articles_favorites pf 
-	GROUP BY pf.article_id) AS favorites ON favorites.article_id = p.id
+	SELECT af.article_id, af.user_id, true AS favorited
+	FROM articles_favorites af 
+	WHERE af.user_id = $1) AS selectedFavorited ON selectedFavorited.article_id = a.id
 LEFT JOIN (
-	SELECT hp.article_id, array_agg(h.title) AS hashtags
-	FROM hashtags_articles hp
-	INNER JOIN hashtags h ON h.id = hp.hashtag_id
-	GROUP BY hp.article_id
-) AS hashtags ON hashtags.article_id = p.id
-WHERE p.resource_id = $2;
+	SELECT af.article_id, COUNT(*) AS favorites_count
+	FROM articles_favorites af 
+	GROUP BY af.article_id) AS selectedFavoritesCount ON selectedFavoritesCount.article_id = a.id
+LEFT JOIN (
+	SELECT ha.article_id, array_agg(h.title) AS hashtags
+	FROM hashtags_articles ha
+	INNER JOIN hashtags h ON h.id = ha.hashtag_id
+	GROUP BY ha.article_id
+) AS hashtags ON hashtags.article_id = a.id
+WHERE a.resource_id = $2;
 `;
 
 export const insertArticleText = `
