@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
-import { initArticle, deleteArticle } from './articleAPI';
+import {
+  initArticle,
+  favoriteArticle,
+  unfavoriteArticle,
+  deleteArticle,
+} from './articleAPI';
 import { followUserAsync, unfollowUserAsync } from '../../Profile/profileSlice';
 
 import type {
@@ -11,11 +16,13 @@ import type {
   ArticleState,
   InitArticlePayload,
   DeleteArticlePayload,
+  FavoriteArticlePayload,
 } from '../../../app/types/redux.types';
 
 const initialState: ArticleState = {
   article: null,
   articleStatus: 'idle',
+  favoriteStatus: 'idle',
   deleteStatus: 'idle',
 };
 
@@ -25,6 +32,24 @@ export const initArticleAsync = createAsyncThunk<
   { rejectValue: ErrorResBody }
 >('article/initArticle', async (reqData) => {
   const response = await initArticle(reqData);
+  return response;
+});
+
+export const favoriteArticleAsync = createAsyncThunk<
+  SingleArticleResBody,
+  FavoriteArticlePayload,
+  { rejectValue: ErrorResBody }
+>('article/favoriteArticle', async (payload) => {
+  const response = await favoriteArticle(payload);
+  return response;
+});
+
+export const unfavoriteArticleAsync = createAsyncThunk<
+  SingleArticleResBody,
+  FavoriteArticlePayload,
+  { rejectValue: ErrorResBody }
+>('article/unfavoriteArticle', async (payload) => {
+  const response = await unfavoriteArticle(payload);
   return response;
 });
 
@@ -57,6 +82,40 @@ export const articleSlice = createSlice({
       })
       .addCase(initArticleAsync.rejected, (state) => {
         state.articleStatus = 'failed';
+      })
+      .addCase(favoriteArticleAsync.pending, (state) => {
+        if (state.article) {
+          state.favoriteStatus = 'loading';
+        }
+      })
+      .addCase(favoriteArticleAsync.fulfilled, (state, action) => {
+        if (state.article) {
+          state.favoriteStatus = 'success';
+          state.article!.favorited = action.payload.article.favorited;
+          state.article!.favoritesCount = action.payload.article.favoritesCount;
+        }
+      })
+      .addCase(favoriteArticleAsync.rejected, (state) => {
+        if (state.article) {
+          state.favoriteStatus = 'failed';
+        }
+      })
+      .addCase(unfavoriteArticleAsync.pending, (state) => {
+        if (state.article) {
+          state.favoriteStatus = 'loading';
+        }
+      })
+      .addCase(unfavoriteArticleAsync.fulfilled, (state, action) => {
+        if (state.article) {
+          state.favoriteStatus = 'success';
+          state.article!.favorited = action.payload.article.favorited;
+          state.article!.favoritesCount = action.payload.article.favoritesCount;
+        }
+      })
+      .addCase(unfavoriteArticleAsync.rejected, (state) => {
+        if (state.article) {
+          state.favoriteStatus = 'failed';
+        }
       })
       .addCase(deleteArticleAsync.pending, (state) => {
         state.deleteStatus = 'loading';

@@ -22,6 +22,7 @@ const Article: FC<{ article: ArticleProperties }> = (props) => {
     createdAt: article.createdAt,
     slug: article.slug,
     resourceId: article.resourceId,
+    favorited: article.favorited,
     favoritesCount: article.favoritesCount,
   };
 

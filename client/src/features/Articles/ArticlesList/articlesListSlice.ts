@@ -1,5 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
+import {
+  favoriteArticleAsync,
+  unfavoriteArticleAsync,
+} from '../Article/articleSlice';
 import {
   initGlobalArticles,
   initFeedArticles,
@@ -16,8 +20,12 @@ import type {
   MultipleFeedArticlesPayload,
   MultipleTagFilterArticlesPayload,
 } from '../../../app/types/redux.types';
-import type { MultipleArticlesResBody } from '../../../../../server/src/types/appResponse.types';
-import { ErrorResBody } from '../../../../../server/src/types/appResponse.types';
+import type {
+  MultipleArticlesResBody,
+  SingleArticleResBody,
+} from '../../../../../server/src/types/appResponse.types';
+import type { ErrorResBody } from '../../../../../server/src/types/appResponse.types';
+import type { WritableDraft } from 'immer/dist/internal';
 
 const initialState: ArticlesListState = {
   articles: [],
@@ -69,6 +77,22 @@ export const initFavoritedFilterArticlesAsync = createAsyncThunk<
   const response = await initFavoritedFilterArticles(payload);
   return response;
 });
+
+const updateFavoritedArticle = (
+  state: WritableDraft<ArticlesListState>,
+  action: PayloadAction<SingleArticleResBody>
+) => {
+  if (state.articles) {
+    const article = state.articles.find(
+      (article) => article.resourceId === action.payload.article.resourceId
+    );
+
+    if (article) {
+      article.favorited = action.payload.article.favorited;
+      article.favoritesCount = action.payload.article.favoritesCount;
+    }
+  }
+};
 
 export const articlesListSlice = createSlice({
   name: 'articlesList',
@@ -136,7 +160,9 @@ export const articlesListSlice = createSlice({
       })
       .addCase(initFavoritedFilterArticlesAsync.rejected, (state) => {
         state.status = 'failed';
-      });
+      })
+      .addCase(favoriteArticleAsync.fulfilled, updateFavoritedArticle)
+      .addCase(unfavoriteArticleAsync.fulfilled, updateFavoritedArticle);
   },
 });
 

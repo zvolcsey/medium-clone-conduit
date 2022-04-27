@@ -18,16 +18,15 @@ import { createRequestHeaders } from '../../../utils/utility';
 export const initGlobalArticles = async (
   payload: MultipleArticlesPayload
 ): Promise<MultipleArticlesResBody> => {
-  const { limit, offset } = payload;
+  const { limit, offset, token } = payload;
+  const headers = createRequestHeaders(token);
   const { data }: AxiosResponse<MultipleArticlesResBody> =
     await axiosInstance.get(
       `/api/articles?limit=${limit ?? DEFAULT_ARTICLES_LIMIT}&offset=${
         offset ?? DEFAULT_ARTICLES_OFFSET
       }`,
       {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         responseType: 'json',
       }
     );
@@ -55,16 +54,15 @@ export const initFeedArticles = async (
 export const initTagFilterArticles = async (
   payload: MultipleTagFilterArticlesPayload
 ): Promise<MultipleArticlesResBody> => {
-  const { limit, offset, tag } = payload;
+  const { limit, offset, tag, token } = payload;
+  const headers = createRequestHeaders(token);
   const { data }: AxiosResponse<MultipleArticlesResBody> =
     await axiosInstance.get(
       `/api/articles?limit=${limit ?? DEFAULT_ARTICLES_LIMIT}&offset=${
         offset ?? DEFAULT_ARTICLES_OFFSET
       }&tag=${tag}`,
       {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         responseType: 'json',
       }
     );

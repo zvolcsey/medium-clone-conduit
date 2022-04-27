@@ -52,10 +52,16 @@ export interface MultipleFavoritedFilterArticlesPayload
 export interface ArticleState {
   article: ArticleProperties | null;
   articleStatus: Status;
+  favoriteStatus: Status;
   deleteStatus: Status;
 }
 
 export interface InitArticlePayload {
+  token: string | null;
+  resourceId: string;
+}
+
+export interface FavoriteArticlePayload {
   token: string | null;
   resourceId: string;
 }

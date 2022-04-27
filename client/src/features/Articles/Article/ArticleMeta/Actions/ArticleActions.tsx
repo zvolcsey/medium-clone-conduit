@@ -16,9 +16,10 @@ const ArticleMetaActions: FC<{
   authorUsername: string;
   slug: string;
   resourceId: string;
+  favorited: boolean;
   favoritesCount: number;
 }> = (props) => {
-  const { authorUsername, slug, resourceId, favoritesCount } = props;
+  const { authorUsername, slug, resourceId, favorited, favoritesCount } = props;
 
   const dispatch = useAppDispatch();
 
@@ -57,7 +58,12 @@ const ArticleMetaActions: FC<{
   return (
     <ul className={styles.actions}>
       <li className={styles.item}>
-        <FavoriteButton favoritesCount={favoritesCount} />
+        <FavoriteButton
+          username={authorUsername}
+          resourceId={resourceId}
+          favorited={favorited}
+          favoritesCount={favoritesCount}
+        />
       </li>
       {canEdit && (
         <li className={styles.item}>

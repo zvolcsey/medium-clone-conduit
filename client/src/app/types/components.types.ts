@@ -6,5 +6,6 @@ export interface ArticleMetaData {
   createdAt: string;
   slug: string;
   resourceId: string;
+  favorited: boolean;
   favoritesCount: number;
 }

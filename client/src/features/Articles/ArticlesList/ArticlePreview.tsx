@@ -50,7 +50,12 @@ const ArticlePreview: FC<{ article: ArticleProperties }> = (props) => {
           >
             Read More
           </Link>
-          <FavoriteButton favoritesCount={article.favoritesCount} />
+          <FavoriteButton
+            username={article.author.username}
+            resourceId={article.resourceId}
+            favorited={article.favorited}
+            favoritesCount={article.favoritesCount}
+          />
         </footer>
       </Card>
     </article>

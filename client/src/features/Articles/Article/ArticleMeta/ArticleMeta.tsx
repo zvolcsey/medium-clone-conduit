@@ -14,6 +14,7 @@ const ArticleMeta: FC<{
     createdAt,
     slug,
     resourceId,
+    favorited,
     favoritesCount,
     authorUsername,
     following,
@@ -30,6 +31,7 @@ const ArticleMeta: FC<{
         authorUsername={authorUsername}
         slug={slug}
         resourceId={resourceId}
+        favorited={favorited}
         favoritesCount={favoritesCount}
       />
     </div>

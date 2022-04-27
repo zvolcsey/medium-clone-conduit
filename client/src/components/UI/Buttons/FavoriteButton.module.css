@@ -1,3 +1,11 @@
+.favorited {
+  color: #a80000;
+}
+
 .button > span {
   margin-left: 0.4rem;
+  padding: 0.4rem;
+  background: var(--main-color);
+  border-radius: 0.4rem;
+  color: #fff;
 }
