@@ -11,7 +11,10 @@ import { initTagFilterArticlesAsync } from '../features/Articles/ArticlesList/ar
 import { setCurrentPage } from '../features/Pagination/paginationSlice';
 import { selectToken } from '../features/Auth/authSlice';
 import { selectAppName } from '../app/common-slice';
-import { DEFAULT_ARTICLES_LIMIT } from '../app/constant';
+import {
+  DEFAULT_ARTICLES_LIMIT,
+  DEFAULT_ARTICLES_OFFSET,
+} from '../app/constant';
 
 import Banner from '../components/Banner/Banner';
 import PopularTags from '../features/PopularTags/PopularTags';
@@ -33,7 +36,7 @@ const Home: FC<{}> = () => {
       : Number(searchParams.get('page'));
   const articlesOffset =
     pageSearchParam === 1
-      ? 0
+      ? DEFAULT_ARTICLES_OFFSET
       : pageSearchParam * DEFAULT_ARTICLES_LIMIT - DEFAULT_ARTICLES_LIMIT;
 
   useEffect(() => {

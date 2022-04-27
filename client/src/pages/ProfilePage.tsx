@@ -1,5 +1,11 @@
 import { FC, useEffect } from 'react';
-import { useLocation, useParams, Routes, Route } from 'react-router-dom';
+import {
+  useLocation,
+  useParams,
+  Routes,
+  Route,
+  useSearchParams,
+} from 'react-router-dom';
 import { selectAppName } from '../app/common-slice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
@@ -24,6 +30,7 @@ import ProfileTabs from '../components/Tabs/ProfileTabs';
 import Loading from '../components/UI/Loading';
 import Profile from '../features/Profile/Profile';
 import TabPanel from '../components/Tabs/TabPanel';
+import { setCurrentPage } from '../features/Pagination/paginationSlice';
 
 const ProfilePage: FC<{}> = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +44,17 @@ const ProfilePage: FC<{}> = () => {
   const pathname = location.pathname;
   const params = useParams();
   const username = params.username!;
+  const [searchParams] = useSearchParams();
+
+  const pageSearchParam =
+    Number(searchParams.get('page')) === 0
+      ? 1
+      : Number(searchParams.get('page'));
+
+  const articlesOffset =
+    pageSearchParam === 1
+      ? DEFAULT_ARTICLES_OFFSET
+      : pageSearchParam * DEFAULT_ARTICLES_LIMIT - DEFAULT_ARTICLES_LIMIT;
 
   useEffect(() => {
     if (pathname === `/profile/@${username}`) {
@@ -55,11 +73,12 @@ const ProfilePage: FC<{}> = () => {
   }, [dispatch, token, username]);
 
   useEffect(() => {
+    dispatch(setCurrentPage(pageSearchParam));
     if (pathname === `/profile/@${username}`) {
       dispatch(
         initAuthorFilterArticlesAsync({
           limit: DEFAULT_ARTICLES_LIMIT,
-          offset: DEFAULT_ARTICLES_OFFSET,
+          offset: articlesOffset,
           author: username,
           token: token,
         })
@@ -69,7 +88,7 @@ const ProfilePage: FC<{}> = () => {
       dispatch(
         initFavoritedFilterArticlesAsync({
           limit: DEFAULT_ARTICLES_LIMIT,
-          offset: DEFAULT_ARTICLES_OFFSET,
+          offset: articlesOffset,
           username: username,
           token: token,
         })
@@ -78,7 +97,7 @@ const ProfilePage: FC<{}> = () => {
     return () => {
       dispatch(articlesUnload());
     };
-  }, [dispatch, pathname, username, token]);
+  }, [dispatch, pathname, username, token, searchParams]);
 
   let profile = <Loading />;
 
