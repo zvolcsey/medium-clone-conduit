@@ -4,7 +4,13 @@ import '../../index.css';
 import styles from './Loading.module.css';
 
 const Loading: FC<{}> = () => {
-  return <p className={`${styles.loading} centered bold`}>Loading...</p>;
+  return (
+    <div className={styles['loading-container']}>
+      <div className={styles.circle}></div>
+      <div className={styles.circle}></div>
+      <div className={styles.circle}></div>
+    </div>
+  );
 };
 
 export default Loading;
