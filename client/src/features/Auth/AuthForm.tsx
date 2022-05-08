@@ -96,12 +96,22 @@ const AuthForm: FC<{
     <form onSubmit={submitHandler} className={styles.form} noValidate>
       <FormControl>
         <FormLabel htmlFor='username'>Username</FormLabel>
-        <TextInput name='username' required onTextInput={usernameRes} />
+        <TextInput
+          name='username'
+          required
+          value={usernameRes.value}
+          onChange={usernameRes.valueChangedHandler}
+        />
         {usernameInfo}
       </FormControl>
       <FormControl>
         <FormLabel htmlFor='password'>Password</FormLabel>
-        <PasswordInput name='password' required onPasswordInput={passwordRes} />
+        <PasswordInput
+          name='password'
+          required
+          value={passwordRes.value}
+          onChange={passwordRes.valueChangedHandler}
+        />
         {passwordInfo}
       </FormControl>
       {type === 'sign-up' && (
@@ -110,7 +120,8 @@ const AuthForm: FC<{
           <PasswordInput
             name='confirm-password'
             required
-            onPasswordInput={confirmPasswordRes}
+            value={confirmPasswordRes.value}
+            onChange={confirmPasswordRes.valueChangedHandler}
           />
         </FormControl>
       )}

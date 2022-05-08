@@ -1,26 +1,11 @@
-import { FC } from 'react';
+import { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
 
 import Input from './Input';
 
-import type { InputHookRes } from '../../../app/types/hooks.types';
-
-const PasswordInput: FC<{
-  name: string;
-  required?: boolean;
-  onPasswordInput: InputHookRes;
-}> = (props) => {
-  const { name, required, onPasswordInput } = props;
-
-  return (
-    <>
-      <Input
-        type='password'
-        name={name}
-        required={required}
-        onInput={onPasswordInput}
-      />
-    </>
-  );
+const PasswordInput: FC<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+> = (props) => {
+  return <Input type='password' {...props} />;
 };
 
 export default PasswordInput;

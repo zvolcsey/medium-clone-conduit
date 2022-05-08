@@ -31,8 +31,10 @@ const ArticlePage: FC<{}> = () => {
   }, [article?.title, appName]);
 
   useEffect(() => {
-    dispatch(initArticleAsync({ token, resourceId }));
-  }, [dispatch, token, resourceId]);
+    if (!article) {
+      dispatch(initArticleAsync({ token, resourceId }));
+    }
+  }, [dispatch, token, resourceId, article]);
 
   useEffect(() => {
     return () => {

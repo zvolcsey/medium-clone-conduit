@@ -1,4 +1,4 @@
-import { FocusEvent, ChangeEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 export interface InputHookRes {
   value: string;
@@ -6,5 +6,6 @@ export interface InputHookRes {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   valid: boolean;
+  keyDownHandler: (event: KeyboardEvent<HTMLInputElement>) => void;
   reset: () => void;
 }

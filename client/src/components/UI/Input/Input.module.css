@@ -9,5 +9,6 @@
 }
 
 .input:focus {
-  outline: var(--main-color);
+  outline: none;
+  border: 0.1rem solid var(--main-color);
 }

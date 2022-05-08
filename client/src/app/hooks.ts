@@ -1,5 +1,8 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, KeyboardEvent } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { addTag, removeTag, selectTags } from '../features/Editor/editorSlice';
+import { HASHTAG_MAX_LENGTH, HASHTAG_MIN_LENGTH } from './constant';
+
 import type { RootState, AppDispatch } from './store';
 import type { InputHookRes } from './types/hooks.types';
 
@@ -7,25 +10,53 @@ import type { InputHookRes } from './types/hooks.types';
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const useInput = (): InputHookRes => {
-  const [enteredValue, setEnteredValue] = useState('');
+export const useInput = (data?: string): InputHookRes => {
+  const dispatch = useAppDispatch();
+  const [enteredValue, setEnteredValue] = useState<string>(data ? data : '');
+  const tags = useAppSelector(selectTags);
+  const tagRegex = /^#([a-z0-9&\-_]+)/g;
 
-  const valid = enteredValue.length > 0;
+  let valid = enteredValue.length > 0;
 
   const valueChangedHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setEnteredValue(event.target.value);
+    if (event.target.value !== ' ') {
+      setEnteredValue(event.target.value);
+    }
   };
 
   const reset = () => {
     setEnteredValue('');
   };
 
+  const keyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === ' ') {
+      if (
+        enteredValue.length >= HASHTAG_MIN_LENGTH &&
+        enteredValue.length <= HASHTAG_MAX_LENGTH &&
+        tagRegex.test(enteredValue) &&
+        !tags.includes(enteredValue.slice(1))
+      ) {
+        dispatch(addTag(enteredValue.slice(1)));
+        reset();
+      }
+    }
+
+    if (event.key === 'Backspace' && enteredValue.length === 0) {
+      const tagsArray = [...tags];
+      const tag = tagsArray.pop();
+      if (tag) {
+        dispatch(removeTag(tag));
+      }
+    }
+  };
+
   return {
     value: enteredValue,
     valueChangedHandler,
     valid,
+    keyDownHandler,
     reset,
   };
 };

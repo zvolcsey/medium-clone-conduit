@@ -10,9 +10,9 @@ import FavoriteButton from '../../../components/UI/Buttons/FavoriteButton';
 const ArticlePreview: FC<{ article: ArticleProperties }> = (props) => {
   const { article } = props;
 
-  const slugWithResourceId = `${article.slug}-${article.resourceId}`;
-
-  const date = new Date(article.createdAt).toDateString();
+  const createdAtDate = new Date(article.createdAt).toDateString();
+  const updatedAtDate = new Date(article.updatedAt).toDateString();
+  const isUpdated = new Date(article.updatedAt) > new Date(article.createdAt);
 
   let tagList = (
     <p className={styles['article-preview__no-hashtag']}>No hashtags</p>
@@ -35,7 +35,9 @@ const ArticlePreview: FC<{ article: ArticleProperties }> = (props) => {
             <Link to={`/profile/@${article.author.username}`}>
               {article.author.username}
             </Link>
-            <span className={styles['article-meta__date']}>{date}</span>
+            <span className={styles['article-meta__date']}>{`${
+              isUpdated ? 'Edited: ' : 'Created: '
+            }${isUpdated ? updatedAtDate : createdAtDate}`}</span>
           </div>
         </div>
         <h1>{article.title}</h1>

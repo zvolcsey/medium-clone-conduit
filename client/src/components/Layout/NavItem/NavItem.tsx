@@ -4,13 +4,14 @@ import { NavLink } from 'react-router-dom';
 import '../../../index.css';
 import styles from './NavItem.module.css';
 
-const NavItem: FC<{ path: string }> = (props) => {
-  const { path, children } = props;
+const NavItem: FC<{ path: string; end?: boolean }> = (props) => {
+  const { path, end, children } = props;
 
   return (
     <li className={`${styles.item}`}>
       <NavLink
         to={path}
+        end={end || false}
         className={({ isActive }) =>
           isActive ? styles['item--active'] : undefined
         }

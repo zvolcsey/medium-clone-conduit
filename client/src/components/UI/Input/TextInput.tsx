@@ -1,19 +1,11 @@
-import { FC } from 'react';
+import { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
 
 import Input from './Input';
 
-import type { InputHookRes } from '../../../app/types/hooks.types';
-
-const TextInput: FC<{
-  name: string;
-  required?: boolean;
-  onTextInput: InputHookRes;
-}> = (props) => {
-  const { name, required, onTextInput } = props;
-
-  return (
-    <Input type='text' name={name} required={required} onInput={onTextInput} />
-  );
+const TextInput: FC<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+> = (props) => {
+  return <Input type='text' {...props} />;
 };
 
 export default TextInput;

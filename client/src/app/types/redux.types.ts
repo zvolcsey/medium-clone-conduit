@@ -1,10 +1,13 @@
-import {
+import type {
   ArticleProperties,
   CommentProperties,
   ProfileProperties,
 } from '../../../../server/src/types/appClasses';
-import { CommentReqBody } from '../../../../server/src/types/appRequest.types';
-import { ErrorResBody } from '../../../../server/src/types/appResponse.types';
+import type {
+  ArticleReqBody,
+  CommentReqBody,
+} from '../../../../server/src/types/appRequest.types';
+import type { ErrorResBody } from '../../../../server/src/types/appResponse.types';
 
 export type Status = 'idle' | 'loading' | 'success' | 'failed';
 
@@ -126,4 +129,25 @@ export interface FollowingPayload {
 export interface ProfileState {
   profile: ProfileProperties | null;
   status: Status;
+}
+
+export interface EditorState {
+  article: ArticleProperties | null;
+  articleStatus: Status;
+  editorStatus: Status;
+  errors: ErrorResBody | undefined;
+  tagList: string[];
+}
+
+export type EditorType = 'create' | 'edit';
+
+export interface CreateArticlePayload {
+  token: string | null;
+  reqBody: ArticleReqBody;
+}
+
+export interface UpdateArticlePayload {
+  token: string | null;
+  reqBody: ArticleReqBody;
+  resourceId: string;
 }

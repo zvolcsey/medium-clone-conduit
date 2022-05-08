@@ -1,0 +1,13 @@
+.form {
+  width: 100%;
+}
+
+.input {
+  background: var(--main-color);
+}
+
+.button {
+  margin: 1rem auto;
+  display: grid;
+  place-items: center;
+}

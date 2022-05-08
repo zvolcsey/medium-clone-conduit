@@ -4,6 +4,7 @@ export interface ArticleMetaData {
   authorUsername: string;
   following: boolean;
   createdAt: string;
+  updatedAt: string;
   slug: string;
   resourceId: string;
   favorited: boolean;

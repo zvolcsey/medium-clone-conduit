@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import styles from './ArticleMeta.module.css';
-
 import ArticleInfo from './ArticleInfo';
 import ArticleActions from './Actions/ArticleActions';
 
@@ -12,6 +11,7 @@ const ArticleMeta: FC<{
 }> = (props) => {
   const {
     createdAt,
+    updatedAt,
     slug,
     resourceId,
     favorited,
@@ -26,6 +26,7 @@ const ArticleMeta: FC<{
         authorUsername={authorUsername}
         following={following}
         createdAt={createdAt}
+        updatedAt={updatedAt}
       />
       <ArticleActions
         authorUsername={authorUsername}

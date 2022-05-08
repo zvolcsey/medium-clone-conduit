@@ -20,6 +20,7 @@ const Article: FC<{ article: ArticleProperties }> = (props) => {
     authorUsername: article.author.username,
     following: article.author.following,
     createdAt: article.createdAt,
+    updatedAt: article.updatedAt,
     slug: article.slug,
     resourceId: article.resourceId,
     favorited: article.favorited,
@@ -42,7 +43,8 @@ const Article: FC<{ article: ArticleProperties }> = (props) => {
       </Container>
       <ArticleMeta metaData={articleMetaData} />
       <Card className={styles['body-card']}>
-        <p>The body of the article.</p>
+        <p className={styles.description}>{article.description}</p>
+        <p className={styles.body}>{article.body}</p>
         <TagList tags={article.tagList} className={styles['tag-list']} />
       </Card>
       <ArticleMeta metaData={articleMetaData} />

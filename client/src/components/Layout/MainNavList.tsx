@@ -14,6 +14,9 @@ const MainNavList: FC<{}> = () => {
     <ul id='main-navigation' className={styles.items}>
       <PublicNavItem path='/'>Home</PublicNavItem>
       <PrivateNavItem path='/feed'>Your Feed</PrivateNavItem>
+      <PrivateNavItem path='/editor' end={true}>
+        Create Article
+      </PrivateNavItem>
       <PrivateNavItem path={`/profile/@${currentUser}`}>
         {currentUser}
       </PrivateNavItem>

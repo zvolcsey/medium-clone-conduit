@@ -1,0 +1,9 @@
+.item {
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.item:hover,
+.item:active {
+  filter: brightness(1.8);
+}

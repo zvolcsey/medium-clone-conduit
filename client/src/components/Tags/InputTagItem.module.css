@@ -1,0 +1,11 @@
+.item {
+  display: inline-block;
+  color: var(--main-color);
+  cursor: pointer;
+  margin-right: 0.8rem;
+}
+
+.item:hover,
+.item:active {
+  filter: brightness(1.8);
+}

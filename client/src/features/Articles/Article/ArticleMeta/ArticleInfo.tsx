@@ -10,12 +10,16 @@ const ArticleMetaInfo: FC<{
   authorUsername: string;
   following: boolean;
   createdAt: string;
+  updatedAt: string;
 }> = (props) => {
-  const { authorUsername, following, createdAt } = props;
+  const { authorUsername, following, createdAt, updatedAt } = props;
 
   const currentUser = useAppSelector(selectCurrentUser);
 
   const isYou = currentUser === authorUsername;
+  const createdAtDate = new Date(createdAt).toDateString();
+  const updatedAtDate = new Date(updatedAt).toDateString();
+  const isUpdated = new Date(updatedAt) > new Date(createdAt);
 
   return (
     <div className={styles.info}>
@@ -26,7 +30,9 @@ const ArticleMetaInfo: FC<{
           <FollowingButton username={authorUsername} following={following} />
         )}
       </div>
-      <span className={styles.date}>{new Date(createdAt).toDateString()}</span>
+      <span className={styles.date}>{`${isUpdated ? 'Edited: ' : 'Created: '}${
+        isUpdated ? updatedAtDate : createdAtDate
+      }`}</span>
     </div>
   );
 };

@@ -68,7 +68,8 @@ const NewCommentForm: FC<{
           rows={2}
           cols={2}
           required
-          onInput={commentRes}
+          value={commentRes.value}
+          onChange={commentRes.valueChangedHandler}
         />
       </FormControl>
       <SubmitButton className={styles.button} disabled={!formIsValid}>

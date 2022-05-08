@@ -18,6 +18,11 @@ import type {
   DeleteArticlePayload,
   FavoriteArticlePayload,
 } from '../../../app/types/redux.types';
+import {
+  createArticleAsync,
+  editorPageUnload,
+  updateArticleAsync,
+} from '../../Editor/editorSlice';
 
 const initialState: ArticleState = {
   article: null,
@@ -68,6 +73,7 @@ export const articleSlice = createSlice({
     articlePageUnload(state) {
       state.article = null;
       state.articleStatus = 'idle';
+      state.favoriteStatus = 'idle';
       state.deleteStatus = 'idle';
     },
   },
@@ -135,6 +141,18 @@ export const articleSlice = createSlice({
         if (state.article) {
           state.article.author.following = action.payload.profile.following;
         }
+      })
+      .addCase(createArticleAsync.fulfilled, (state, action) => {
+        state.article = action.payload!.article;
+        state.articleStatus = 'success';
+      })
+      .addCase(updateArticleAsync.fulfilled, (state, action) => {
+        state.article = action.payload!.article;
+        state.articleStatus = 'success';
+      })
+      .addCase(editorPageUnload, (state) => {
+        state.article = null;
+        state.articleStatus = 'idle';
       });
   },
 });

@@ -4,8 +4,8 @@ import { selectToken } from '../../../features/Auth/authSlice';
 
 import NavItem from './NavItem';
 
-const PrivateNavItem: FC<{ path: string }> = (props) => {
-  const { path, children } = props;
+const PrivateNavItem: FC<{ path: string; end?: boolean }> = (props) => {
+  const { path, end, children } = props;
 
   const token = useAppSelector(selectToken);
 
@@ -13,7 +13,11 @@ const PrivateNavItem: FC<{ path: string }> = (props) => {
     return null;
   }
 
-  return <NavItem path={path}>{children}</NavItem>;
+  return (
+    <NavItem path={path} end={end}>
+      {children}
+    </NavItem>
+  );
 };
 
 export default PrivateNavItem;
