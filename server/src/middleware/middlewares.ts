@@ -4,6 +4,10 @@ import {
   checkUsername,
   checkPassword,
   checkCommentBody,
+  checkTitle,
+  checkDescription,
+  checkBody,
+  checkTags,
 } from '../utils/utility';
 
 import {
@@ -13,12 +17,13 @@ import {
   FoundError,
   NotFoundError,
 } from '../types/appClasses';
-import type { ErrorResBody } from '../types/appResponse.types';
+import type { ErrorResBody, InputValidation } from '../types/appResponse.types';
 import type { Response, NextFunction } from 'express';
 import type {
   ConduitRequest,
   AuthUserReqBody,
   CommentReqBody,
+  ArticleReqBody,
 } from '../types/appRequest.types';
 
 export const setHeader = (
@@ -169,6 +174,35 @@ export const commentInputValidation = (
     const { body } = req.body.comment;
 
     const errors = checkCommentBody(body);
+
+    if (errors.length > 0) {
+      throw new ValidationError(errors);
+    }
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const articleInputValidation = (
+  req: ConduitRequest<ArticleReqBody>,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    if (!req.body.article) {
+      console.log('Missing user object from request body');
+    }
+    const { title, description, body, tagList } = req.body.article;
+    const tagRegex = /^[a-z0-9&\-_]+$/g;
+
+    const titleErrors = checkTitle(title);
+    const descriptionErrors = checkDescription(description);
+    const bodyErrors = checkBody(body);
+    const tagsError = checkTags(tagList, tagRegex);
+
+    const errors = titleErrors.concat(descriptionErrors, bodyErrors, tagsError);
 
     if (errors.length > 0) {
       throw new ValidationError(errors);

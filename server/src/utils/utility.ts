@@ -189,3 +189,77 @@ export const checkCommentBody = (body: string): InputValidation[] => {
 
   return errors;
 };
+
+export const checkTitle = (title: string): InputValidation[] => {
+  let errors: InputValidation[] = [];
+
+  if (title.length === 0)
+    errors.push({ id: generateId(), text: 'Article title is empty' });
+  if (title.length < 6 || title.length > 15)
+    errors.push({
+      id: generateId(),
+      text: 'Article title must be between 6 and 15 characters',
+    });
+
+  return errors;
+};
+
+export const checkDescription = (description: string): InputValidation[] => {
+  let errors: InputValidation[] = [];
+
+  if (description.length === 0)
+    errors.push({ id: generateId(), text: 'Article description is empty' });
+  if (description.length < 6 || description.length > 200)
+    errors.push({
+      id: generateId(),
+      text: 'Article description must be between 6 and 200 characters',
+    });
+
+  return errors;
+};
+
+export const checkBody = (body: string): InputValidation[] => {
+  let errors: InputValidation[] = [];
+
+  if (body.length === 0)
+    errors.push({ id: generateId(), text: 'Article body is empty' });
+  if (body.length < 6 || body.length > 3000)
+    errors.push({
+      id: generateId(),
+      text: 'Article body must be between 6 and 3000 characters',
+    });
+
+  return errors;
+};
+
+export const checkTags = (
+  tags: string[],
+  tagRegex: RegExp
+): InputValidation[] => {
+  let error: InputValidation[] = [];
+
+  if (tags.length > 30) {
+    error.push({ id: generateId(), text: 'Maximum number of tag is 30' });
+    return error;
+  }
+
+  for (let tag of tags) {
+    if (!tag.match(tagRegex)) {
+      error.push({
+        id: generateId(),
+        text: 'One of the hashtag contain not allowed characters',
+      });
+      return error;
+    }
+
+    if (tag.length < 2 && tag.length > 15) {
+      error.push({
+        id: generateId(),
+        text: 'Each tag must be between 2 and 15 characters',
+      });
+      return error;
+    }
+  }
+
+  return error;
+};

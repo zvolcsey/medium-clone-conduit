@@ -324,6 +324,17 @@ export const insertArticleText = `
     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
 `;
 
+export const selectHashtagCountText = `
+    SELECT hashtag_id as id, count(hashtag_id)
+    FROM hashtags_articles ha
+    WHERE hashtag_id = (
+        SELECT id
+        FROM hashtags h
+        WHERE h.title = $1
+    )
+    GROUP BY hashtag_id;
+`;
+
 export const insertHashtagText = `
 INSERT INTO hashtags (title)
 VALUES ($1) ON CONFLICT (title) DO NOTHING
@@ -337,6 +348,14 @@ VALUES ((
     FROM hashtags h
     WHERE h.title = $1
     ), $2) ON CONFLICT (hashtag_id, article_id) DO NOTHING;
+`;
+
+export const deleteHashtagText = `
+    DELETE FROM hashtags h WHERE h.title = $1;  
+`;
+
+export const deleteHashtagArticleText = `
+    DELETE FROM hashtags_articles ha WHERE ha.hashtag_id = $1 AND ha.article_id = $2;  
 `;
 
 export const patchArticleText = `

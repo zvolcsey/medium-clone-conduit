@@ -149,10 +149,6 @@ export const articleSlice = createSlice({
       .addCase(updateArticleAsync.fulfilled, (state, action) => {
         state.article = action.payload!.article;
         state.articleStatus = 'success';
-      })
-      .addCase(editorPageUnload, (state) => {
-        state.article = null;
-        state.articleStatus = 'idle';
       });
   },
 });

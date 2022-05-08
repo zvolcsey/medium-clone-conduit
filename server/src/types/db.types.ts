@@ -74,6 +74,10 @@ export interface Count {
   count: string;
 }
 
+export interface CountWithId extends Count {
+  id: string;
+}
+
 export interface isFollowing {
   exists: boolean;
 }

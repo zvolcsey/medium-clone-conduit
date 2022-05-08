@@ -7,7 +7,11 @@ import {
   favoriteArticleHandler,
   unfavoriteArticleHandler,
 } from '../../controller/articles.controller';
-import { authRequired, authOptional } from '../../middleware/middlewares';
+import {
+  authRequired,
+  authOptional,
+  articleInputValidation,
+} from '../../middleware/middlewares';
 
 const articlesRoutes = express.Router();
 
@@ -17,11 +21,21 @@ articlesRoutes.get('/:articleResourceId', authOptional, getArticleHandler);
 
 // desc    Create a article
 // route   POST /api/articles
-articlesRoutes.post('/', authRequired, createArticleHandler);
+articlesRoutes.post(
+  '/',
+  authRequired,
+  articleInputValidation,
+  createArticleHandler
+);
 
 // desc    Update a article
 // route   PATCH /api/articles/:articleResourceId
-articlesRoutes.patch('/:articleResourceId', authRequired, updateArticleHandler);
+articlesRoutes.patch(
+  '/:articleResourceId',
+  authRequired,
+  articleInputValidation,
+  updateArticleHandler
+);
 
 // desc    Delete a article
 // route   DELETE /api/articles/:articleResourceId

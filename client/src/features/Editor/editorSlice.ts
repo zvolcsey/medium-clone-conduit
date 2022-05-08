@@ -86,6 +86,9 @@ export const editorSlice = createSlice({
     setTag(state, action: PayloadAction<string[]>) {
       state.tagList = action.payload;
     },
+    setErrorDefault(state) {
+      state.errors = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -104,6 +107,7 @@ export const editorSlice = createSlice({
       })
       .addCase(createArticleAsync.fulfilled, (state) => {
         state.editorStatus = 'success';
+        state.errors = undefined;
       })
       .addCase(createArticleAsync.rejected, (state, action) => {
         state.editorStatus = 'failed';
@@ -114,6 +118,7 @@ export const editorSlice = createSlice({
       })
       .addCase(updateArticleAsync.fulfilled, (state) => {
         state.editorStatus = 'success';
+        state.errors = undefined;
       })
       .addCase(updateArticleAsync.rejected, (state, action) => {
         state.editorStatus = 'failed';
@@ -122,7 +127,7 @@ export const editorSlice = createSlice({
   },
 });
 
-export const { editorPageUnload, addTag, removeTag, setTag } =
+export const { editorPageUnload, addTag, removeTag, setTag, setErrorDefault } =
   editorSlice.actions;
 
 export const selectTags = (state: RootState) => state.editor.tagList;

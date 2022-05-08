@@ -17,6 +17,9 @@ import {
   insertHashtagText,
   insertHashtagArticleText,
   selectHashtagsText,
+  selectHashtagCountText,
+  deleteHashtagText,
+  deleteHashtagArticleText,
 } from './queryTexts';
 import {
   ProfileProperties,
@@ -28,7 +31,12 @@ import randomstring from 'randomstring';
 
 import type { ArticleReqBodyProps } from '../types/appRequest.types';
 import type { QueryResult } from 'pg';
-import type { ArticleFromDB, isFavorite, TagFromDB } from '../types/db.types';
+import type {
+  ArticleFromDB,
+  CountWithId,
+  isFavorite,
+  TagFromDB,
+} from '../types/db.types';
 
 export const findArticleByResourceId = async (
   reqUserId: string | null,
@@ -69,6 +77,10 @@ const insertArticle = async (
         articleResourceId,
       ]
     );
+
+    articleQueryResult.rows[0].favorited = false;
+    articleQueryResult.rows[0].favorites_count = '0';
+
     for (let index in reqBody.tagList) {
       await client.query(insertHashtagText, [reqBody.tagList[index]]);
       const tag: QueryResult<TagFromDB> = await client.query(
@@ -99,38 +111,52 @@ const insertArticle = async (
 
 const patchArticle = async (
   reqBody: ArticleReqBodyProps,
+  reqUser: RequestUserProperties,
   slug: string,
   articleResourceId: string
 ): Promise<ArticleFromDB> => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const articleQueryResult: QueryResult<ArticleFromDB> = await pool.query(
-      patchArticleText,
-      [
-        reqBody.title,
-        reqBody.description,
-        reqBody.body,
-        slug,
-        articleResourceId,
-      ]
+    await pool.query(patchArticleText, [
+      reqBody.title,
+      reqBody.description,
+      reqBody.body,
+      slug,
+      articleResourceId,
+    ]);
+
+    const articleQueryResult: QueryResult<ArticleFromDB> = await client.query(
+      findArticleByResourceIdText,
+      [reqUser.id, articleResourceId]
     );
-    for (let tag in reqBody.tagList) {
+
+    for (let tag of articleQueryResult.rows[0].tag_list) {
+      if (!reqBody.tagList.includes(tag)) {
+        const selectHashtagCount: QueryResult<CountWithId> = await client.query(
+          selectHashtagCountText,
+          [tag]
+        );
+
+        if (selectHashtagCount.rows[0].count === '1') {
+          await client.query(deleteHashtagText, [tag]);
+        }
+        await client.query(deleteHashtagArticleText, [
+          selectHashtagCount.rows[0].id,
+          articleQueryResult.rows[0].id,
+        ]);
+      }
+    }
+
+    for (let tag of reqBody.tagList) {
       await client.query(insertHashtagText, [tag]);
       await client.query(insertHashtagArticleText, [
         tag,
         articleQueryResult.rows[0].id,
       ]);
     }
-    const tagsofArticleQueryResult: QueryResult<TagFromDB> = await client.query(
-      selectHashtagsText,
-      [articleQueryResult.rows[0].id]
-    );
-    let tagList: string[] = [];
-    for (let row in tagsofArticleQueryResult.rows) {
-      tagList.push(tagsofArticleQueryResult.rows[row].title);
-    }
-    articleQueryResult.rows[0].tag_list = tagList;
+
+    articleQueryResult.rows[0].tag_list = reqBody.tagList;
 
     await client.query('COMMIT');
     return articleQueryResult.rows[0];
@@ -254,7 +280,12 @@ export const updateArticle = async (
   if (reqBody.title && reqBody.title !== result.title)
     slug = slugify(reqBody.title);
 
-  const patchedData = await patchArticle(reqBody, slug, articleResourceId);
+  const patchedData = await patchArticle(
+    reqBody,
+    reqUser,
+    slug,
+    articleResourceId
+  );
 
   const ArticleData = { ...patchedData };
 
