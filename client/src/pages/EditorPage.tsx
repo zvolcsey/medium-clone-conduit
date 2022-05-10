@@ -60,8 +60,8 @@ const EditorPage: FC<{}> = () => {
         isYourArticle && (
           <Editor article={article} token={token!} resourceId={resourceId} />
         )}
-      {resourceId && !isYourArticle && (
-        <p className={`${styles.message} centered bold`}>
+      {resourceId && article && !isYourArticle && (
+        <p className={`${styles.error} centered bold`}>
           It is not your article!
         </p>
       )}

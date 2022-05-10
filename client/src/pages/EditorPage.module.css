@@ -1,7 +1,3 @@
-.message {
-  margin: 2rem 0;
-}
-
 .card {
   position: relative;
   margin: 2rem auto 2rem auto;
@@ -16,6 +12,10 @@
 
 .card > h1 {
   margin: 1rem 0;
+}
+
+.error {
+  margin: 2rem 0;
 }
 
 .errors {
