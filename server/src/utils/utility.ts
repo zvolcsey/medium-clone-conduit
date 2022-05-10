@@ -263,3 +263,15 @@ export const checkTags = (
 
   return error;
 };
+
+export const checkBio = (bio: string): InputValidation[] => {
+  let errors: InputValidation[] = [];
+
+  if (bio.length > 400)
+    errors.push({
+      id: generateId(),
+      text: 'Biography must be between 6 and 400 characters',
+    });
+
+  return errors;
+};

@@ -8,7 +8,12 @@ import {
   checkDescription,
   checkBody,
   checkTags,
+  checkBio,
 } from '../utils/utility';
+import { USERNAME_REGEX } from '../utils/constant';
+import { PASSWORD_REGEX } from '../utils/constant';
+import { PASSWORD_SPECIAL_CHARS_REGEX } from '../utils/constant';
+import { TAG_REGEX } from '../utils/constant';
 
 import {
   RequestUserProperties,
@@ -24,6 +29,7 @@ import type {
   AuthUserReqBody,
   CommentReqBody,
   ArticleReqBody,
+  UpdateUserReqBody,
 } from '../types/appRequest.types';
 
 export const setHeader = (
@@ -142,14 +148,11 @@ export const authInputValidation = (
       console.log('Missing user object from request body');
     }
     const { username, password } = req.body.user;
-    const usernameRegex = /^[A-Za-z_0-9]+$/g;
-    const passwordRegex = /^[A-Za-z0-9!#$%&+-?@_~]+$/g;
-    const passwordSpecialCharactersRegex = /[!#$%&+\-?@_~]/g;
 
-    const usernameErrors = checkUsername(username, usernameRegex);
+    const usernameErrors = checkUsername(username, USERNAME_REGEX);
 
     const errors = usernameErrors.concat(
-      checkPassword(password, passwordRegex, passwordSpecialCharactersRegex)
+      checkPassword(password, PASSWORD_REGEX, PASSWORD_SPECIAL_CHARS_REGEX)
     );
 
     if (errors.length > 0) {
@@ -195,14 +198,55 @@ export const articleInputValidation = (
       console.log('Missing user object from request body');
     }
     const { title, description, body, tagList } = req.body.article;
-    const tagRegex = /^[a-z0-9&\-_]+$/g;
 
     const titleErrors = checkTitle(title);
     const descriptionErrors = checkDescription(description);
     const bodyErrors = checkBody(body);
-    const tagsError = checkTags(tagList, tagRegex);
+    const tagsError = checkTags(tagList, TAG_REGEX);
 
     const errors = titleErrors.concat(descriptionErrors, bodyErrors, tagsError);
+
+    if (errors.length > 0) {
+      throw new ValidationError(errors);
+    }
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateUserInputValidation = (
+  req: ConduitRequest<UpdateUserReqBody>,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    if (!req.body.user) {
+      console.log('Missing user object from request body');
+    }
+    const { username, password, bio } = req.body.user;
+    let usernameErrors: InputValidation[] = [];
+    let passwordErrors: InputValidation[] = [];
+    let bioErrors: InputValidation[] = [];
+
+    if (username) {
+      usernameErrors = checkUsername(username, USERNAME_REGEX);
+    }
+
+    if (password) {
+      passwordErrors = checkPassword(
+        password,
+        PASSWORD_REGEX,
+        PASSWORD_SPECIAL_CHARS_REGEX
+      );
+    }
+
+    if (bio) {
+      bioErrors = checkBio(bio);
+    }
+
+    const errors = usernameErrors.concat(passwordErrors, bioErrors);
 
     if (errors.length > 0) {
       throw new ValidationError(errors);

@@ -6,6 +6,7 @@ import type {
 import type {
   ArticleReqBody,
   CommentReqBody,
+  UpdateUserReqBody,
 } from '../../../../server/src/types/appRequest.types';
 import type { ErrorResBody } from '../../../../server/src/types/appResponse.types';
 
@@ -150,4 +151,21 @@ export interface UpdateArticlePayload {
   token: string | null;
   reqBody: ArticleReqBody;
   resourceId: string;
+}
+
+export interface SettingsState {
+  profile: ProfileProperties | null;
+  profileStatus: Status;
+  profileErrors: ErrorResBody | undefined;
+  usernameStatus: Status;
+  usernameErrors: ErrorResBody | undefined;
+  passwordStatus: Status;
+  passwordErrors: ErrorResBody | undefined;
+  bioStatus: Status;
+  bioErrors: ErrorResBody | undefined;
+}
+
+export interface UpdateUserPayload {
+  token: string | null;
+  reqBody: UpdateUserReqBody;
 }

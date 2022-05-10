@@ -3,6 +3,7 @@ import * as userControllers from '../../controller/users.controller';
 import {
   authRequired,
   authInputValidation,
+  updateUserInputValidation,
 } from '../../middleware/middlewares';
 
 const usersRoutes = express.Router();
@@ -25,6 +26,11 @@ usersRoutes.get('/user', authRequired, userControllers.getCurrentUserHandler);
 
 // desc    Update the user
 // route   PATCH /api/user
-usersRoutes.patch('/user', authRequired, userControllers.updateUserHandler);
+usersRoutes.patch(
+  '/user',
+  updateUserInputValidation,
+  authRequired,
+  userControllers.updateUserHandler
+);
 
 export default usersRoutes;

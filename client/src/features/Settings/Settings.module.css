@@ -10,10 +10,11 @@
   align-items: center;
 }
 
-.logout-card {
-  margin-bottom: 2rem;
+.card > h1 {
+  margin: 1rem 0;
+  font-size: 1.4rem;
 }
 
-.error {
-  margin: 2rem 0;
+.errors {
+  margin-bottom: 1rem;
 }

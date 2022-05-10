@@ -11,6 +11,7 @@ import paginationReducer from '../features/Pagination/paginationSlice';
 import authReducer from '../features/Auth/authSlice';
 import profileReducer from '../features/Profile/profileSlice';
 import editorReducer from '../features/Editor/editorSlice';
+import settingsReducer from '../features/Settings/settingsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     auth: authReducer,
     profile: profileReducer,
     editor: editorReducer,
+    settings: settingsReducer,
   },
 });
 
