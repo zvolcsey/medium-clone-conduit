@@ -8,8 +8,9 @@ import Container from '../../../components/UI/Container';
 import Comments from './Comments/Comments';
 import TagList from '../../../components/Tags/TagList';
 import ArticleMeta from './ArticleMeta/ArticleMeta';
+import ReactMarkdown from 'react-markdown';
 
-import { ArticleMetaData } from '../../../app/types/components.types';
+import type { ArticleMetaData } from '../../../app/types/components.types';
 
 const Article: FC<{ article: ArticleProperties }> = (props) => {
   const { article } = props;
@@ -43,8 +44,7 @@ const Article: FC<{ article: ArticleProperties }> = (props) => {
       </Container>
       <ArticleMeta metaData={articleMetaData} />
       <Card className={styles['body-card']}>
-        <p className={styles.description}>{article.description}</p>
-        <p className={styles.body}>{article.body}</p>
+        <ReactMarkdown children={article.body} />
         <TagList tags={article.tagList} className={styles['tag-list']} />
       </Card>
       <ArticleMeta metaData={articleMetaData} />

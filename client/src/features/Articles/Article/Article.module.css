@@ -17,15 +17,6 @@
   max-width: 40rem;
 }
 
-.description {
-  padding-bottom: 1rem;
-  border-bottom: 0.1rem solid #000;
-}
-
-.body {
-  padding-top: 1rem;
-}
-
 .tag-list {
   justify-content: flex-end;
 }

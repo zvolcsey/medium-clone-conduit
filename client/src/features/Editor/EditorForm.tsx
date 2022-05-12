@@ -125,7 +125,9 @@ const EditorForm: FC<{
         />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor='body'>Write your article</FormLabel>
+        <FormLabel htmlFor='body'>
+          {'Write your article (in markdown)'}
+        </FormLabel>
         <TextArea
           name='body'
           rows={4}
