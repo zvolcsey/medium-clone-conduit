@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 import '../../index.css';
 import styles from './Footer.module.css';
@@ -18,6 +20,7 @@ const Footer: FC<{}> = () => {
             href='https://thinkster.io'
             className='bold'
           >
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             Thinkster
           </a>
           . Code &amp; design licensed under MIT.

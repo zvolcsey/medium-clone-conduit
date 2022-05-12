@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './SubmitButton.module.css';
 import Button from './Button';
@@ -15,7 +17,8 @@ const SubmitButton: FC<{ className?: string; disabled?: boolean }> = (
       onClick={undefined}
       disabled={disabled || false}
     >
-      {children}
+      {children}&nbsp;
+      <FontAwesomeIcon icon={faChevronRight} />
     </Button>
   );
 };

@@ -9,5 +9,5 @@
 .button:hover,
 .button:active,
 .button:focus {
-  filter: var(--main-brightness);
+  filter: brightness(1.8);
 }

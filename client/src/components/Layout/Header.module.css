@@ -11,7 +11,30 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  padding: 0 1rem;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
   height: 100%;
+}
+
+.nav {
+  display: none;
+}
+
+.nav-list {
+  flex-direction: row;
+}
+
+.nav-list li {
+  margin-right: 1rem;
+}
+
+@media (min-width: 50rem) {
+  .container {
+    justify-content: space-around;
+  }
+
+  .nav {
+    display: block;
+  }
 }

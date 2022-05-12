@@ -6,6 +6,10 @@
   color: #fff;
 }
 
+.button > svg {
+  margin-left: 0.5rem;
+}
+
 .button:hover,
 .button:active {
   filter: brightness(1.8);

@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Comment.module.css';
 import Card from '../../../../../components/UI/Card';
@@ -38,7 +40,7 @@ const CommentPreview: FC<{
             </div>
             {canDelete && (
               <DeleteButton onClick={deleteCommentHandler}>
-                Delete Comment
+                <FontAwesomeIcon icon={faTrashCan} /> Delete
               </DeleteButton>
             )}
           </footer>

@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import { selectCurrentUser, selectToken } from '../../../../Auth/authSlice';
 import { deleteArticleAsync } from '../../articleSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './ArticleActions.module.css';
 import FavoriteButton from '../../../../../components/UI/Buttons/FavoriteButton';
@@ -79,7 +81,7 @@ const ArticleMetaActions: FC<{
       {canDelete && (
         <li className={styles.item}>
           <DeleteButton onClick={showDeleteModalHandler}>
-            Delete Article
+            <FontAwesomeIcon icon={faTrashCan} /> Delete
           </DeleteButton>
         </li>
       )}

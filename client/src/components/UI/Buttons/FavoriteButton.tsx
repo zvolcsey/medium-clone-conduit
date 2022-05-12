@@ -8,6 +8,9 @@ import {
   selectCurrentUser,
   selectToken,
 } from '../../../features/Auth/authSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as favoritedIcon } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as notFavoritedIcon } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './FavoriteButton.module.css';
 import PrimaryButton from './PrimaryButton';
@@ -43,7 +46,13 @@ const FavoriteButton: FC<{
       className={`${styles.button} ${favorited && styles.favorited}`}
       onClick={favoriteHandler}
     >
-      Favorite <span>{favoritesCount}</span>
+      {favorited ? (
+        <FontAwesomeIcon icon={favoritedIcon} />
+      ) : (
+        <FontAwesomeIcon icon={notFavoritedIcon} />
+      )}
+      Favorite
+      <span>{favoritesCount}</span>
     </PrimaryButton>
   );
 };

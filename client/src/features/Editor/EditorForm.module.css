@@ -8,6 +8,5 @@
 
 .button {
   margin: 1rem auto;
-  display: grid;
-  place-items: center;
+  display: block;
 }

@@ -1,8 +1,16 @@
 .item {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--main-color);
   cursor: pointer;
-  margin-right: 0.8rem;
+  margin: 0.4rem 1rem 0.4rem 0;
+  padding: 0.4rem;
+  border: 0.1rem solid var(--main-color);
+  background: var(--main-color);
+  color: #fff;
+  border-radius: 0.6rem;
+  gap: 0.3rem;
 }
 
 .item:hover,

@@ -19,6 +19,7 @@
 .input {
   font: inherit;
   border: none;
+  margin: 0.4rem 0;
 }
 
 .input:focus {

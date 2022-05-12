@@ -3,6 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { DEFAULT_PAGE_LIMIT } from '../../app/constant';
 import { useAppSelector } from '../../app/hooks';
 import { selectCurrentPage } from './paginationSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Pagination.module.css';
 
@@ -31,17 +36,37 @@ const Pagination: FC<{ pages: number }> = (props) => {
     return null;
   }
 
-  let prevPage = <span className={styles['item--disabled']}>Prev</span>;
+  let prevPage = (
+    <span className={`${styles['item--disabled']} ${styles.prev}`}>
+      <FontAwesomeIcon icon={faChevronLeft} size='sm' />
+      Prev
+    </span>
+  );
   if (currentPage > 1) {
     prevPage = (
-      <Link to={`${location.pathname}?page=${currentPage - 1}`}>Prev</Link>
+      <Link
+        to={`${location.pathname}?page=${currentPage - 1}`}
+        className={styles.prev}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} size='sm' />
+        Prev
+      </Link>
     );
   }
 
-  let nextPage = <span className={styles['item--disabled']}>Next</span>;
+  let nextPage = (
+    <span className={`${styles['item--disabled']} ${styles.next}`}>
+      Next <FontAwesomeIcon icon={faChevronRight} size='sm' />
+    </span>
+  );
   if (currentPage !== pages) {
     nextPage = (
-      <Link to={`${location.pathname}?page=${currentPage + 1}`}>Next</Link>
+      <Link
+        to={`${location.pathname}?page=${currentPage + 1}`}
+        className={styles.next}
+      >
+        Next <FontAwesomeIcon icon={faChevronRight} size='sm' />
+      </Link>
     );
   }
 

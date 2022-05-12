@@ -1,0 +1,14 @@
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 1rem;
+}
+
+@media (min-width: 50rem) {
+  .button {
+    display: none;
+  }
+}

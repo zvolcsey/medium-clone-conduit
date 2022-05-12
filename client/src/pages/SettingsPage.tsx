@@ -8,6 +8,8 @@ import {
   settingsPageUnload,
 } from '../features/Settings/settingsSlice';
 import { selectCurrentUser, selectToken } from '../features/Auth/authSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './SettingsPage.module.css';
 import Card from '../components/UI/Card';
@@ -64,7 +66,10 @@ const SettingsPage: FC<{}> = () => {
         </p>
       )}
       <Card className={`${styles.card} ${styles['logout-card']}`}>
-        <LogoutButton>Logout</LogoutButton>
+        <LogoutButton>
+          <FontAwesomeIcon icon={faRightFromBracket} />
+          Logout
+        </LogoutButton>
       </Card>
     </>
   );

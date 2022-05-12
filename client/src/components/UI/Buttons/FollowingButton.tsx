@@ -5,6 +5,8 @@ import {
   followUserAsync,
   unfollowUserAsync,
 } from '../../../features/Profile/profileSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdd, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import PrimaryButton from './PrimaryButton';
 
@@ -28,6 +30,11 @@ const FollowingButton: FC<{ username: string; following: boolean }> = (
 
   return (
     <PrimaryButton onClick={followingHandler}>
+      {following ? (
+        <FontAwesomeIcon icon={faMinus} />
+      ) : (
+        <FontAwesomeIcon icon={faAdd} />
+      )}
       {following ? 'Unfollow' : 'Follow'}
     </PrimaryButton>
   );
