@@ -453,7 +453,7 @@ RETURNING *;
 `;
 
 export const findCommentText = `
-    SELECT c.resource_id, c.created_at, c.updated_at, c.body, c.user_id AS author_id, u.username, u.bio,
+    SELECT c.resource_id, c.created_at, c.body, c.user_id AS author_id, u.username, u.bio,
     COALESCE(selectedFollowers.following, false) AS following
     FROM comments c
     INNER JOIN users u ON u.id = c.user_id
@@ -477,7 +477,7 @@ export const countCommentsText = `
 `;
 
 export const findCommentsText = `
-SELECT c.resource_id, c.created_at, c.updated_at, c.body, c.user_id AS author_id, u.username, u.bio,
+SELECT c.resource_id, c.created_at, c.body, c.user_id AS author_id, u.username, u.bio,
 COALESCE(selectedFollowers.following, false) AS following
 FROM comments c
 INNER JOIN users u ON u.id = c.user_id
