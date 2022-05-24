@@ -37,11 +37,11 @@ I added to my project the routes, that was in the [routing guideline](https://re
 
 ### Client
 
-<mark>index.tsx, index.css</mark> - The entry point of the client.
+`index.tsx`, `index.css` - The entry point of the client.
 
-<mark>App.tsx</mark> - The main component of the component tree. This contains the main layout route and other routes.
+`App.tsx` - The main component of the component tree. This contains the main layout route and other routes.
 
-<mark>app/</mark> - This folder contains
+`app/` - This folder contains
 
 - the types of the client side,
 - create instance function of axios package,
@@ -49,83 +49,83 @@ I added to my project the routes, that was in the [routing guideline](https://re
 - hooks definitions and
 - store.ts file for Redux Toolkit.
 
-<mark>components/</mark> This folder contains
+`components/` This folder contains
 
 - compnents and
 - css files.
 
-<mark>features/</mark> - This folder contains
+`features/` - This folder contains
 
 - the feature related components
 - css files and
 - feature related redux slice and API files.
 
-<mark>pages/</mark> - This folder contains
+`pages/` - This folder contains
 
 - the page related components and
 - css files.
 
-<mark>utils/</mark> - This folder contains the utility functions of client side.
+`utils/` - This folder contains the utility functions of client side.
 
 ### Server
 
-<mark>app.ts</mark> - The entry point of the client. This file contains
+`app.ts` - The entry point of the client. This file contains
 
 - express server definition and
 - binding of setHeaders, errorHandler middleware and routing.
 
-<mark>controller/</mark> - This folder contains controller functions.
+`controller/` - This folder contains controller functions.
 
-<mark>db/</mark> - This folder contain db.ts file, that create a new Pool.
+`db/` - This folder contain db.ts file, that create a new Pool.
 
-<mark>middleware/</mark> - This folder contains middleware functions.
+`middleware/` - This folder contains middleware functions.
 
-<mark>models/</mark> - This folder contains functions that communicate with the database and queryTexts.ts file. There are sql queries in the queryText.ts.
+`models/` - This folder contains functions that communicate with the database and queryTexts.ts file. There are sql queries in the queryText.ts.
 
-<mark>routes/</mark> - This folder contains the route functions. The app use Express Router.
+`routes/` - This folder contains the route functions. The app use Express Router.
 
-<mark>types/</mark> - This folder contains the types of the server side.
+`types/` - This folder contains the types of the server side.
 
-<mark>utils/</mark> - This folder contains the utility functions of server side.
+`utils/` - This folder contains the utility functions of server side.
 
 ## Dependencies
 
 ### Client
 
 - Basic react packages
-  - <mark>react, @types/react</mark>
-  - <mark>react-dom, @types/react-dom</mark>
-  - <mark>react-scripts</mark>
-  - <mark>@types/node</mark>
-- <mark>typescript</mark> - The app use TypeScript.
-- <mark>react-markdown</mark> - For rendering the article body.
+  - `react`, `@types/react`
+  - `react-dom`, `@types/react-dom`
+  - `react-scripts`
+  - `@types/node`
+- `typescript` - The app use TypeScript.
+- `react-markdown` - For rendering the article body.
 - Redux Toolkit
-  - <mark>reduxjs/toolkit</mark> - The app use Redux Toolkit.
-  - <mark>react-redux, @types/react-redux</mark> - For connection between React and Redux.
-- <mark>react-router-dom</mark> - For the routing using React Router package version 6.
-- <mark>axios</mark> - For the requests using axios package.
+  - `reduxjs/toolkit` - The app use Redux Toolkit.
+  - `react-redux`, `@types/react-redux` - For connection between React and Redux.
+- `react-router-dom` - For the routing using React Router package version 6.
+- `axios` - For the requests using axios package.
 - Font Awesome
-  - <mark>fortawesome/fontawesome-svg-core</mark> - For using SVG icons.
-  - <mark>fortawesome/free-solid-svg-icons</mark> - For using free solid icons from Font Awesome package.
-  - <mark>fortawesome/free-regular-svg-icons</mark> - For using free regular icons from Font Awesome package.
-  - <mark>fortawesome/react-fontawesome</mark> - For using FontAwesomeIcon component.
+  - `fortawesome/fontawesome-svg-core` - For using SVG icons.
+  - `fortawesome/free-solid-svg-icons` - For using free solid icons from Font Awesome package.
+  - `fortawesome/free-regular-svg-icons` - For using free regular icons from Font Awesome package.
+  - `fortawesome/react-fontawesome` - For using FontAwesomeIcon component.
 - Testing
-  - <mark>@types/jest</mark>
-  - <mark>testing-library/jest-dom</mark>
-  - <mark>testing-library/react</mark>
-  - <mark>testing-library/user-event</mark>
+  - `@types/jest`
+  - `testing-library/jest-dom`
+  - `testing-library/react`
+  - `testing-library/user-event`
 
 ### Server
 
-- <mark>typescript</mark> - The app use TypeScript.
-- <mark>express, @types/express</mark> - The app use Express framework.
-- <mark>bcrypt, @types/bcrypt</mark> - For hashing the password.
-- <mark>dotenv</mark> - For the env variables in the server side.
-- <mark>jose</mark> - For the jwt authentication.
-- <mark>pg, @types/pg</mark> - For the connection to the postgres database.
-- <mark>randomstring, @types/randomstring</mark> - For create unique ids and resource ids.
-- <mark>slugify</mark> - For create URL friendly slug from title.
-- <mark>ts-node-dev</mark> - For the running the server.
+- `typescript` - The app use TypeScript.
+- `express`, `@types/express` - The app use Express framework.
+- `bcrypt`, `@types/bcrypt` - For hashing the password.
+- `dotenv` - For the env variables in the server side.
+- `jose` - For the jwt authentication.
+- `pg, @types/pg` - For the connection to the postgres database.
+- `randomstring`, `@types/randomstring` - For create unique ids and resource ids.
+- `slugify` - For create URL friendly slug from title.
+- `ts-node-dev` - For the running the server.
 
 ## Authentication
 
@@ -194,18 +194,74 @@ The input validation function run the next function if there are not errors. If 
 
 ## Run locally
 
+### Clone Repository and install dependencies
+
 ```
-  Clone this repo
-  npm ci
-  open client folder in the terminal
-  npm start
-  open server folder in the terminal
-  npm run dev
+  clone this repository
+  open the client folder
+    npm ci
+  open the server folder
+    npm ci
+```
+
+### Modify the tsconfig.json
+
+```json
+  open the tsconfig.json in the server folder
+  if name of the top-level folder is not realworld-implementation, then change this property
+    "rootDir": "../../<name of the top-level folder>"
+```
+
+### Install PostgreSQL Server and create database
+
+```
+  install PostgreSQL 13.3 Server or higher
+  create db
+  open psql shell
+  create a database with CREATE DATABASE <DB_NAME>; command
+```
+
+### Create .env file
+
+```
+  create a .env file in the server folder, that has this values
+  API_PORT: select a port (not 3000) for example: 8080
+  DB_HOST: localhost
+  DB_USER: postgres username (default postgres)
+  DB_PASS: password of the PostgreSQL Server
+  DB_PORT: postgres port
+  (values of the DB_PASS and the DB_PORT you can add in the installer of the PostgresSQL Server)
+  DB_NAME: name of your database
+  JWT_SECRET: add a string
+```
+
+### Create tables
+
+```
+    open the server folder and run one of the command with the right values from the .env files
+      MacOS with Postgres.app
+        DATABASE_URL=postgres://<DB_USER>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
+      Windows with Git Bash
+        DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
+      Windows with CMD
+        set DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>&&npm run migrate up
+      Windows wiht Powershell
+        $env:DATABASE_URL="postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>";
+        npm run migrate up
+```
+
+### Run the app
+
+```
+  start the client
+    npm start
+  start the server
+    npm run dev
 ```
 
 ## Port
 
-Client use port 3000 and server use port 8080.
+Client use port 3000. You can add the port of the server in the .env file.
 
 # Contributing
 
