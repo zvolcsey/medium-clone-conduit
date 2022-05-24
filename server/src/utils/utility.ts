@@ -181,10 +181,10 @@ export const checkCommentBody = (body: string): InputValidation[] => {
 
   if (body.length === 0)
     errors.push({ id: generateId(), text: 'Length of the comment is 0' });
-  if (body.length < 8 || body.length > 2500)
+  if (body.length < 6 || body.length > 2500)
     errors.push({
       id: generateId(),
-      text: 'Comment must be between 8 and 2500 characters',
+      text: 'Comment must be between 6 and 2500 characters',
     });
 
   return errors;
@@ -195,10 +195,10 @@ export const checkTitle = (title: string): InputValidation[] => {
 
   if (title.length === 0)
     errors.push({ id: generateId(), text: 'Article title is empty' });
-  if (title.length < 6 || title.length > 15)
+  if (title.length < 6 || title.length > 30)
     errors.push({
       id: generateId(),
-      text: 'Article title must be between 6 and 15 characters',
+      text: 'Article title must be between 6 and 30 characters',
     });
 
   return errors;
