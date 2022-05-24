@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/server/app.js",
     "dev": "ts-node-dev --respawn --transpile-only app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [
     "server",
@@ -22,6 +23,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "jose": "^4.3.7",
+    "node-pg-migrate": "^6.2.1",
     "pg": "^8.7.1",
     "randomstring": "^1.2.2",
     "slugify": "^1.6.5"
