@@ -197,7 +197,7 @@ The input validation function run the next function if there are not errors. If 
 ### Clone Repository and install dependencies
 
 ```
-  clone this repository
+  clone this repository (top-level folder name: realworld-implementation)
   open the client folder
     npm ci
   open the server folder
@@ -210,6 +210,7 @@ The input validation function run the next function if there are not errors. If 
   open the tsconfig.json in the server folder
   if name of the top-level folder is not realworld-implementation, then change this property
     "rootDir": "../../<name of the top-level folder>"
+  before pull request set default
 ```
 
 ### Install PostgreSQL Server and create database
