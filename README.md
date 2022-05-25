@@ -206,11 +206,13 @@ The input validation function run the next function if there are not errors. If 
 
 ### Modify the tsconfig.json
 
+Open the tsconfig.json in the server folder.
+If name of the top-level folder is not realworld-implementation, then change this `rootDir` property.
+
+**Before pull request set default.**
+
 ```json
-  open the tsconfig.json in the server folder
-  if name of the top-level folder is not realworld-implementation, then change this property
-    "rootDir": "../../<name of the top-level folder>"
-  before pull request set default
+  "rootDir": "../../<name of the top-level folder>"
 ```
 
 ### Install PostgreSQL Server and create database
