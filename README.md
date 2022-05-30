@@ -194,17 +194,18 @@ The input validation function run the next function if there are not errors. If 
 
 ## Run locally
 
-### Clone Repository and install dependencies
+### 1. Clone Repository and install dependencies
 
 ```
-  clone this repository (top-level folder name: realworld-implementation)
-  open the client folder
-    npm ci
-  open the server folder
-    npm ci
+  1.1. create a folder with realworld-implementation name
+  1.2. clone this repository (top-level folder name: realworld-implementation)
+  1.3. open the client folder
+    1.3.1 npm ci
+  1.4. open the server folder
+    1.4.1 npm ci
 ```
 
-### Modify the tsconfig.json
+### OPTIONAL: if the top-level folder is not realworld implementation - Modify the tsconfig.json
 
 Open the tsconfig.json in the server folder.
 If name of the top-level folder is not realworld-implementation, then change this `rootDir` property.
@@ -215,51 +216,67 @@ If name of the top-level folder is not realworld-implementation, then change thi
   "rootDir": "../../<name of the top-level folder>"
 ```
 
-### Install PostgreSQL Server and create database
+### 2. Install PostgreSQL Server and create database
 
 ```
-  install PostgreSQL 13.3 Server or higher
-  create db
-  open psql shell
-  create a database with CREATE DATABASE <DB_NAME>; command
+  2.1. install PostgreSQL 13.3 Server or higher
+  2.2. open psql shell
+  2.3. create a database with CREATE DATABASE conduit; command
 ```
 
-### Create .env file
+### 3. Create .env file
+
+create a .env file in the server folder, that has this values
 
 ```
-  create a .env file in the server folder, that has this values
-  API_PORT: select a port (not 3000) for example: 8080
-  DB_HOST: localhost
-  DB_USER: postgres username (default postgres)
-  DB_PASS: password of the PostgreSQL Server
-  DB_PORT: postgres port
-  (values of the DB_PASS and the DB_PORT you can add in the installer of the PostgresSQL Server)
-  DB_NAME: name of your database
-  JWT_SECRET: add a string
+  API_PORT=8080
+  DB_HOST=localhost
+  DB_USER=postgres
+  DB_PASS=<DB_PASS>
+  DB_PORT=5432
+  DB_NAME=conduit
+  JWT_SECRET=secretstring
 ```
 
-### Create tables
+- postgres is the default postgres username, please change if you have another name
+- values of the DB_PASS and the DB_PORT you can add in the installer of the PostgresSQL Server
+
+### 4. Create tables
+
+4.1. in the server folder and run one of the command with the right values from the .env files
+
+- MacOS with Postgres.app
 
 ```
-    open the server folder and run one of the command with the right values from the .env files
-      MacOS with Postgres.app
-        DATABASE_URL=postgres://<DB_USER>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
-      Windows with Git Bash
-        DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
-      Windows with CMD
-        set DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>&&npm run migrate up
-      Windows wiht Powershell
-        $env:DATABASE_URL="postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>";
-        npm run migrate up
+  DATABASE_URL=postgres://<DB_USER>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
 ```
 
-### Run the app
+- Windows with Git Bash
 
 ```
-  start the client
-    npm start
-  start the server
-    npm run dev
+  DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME> npm run migrate up
+```
+
+- Windows with CMD
+
+```
+  set DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>&&npm run migrate up
+```
+
+- Windows wiht Powershell
+
+```
+  $env:DATABASE_URL="postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>";
+  npm run migrate up
+```
+
+### 5. Run the app
+
+```
+  5.1. start the client
+    5.1.1 npm start
+  5.2. start the server
+    5.2.1 npm run dev
 ```
 
 ## Port
