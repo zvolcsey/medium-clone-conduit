@@ -270,7 +270,7 @@ export const checkBio = (bio: string): InputValidation[] => {
   if (bio.length > 400)
     errors.push({
       id: generateId(),
-      text: 'Biography must be between 6 and 400 characters',
+      text: 'Maximum characters of biography is 400',
     });
 
   return errors;
