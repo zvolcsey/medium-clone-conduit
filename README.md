@@ -196,14 +196,10 @@ The input validation function run the next function if there are not errors. If 
 
 ### 1. Clone Repository and install dependencies
 
-```
-  1.1. create a folder with realworld-implementation name
-  1.2. clone this repository (top-level folder name: realworld-implementation)
-  1.3. open the client folder
-    1.3.1 npm ci
-  1.4. open the server folder
-    1.4.1 npm ci
-```
+1. create a folder with realworld-implementation name
+2. clone this repository
+3. open the client folder and run `npm ci`
+4. open the server folder and run `npm ci`
 
 ### OPTIONAL: if the top-level folder is not realworld implementation - Modify the tsconfig.json
 
@@ -218,11 +214,9 @@ If name of the top-level folder is not realworld-implementation, then change thi
 
 ### 2. Install PostgreSQL Server and create database
 
-```
-  2.1. install PostgreSQL 13.3 Server or higher
-  2.2. open psql shell
-  2.3. create a database with CREATE DATABASE conduit; command
-```
+1. download and install PostgreSQL 13 or 14 from [PostgreSQL](https://www.postgresql.org/download/)
+2. open psql shell
+3. create a database with `CREATE DATABASE conduit;` command
 
 ### 3. Create .env file
 
@@ -231,19 +225,22 @@ create a .env file in the server folder, that has this values
 ```
   API_PORT=8080
   DB_HOST=localhost
-  DB_USER=postgres
-  DB_PASS=<DB_PASS>
-  DB_PORT=5432
+  DB_USER=<postgres>
+  DB_PASS=<password of postgres>
+  DB_PORT=<5432 or 5433>
   DB_NAME=conduit
   JWT_SECRET=secretstring
 ```
 
 - postgres is the default postgres username, please change if you have another name
 - values of the DB_PASS and the DB_PORT you can add in the installer of the PostgresSQL Server
+- default port
+  - PostgreSQL 13: `5432`
+  - PostgreSQL 14: `5433`
 
 ### 4. Create tables
 
-4.1. in the server folder and run one of the command with the right values from the .env files
+1. in the server folder and run one of the command with the right values from the .env files
 
 - MacOS with Postgres.app
 
@@ -272,12 +269,8 @@ create a .env file in the server folder, that has this values
 
 ### 5. Run the app
 
-```
-  5.1. start the client
-    5.1.1 npm start
-  5.2. start the server
-    5.2.1 npm run dev
-```
+1. run `npm start` to start the client
+2. run `npm run dev` to start the server
 
 ## Port
 
