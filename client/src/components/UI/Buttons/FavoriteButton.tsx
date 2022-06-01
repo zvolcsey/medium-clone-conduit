@@ -31,10 +31,10 @@ const FavoriteButton: FC<{
   const isYou = currentUser === username;
 
   const favoriteHandler = () => {
-    if (token && !favorited && !isYou) {
+    if (token && !favorited) {
       dispatch(favoriteArticleAsync({ token: token, resourceId: resourceId }));
     }
-    if (token && favorited && !isYou) {
+    if (token && favorited) {
       dispatch(
         unfavoriteArticleAsync({ token: token, resourceId: resourceId })
       );
@@ -45,6 +45,7 @@ const FavoriteButton: FC<{
     <PrimaryButton
       className={`${styles.button} ${favorited && styles.favorited}`}
       onClick={favoriteHandler}
+      disabled={isYou && true}
     >
       {favorited ? (
         <FontAwesomeIcon icon={favoritedIcon} />

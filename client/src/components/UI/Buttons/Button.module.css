@@ -9,4 +9,9 @@
 
 .button:disabled {
   cursor: not-allowed;
+  color: var(--disabled);
+}
+
+.button:disabled:hover {
+  filter: none;
 }
