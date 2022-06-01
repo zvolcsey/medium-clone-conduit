@@ -34,8 +34,7 @@ const ArticleMetaActions: FC<{
   const currentUser = useAppSelector(selectCurrentUser);
   const token = useAppSelector(selectToken);
 
-  const canEdit = currentUser === authorUsername;
-  const canDelete = currentUser === authorUsername;
+  const isYou = currentUser === authorUsername;
 
   const showDeleteModalHandler = () => {
     setShowDeleteModal(true);
@@ -67,7 +66,7 @@ const ArticleMetaActions: FC<{
           favoritesCount={favoritesCount}
         />
       </li>
-      {canEdit && (
+      {isYou && (
         <li className={styles.item}>
           <EditArticleLink slug={slug} resourceId={resourceId} />
         </li>
@@ -78,7 +77,7 @@ const ArticleMetaActions: FC<{
           onConfirm={deleteArticleHandler}
         />
       )}
-      {canDelete && (
+      {isYou && (
         <li className={styles.item}>
           <DeleteButton onClick={showDeleteModalHandler}>
             <FontAwesomeIcon icon={faTrashCan} /> Delete
