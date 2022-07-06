@@ -24,8 +24,8 @@ const findProfile = async (
     );
 
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select Profile from DB was not successfully');
   }
 };
@@ -36,8 +36,8 @@ const insertFollowData = async (
 ): Promise<void> => {
   try {
     await pool.query(insertFollowDataText, [username, reqUserId]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Insert follow data to the DB was not successfully'
     );
@@ -50,8 +50,8 @@ const deleteFollowData = async (
 ): Promise<void> => {
   try {
     await pool.query(deleteFollowDataText, [username, reqUserId]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Delete follow data to the DB was not successfully'
     );

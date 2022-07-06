@@ -88,8 +88,8 @@ const findArticles = async (
     const articlesFromDB = articlesQueryResult.rows;
     const articlesCount = Number(articlesCountQueryResult.rows[0].count);
     return { articlesFromDB, articlesCount };
-  } catch (error) {
-    //console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Get articles and articlesCount from DB was not successfully'
     );
@@ -107,7 +107,8 @@ const findFeedArticles = async (
       [reqUserId, limit, offset]
     );
     return queryResult.rows;
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Select feed articles from DB was not successfully'
     );
@@ -122,8 +123,8 @@ const countFeedArticles = async (reqUserId: string): Promise<number> => {
     );
     const count = Number(queryResult.rows[0].count);
     return count;
-  } catch (error) {
-    //console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Count feed articles from DB was not successfully');
   }
 };

@@ -5,25 +5,6 @@ import { DatabaseError } from '../types/appClasses';
 
 import type { QueryResult } from 'pg';
 
-/*export const selectAllTags = async (): Promise<string[]> => {
-  try {
-    const queryResult: QueryResult<TagFromDB> = await pool.query(
-      selectAllHashtagsText,
-      [postId]
-    );
-
-    const tagList = [];
-    for (let i = 0; i < queryResult.rows.length; i++) {
-      tagList.push(queryResult.rows[i].title);
-    }
-
-    return tagList;
-  } catch (error) {
-    console.log(error);
-    throw new DatabaseError('Select tags from DB was not successfully');
-  }
-};*/
-
 export const selectTags = async (postId: string): Promise<string[]> => {
   try {
     const queryResult: QueryResult<TagFromDB> = await pool.query(
@@ -37,8 +18,8 @@ export const selectTags = async (postId: string): Promise<string[]> => {
     }
 
     return tagList;
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select tags from DB was not successfully');
   }
 };
@@ -51,7 +32,8 @@ const findPopularTags = async (limit: number): Promise<TagFromDB[]> => {
     );
 
     return queryResult.rows;
-  } catch {
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select popular tags from DB was not successfully');
   }
 };

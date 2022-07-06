@@ -49,8 +49,8 @@ export const findArticleByResourceId = async (
     );
 
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Select Article Data from the DB was not successfully'
     );
@@ -101,8 +101,9 @@ const insertArticle = async (
 
     await client.query('COMMIT');
     return articleQueryResult.rows[0];
-  } catch (error) {
+  } catch (e) {
     await client.query('ROLLBACK');
+    console.error(e);
     throw new DatabaseError('Insert Article to the DB was not successfully');
   } finally {
     client.release();
@@ -160,8 +161,9 @@ const patchArticle = async (
 
     await client.query('COMMIT');
     return articleQueryResult.rows[0];
-  } catch {
+  } catch (e) {
     await client.query('ROLLBACK');
+    console.error(e);
     throw new DatabaseError('Patch Article in the DB was not successfully');
   } finally {
     client.release();
@@ -171,8 +173,8 @@ const patchArticle = async (
 const deleteArticle = async (articleResourceId: string): Promise<void> => {
   try {
     await pool.query(deleteArticleText, [articleResourceId]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Delete Article from the DB was not successfully');
   }
 };
@@ -188,8 +190,8 @@ export const checkFavorite = async (
     );
 
     return queryResult.rows[0].exists;
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Check favorite in the DB was not successfully');
   }
 };
@@ -203,8 +205,8 @@ const insertFavoriteArticleData = async (
       reqUserId,
       articleResourceId,
     ]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError(
       'Insert favorite Article Data to the DB was not successfully'
     );
@@ -220,8 +222,8 @@ const deleteFavoriteArticleData = async (
       reqUserId,
       articleResourceId,
     ]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     throw new DatabaseError(
       'Delete favorite Article Data from the DB was not successfully'
     );

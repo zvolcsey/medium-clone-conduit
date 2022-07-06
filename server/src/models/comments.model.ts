@@ -35,8 +35,8 @@ const findCommentByResourceId = async (
       [reqUserId, commentResourceId]
     );
     return queryResult.rows;
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select Comment from the DB was not successfully');
   }
 };
@@ -58,8 +58,8 @@ const findComments = async (
     const commentsFromDB = commentQueryResult.rows;
     const commentsCount = Number(commentsCountQueryResult.rows[0].count);
     return { commentsFromDB, commentsCount };
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select Comments from DB was not successfully');
   }
 };
@@ -77,8 +77,8 @@ const insertComment = async (
     );
 
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Insert Comment to the DB was not successfully');
   }
 };
@@ -89,8 +89,8 @@ const deleteComment = async (
 ): Promise<void> => {
   try {
     await pool.query(deleteCommentText, [commentResourceId, articleResourceId]);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Delete Comment from the DB was not successfully');
   }
 };

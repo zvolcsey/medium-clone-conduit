@@ -23,8 +23,8 @@ export const findUserByUsername = async (
       [username]
     );
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Select User from DB was not successfully');
   }
 };
@@ -40,8 +40,8 @@ const insertUser = async (
     );
 
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Insert to the DB was not successfully');
   }
 };
@@ -57,8 +57,8 @@ const patchUser = async (
       [reqBody.username, newPassword, reqBody.bio, reqUser.id]
     );
     return queryResult.rows[0];
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.error(e);
     throw new DatabaseError('Patch data in the DB was not successfully');
   }
 };
