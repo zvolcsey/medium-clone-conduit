@@ -1,10 +1,10 @@
 import express from 'express';
 import * as userControllers from '../../controller/users.controller';
+import { authRequired } from '../../middleware/middlewares';
 import {
-  authRequired,
   authInputValidation,
   updateUserInputValidation,
-} from '../../middleware/middlewares';
+} from '../../middleware/validation.middleware';
 
 const usersRoutes = express.Router();
 

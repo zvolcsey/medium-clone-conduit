@@ -1,10 +1,7 @@
 import express from 'express';
 import * as commentsControllers from '../../controller/comments.controller';
-import {
-  authRequired,
-  authOptional,
-  commentInputValidation,
-} from '../../middleware/middlewares';
+import { authRequired, authOptional } from '../../middleware/middlewares';
+import { commentInputValidation } from '../../middleware/validation.middleware';
 
 const commentsRoutes = express.Router();
 

@@ -7,11 +7,8 @@ import {
   favoriteArticleHandler,
   unfavoriteArticleHandler,
 } from '../../controller/articles.controller';
-import {
-  authRequired,
-  authOptional,
-  articleInputValidation,
-} from '../../middleware/middlewares';
+import { authRequired, authOptional } from '../../middleware/middlewares';
+import { articleInputValidation } from '../../middleware/validation.middleware';
 
 const articlesRoutes = express.Router();
 

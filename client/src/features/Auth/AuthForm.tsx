@@ -72,22 +72,11 @@ const AuthForm: FC<{
   };
 
   const usernameInfo = type === 'sign-up' && (
-    <>
-      <InfoText>Username must be between 6 and 15 characters</InfoText>
-      <InfoText>
-        {`Username can contain the following characters A-Z a-z _ 0-9`}
-      </InfoText>
-    </>
+    <InfoText>Username must be between 6 and 15 characters</InfoText>
   );
 
   const passwordInfo = type === 'sign-up' && (
-    <>
-      <InfoText>Password must be between 8 and 15 characters</InfoText>
-      <InfoText>
-        {`Password can contain the following characters A-Z a-z 0-9 and minimum 1 special character`}
-      </InfoText>
-      <InfoText>{`Allowed special characters: ! # $ % & + - ? @ _ ~`}</InfoText>
-    </>
+    <InfoText>Password must be between 8 and 64 characters</InfoText>
   );
 
   let buttonName = type === 'sign-in' ? 'Sign In' : 'Sign Up';
