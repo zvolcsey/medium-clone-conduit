@@ -15,6 +15,7 @@ export interface PasswordInputHookRes {
   valueChangedHandler: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  valid: boolean;
   score: number;
   reset: () => void;
 }

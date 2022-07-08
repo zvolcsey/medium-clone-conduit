@@ -3,7 +3,7 @@ import { useLocation, Navigate } from 'react-router-dom';
 import {
   useAppSelector,
   useAppDispatch,
-  useInput,
+  useUsernameInput,
   usePasswordInput,
 } from '../../app/hooks';
 import { selectError, signInAsync, signUpAsync } from './authSlice';
@@ -29,9 +29,14 @@ const AuthForm: FC<{
   const error = useAppSelector(selectError);
   const location = useLocation();
 
-  const usernameRes = useInput();
+  const usernameRes = useUsernameInput();
   const passwordRes = usePasswordInput();
   const confirmPasswordRes = usePasswordInput();
+
+  const confirmPasswordIsSame = passwordRes.value === confirmPasswordRes.value;
+
+  const formIsValid =
+    usernameRes.valid && passwordRes.valid && confirmPasswordIsSame;
 
   useEffect(() => {
     return () => {
@@ -126,7 +131,12 @@ const AuthForm: FC<{
           />
         </FormControl>
       )}
-      <SubmitButton className={styles.button}>{buttonName}</SubmitButton>
+      <SubmitButton
+        className={styles.button}
+        disabled={type === 'sign-up' && !formIsValid}
+      >
+        {buttonName}
+      </SubmitButton>
     </form>
   );
 };

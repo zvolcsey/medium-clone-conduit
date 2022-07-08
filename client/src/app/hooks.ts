@@ -62,8 +62,22 @@ export const useInput = (data?: string): InputHookRes => {
   };
 };
 
+export const useUsernameInput = (): InputHookRes => {
+  const usernameRes = useInput('');
+
+  usernameRes.valid =
+    usernameRes.value.length >= 6 && usernameRes.value.length <= 15;
+
+  return {
+    ...usernameRes,
+  };
+};
+
 export const usePasswordInput = (): PasswordInputHookRes => {
   const passwordRes = useInput('');
+
+  passwordRes.valid =
+    passwordRes.value.length >= 8 && passwordRes.value.length <= 64;
 
   const score = zxcvbn(passwordRes.value).score;
 
