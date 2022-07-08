@@ -1,6 +1,11 @@
 import { FC, FormEvent, useEffect } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch, useInput } from '../../app/hooks';
+import {
+  useAppSelector,
+  useAppDispatch,
+  useInput,
+  usePasswordInput,
+} from '../../app/hooks';
 import { selectError, signInAsync, signUpAsync } from './authSlice';
 
 import '../../index.css';
@@ -11,6 +16,7 @@ import FormControl from '../../components/UI/FormControl';
 import FormLabel from '../../components/UI/FormLabel';
 import TextInput from '../../components/UI/Input/TextInput';
 import PasswordInput from '../../components/UI/Input/PasswordInput';
+import PasswordStrength from './PasswordStrength/PasswordStrength';
 
 import type { AuthUserReqBody } from '../../../../server/src/types/appRequest.types';
 
@@ -24,8 +30,8 @@ const AuthForm: FC<{
   const location = useLocation();
 
   const usernameRes = useInput();
-  const passwordRes = useInput();
-  const confirmPasswordRes = useInput();
+  const passwordRes = usePasswordInput();
+  const confirmPasswordRes = usePasswordInput();
 
   useEffect(() => {
     return () => {
@@ -101,6 +107,12 @@ const AuthForm: FC<{
           value={passwordRes.value}
           onChange={passwordRes.valueChangedHandler}
         />
+        {type === 'sign-up' && (
+          <PasswordStrength
+            password={passwordRes.value}
+            score={passwordRes.score}
+          />
+        )}
         {passwordInfo}
       </FormControl>
       {type === 'sign-up' && (

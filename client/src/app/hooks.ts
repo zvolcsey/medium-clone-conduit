@@ -2,9 +2,10 @@ import { useState, ChangeEvent, KeyboardEvent } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { addTag, removeTag, selectTags } from '../features/Editor/editorSlice';
 import { HASHTAG_MAX_LENGTH, HASHTAG_MIN_LENGTH } from './constant';
+import { zxcvbn } from '@zxcvbn-ts/core';
 
 import type { RootState, AppDispatch } from './store';
-import type { InputHookRes } from './types/hooks.types';
+import type { InputHookRes, PasswordInputHookRes } from './types/hooks.types';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -58,5 +59,16 @@ export const useInput = (data?: string): InputHookRes => {
     valid,
     keyDownHandler,
     reset,
+  };
+};
+
+export const usePasswordInput = (): PasswordInputHookRes => {
+  const passwordRes = useInput('');
+
+  const score = zxcvbn(passwordRes.value).score;
+
+  return {
+    ...passwordRes,
+    score,
   };
 };

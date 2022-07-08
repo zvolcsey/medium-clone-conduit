@@ -9,3 +9,12 @@ export interface InputHookRes {
   keyDownHandler: (event: KeyboardEvent<HTMLInputElement>) => void;
   reset: () => void;
 }
+
+export interface PasswordInputHookRes {
+  value: string;
+  valueChangedHandler: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  score: number;
+  reset: () => void;
+}
