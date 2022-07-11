@@ -30,6 +30,12 @@
   flex-direction: column;
 }
 
+.article-meta__info a,
+.article-meta__info span {
+  display: block;
+  width: fit-content;
+}
+
 .article-preview__tag-list {
   justify-content: flex-end;
   margin-bottom: 1rem;

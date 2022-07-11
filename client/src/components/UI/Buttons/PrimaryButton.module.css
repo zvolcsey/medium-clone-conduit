@@ -6,8 +6,7 @@
 }
 
 .button:hover,
-.button:active,
-.button:focus {
+.button:active {
   color: var(--main-color);
   filter: brightness(1.8);
 }

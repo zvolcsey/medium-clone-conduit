@@ -42,19 +42,21 @@ const FavoriteButton: FC<{
   };
 
   return (
-    <PrimaryButton
-      className={`${styles.button} ${favorited && styles.favorited}`}
-      onClick={favoriteHandler}
-      disabled={isYou && true}
-    >
-      {favorited ? (
-        <FontAwesomeIcon icon={favoritedIcon} />
-      ) : (
-        <FontAwesomeIcon icon={notFavoritedIcon} />
-      )}
-      Favorite
+    <div className={styles.container}>
+      <PrimaryButton
+        className={`${styles.button} ${favorited && styles.favorited}`}
+        onClick={favoriteHandler}
+        disabled={isYou && true}
+      >
+        {favorited ? (
+          <FontAwesomeIcon icon={favoritedIcon} />
+        ) : (
+          <FontAwesomeIcon icon={notFavoritedIcon} />
+        )}
+        Favorite
+      </PrimaryButton>
       <span>{favoritesCount}</span>
-    </PrimaryButton>
+    </div>
   );
 };
 

@@ -6,8 +6,14 @@
   color: #fff;
 }
 
+.button:focus-visible {
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  outline-offset: 0.4rem;
+  outline: var(--focus-visible-outline);
+}
+
 .button:hover,
-.button:active,
-.button:focus {
+.button:active {
   filter: brightness(1.8);
 }

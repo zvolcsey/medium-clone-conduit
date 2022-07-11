@@ -4,6 +4,10 @@
   --element-background: #fff;
   --focus-box-shadow: 0 0 0 0.3rem rgba(0, 95, 0, 0.4);
   --disabled: #818181;
+  --focus-visible-color: #008b00;
+  --focus-visible-outline: 0.1rem solid var(--focus-visible-color);
+  --focus-visible-padding: 0.2rem;
+  --focus-visible-border-radius: 0.1rem;
 }
 
 * {
@@ -43,9 +47,10 @@ a:active {
   filter: brightness(1.8);
 }
 
-a:focus {
-  outline: none;
-  filter: brightness(1.8);
+a:focus-visible {
+  outline: var(--focus-visible-outline);
+  border-radius: var(--focus-visible-border-radius);
+  padding: var(--focus-visible-padding);
 }
 
 a > svg {

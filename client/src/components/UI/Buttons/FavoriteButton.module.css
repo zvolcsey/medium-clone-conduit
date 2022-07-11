@@ -2,10 +2,11 @@
   color: #a80000;
 }
 
-.button > span {
+.container > span {
   margin-left: 0.5rem;
   padding: 0.4rem;
   background: var(--main-color);
   border-radius: 0.4rem;
   color: #fff;
+  font-weight: 700;
 }
