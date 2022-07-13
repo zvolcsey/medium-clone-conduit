@@ -17,7 +17,14 @@ export const setHeader = (
   res: Response,
   next: NextFunction
 ) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    `${
+      process.env.NODE_ENV === 'production'
+        ? 'https://zvolcsey-conduit-fullstack.onrender.com'
+        : 'http://localhost:3000'
+    }`
+  );
   res.setHeader(
     'Access-Control-Allow-Methods',
     'OPTIONS, GET, POST, PATCH, DELETE'
