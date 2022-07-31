@@ -4,7 +4,7 @@
   "description": "Server for the my RealWorld project.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest --run --reporter verbose",
     "start": "node ./build/app.js",
     "dev": "ts-node-dev --respawn --transpile-only app.ts",
     "build": "tsc",
@@ -34,6 +34,7 @@
     "@types/pg": "^8.6.3",
     "@types/randomstring": "^1.1.8",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vitest": "^0.19.1"
   }
 }
