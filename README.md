@@ -110,12 +110,20 @@ I added to my project the routes, that was in the [routing guideline](https://re
   - `fortawesome/free-regular-svg-icons` - For using free regular icons from Font Awesome package.
   - `fortawesome/react-fontawesome` - For using FontAwesomeIcon component.
 - Testing
+  - `jest`
   - `@types/jest`
   - `testing-library/jest-dom`
   - `testing-library/react`
   - `testing-library/user-event`
 - Prettier
   - `prettier`
+- ESLint
+  - `@typescript-eslint/eslint-plugin`
+  - `@typescript-eslint/parser`
+  - `eslint`
+- Prettier and ESLint
+  - `eslint-config-prettier`
+  - `@types/eslint-config-prettier`
 
 ### Server
 
