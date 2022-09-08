@@ -145,6 +145,15 @@ I added to my project the routes, that was in the [routing guideline](https://re
   - `@babel/core`
 - Prettier
   - `prettier`
+- ESLint
+  - `@typescript-eslint/eslint-plugin`
+  - `@typescript-eslint/parser`
+  - `eslint`
+- Prettier and ESLint
+  - `eslint-config-prettier`
+  - `@types/eslint-config-prettier`
+- Testing and ESLint
+  - `eslint-plugin-jest`
 
 ## Authentication
 
