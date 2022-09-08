@@ -136,7 +136,13 @@ I added to my project the routes, that was in the [routing guideline](https://re
 - `randomstring`, `@types/randomstring` - For create unique ids and resource ids.
 - `slugify` - For create URL friendly slug from title.
 - `ts-node-dev` - For the running the server.
-- `vitest` - For testing the server side code.
+- Testing
+  - `jest`
+  - `@types/jest`
+  - `babel/jest`
+  - `@babel/preset-typescript`
+  - `@babel/preset-env`
+  - `@babel/core`
 
 ## Authentication
 
