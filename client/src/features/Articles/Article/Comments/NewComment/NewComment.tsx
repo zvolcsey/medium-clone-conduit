@@ -21,8 +21,8 @@ const NewComment: FC<{ articleResourceId: string; token: string | null }> = (
       <Errors errors={error} className={styles.errors} />
       {!token && (
         <p>
-          Please <Link to='/sign-up'>sign up</Link> or{' '}
-          <Link to='/sign-in'>sign in</Link>
+          Please <Link to="/sign-up">sign up</Link> or{' '}
+          <Link to="/sign-in">sign in</Link>
         </p>
       )}
       {token && (

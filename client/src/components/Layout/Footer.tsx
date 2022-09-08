@@ -15,10 +15,10 @@ const Footer: FC<{}> = () => {
         <span className={styles.attribution}>
           An interactive learning project from{' '}
           <a
-            target='_blank'
-            rel='noreferrer noopener'
-            href='https://thinkster.io'
-            className='bold'
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://thinkster.io"
+            className="bold"
           >
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             Thinkster

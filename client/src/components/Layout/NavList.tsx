@@ -26,13 +26,13 @@ const NavList: FC<{
 
   return (
     <ul id={id} className={`${styles.items} ${className}`}>
-      <PublicNavItem path='/' onClick={onItemClick}>
+      <PublicNavItem path="/" onClick={onItemClick}>
         Home
       </PublicNavItem>
-      <PrivateNavItem path='/feed' onClick={onItemClick}>
+      <PrivateNavItem path="/feed" onClick={onItemClick}>
         Your Feed
       </PrivateNavItem>
-      <PrivateNavItem path='/editor' end={true} onClick={onItemClick}>
+      <PrivateNavItem path="/editor" end={true} onClick={onItemClick}>
         <FontAwesomeIcon icon={faPenToSquare} />
         Create Article
       </PrivateNavItem>
@@ -40,15 +40,15 @@ const NavList: FC<{
         <FontAwesomeIcon icon={faUser} />
         {currentUser}
       </PrivateNavItem>
-      <PrivateNavItem path='/settings' onClick={onItemClick}>
+      <PrivateNavItem path="/settings" onClick={onItemClick}>
         <FontAwesomeIcon icon={faGear} />
         Settings
       </PrivateNavItem>
-      <AuthNavItem path='/sign-in' onClick={onItemClick}>
+      <AuthNavItem path="/sign-in" onClick={onItemClick}>
         <FontAwesomeIcon icon={faRightToBracket} />
         Sign In
       </AuthNavItem>
-      <AuthNavItem path='/sign-up' onClick={onItemClick}>
+      <AuthNavItem path="/sign-up" onClick={onItemClick}>
         <FontAwesomeIcon icon={faUserPlus} />
         Sign Up
       </AuthNavItem>

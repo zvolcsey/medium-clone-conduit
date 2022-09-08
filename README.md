@@ -114,6 +114,8 @@ I added to my project the routes, that was in the [routing guideline](https://re
   - `testing-library/jest-dom`
   - `testing-library/react`
   - `testing-library/user-event`
+- Prettier
+  - `prettier`
 
 ### Server
 

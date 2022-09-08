@@ -13,7 +13,7 @@ const Auth: FC<{}> = (props) => {
     return <>{children}</>;
   }
 
-  return <Navigate to='/feed' state={{ from: location }} replace />;
+  return <Navigate to="/feed" state={{ from: location }} replace />;
 };
 
 export default Auth;

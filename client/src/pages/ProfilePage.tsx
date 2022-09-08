@@ -106,7 +106,7 @@ const ProfilePage: FC<{}> = () => {
   }
 
   if (status === 'failed') {
-    profile = <p className='centered'>Loading profile was not successfully</p>;
+    profile = <p className="centered">Loading profile was not successfully</p>;
   }
 
   return (
@@ -115,7 +115,7 @@ const ProfilePage: FC<{}> = () => {
       <ProfileTabs username={username} />
       <Routes>
         <Route index element={<TabPanel />} />
-        <Route path='favorites' element={<TabPanel />} />
+        <Route path="favorites" element={<TabPanel />} />
       </Routes>
     </>
   );

@@ -10,7 +10,7 @@ const PageNotFound: FC<{}> = () => {
       <h1 className={`${styles['page-not-found__title']}`}>
         404 Page Not Found!
       </h1>
-      <Link to='/'>Back to Home</Link>
+      <Link to="/">Back to Home</Link>
     </section>
   );
 };

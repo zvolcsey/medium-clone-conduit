@@ -16,12 +16,12 @@ const CommentsContainer: FC<{}> = () => {
   }
 
   if (status === 'success' && commentsData.length === 0) {
-    comments = <p className='centered bold'>No comments here... yet!</p>;
+    comments = <p className="centered bold">No comments here... yet!</p>;
   }
 
   if (status === 'failed') {
     comments = (
-      <p className='centered bold'>Loading comments was not successfully!</p>
+      <p className="centered bold">Loading comments was not successfully!</p>
     );
   }
 

@@ -60,9 +60,9 @@ const ChangePasswordForm: FC<{ token: string }> = (props) => {
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <FormControl className={styles['form-control']}>
-        <FormLabel htmlFor='password'>New Password</FormLabel>
+        <FormLabel htmlFor="password">New Password</FormLabel>
         <PasswordInput
-          name='password'
+          name="password"
           value={passwordRes.value}
           required={true}
           minLength={8}
@@ -71,9 +71,9 @@ const ChangePasswordForm: FC<{ token: string }> = (props) => {
         />
       </FormControl>
       <FormControl className={styles['form-control']}>
-        <FormLabel htmlFor='confirm-password'>Confirm New Password</FormLabel>
+        <FormLabel htmlFor="confirm-password">Confirm New Password</FormLabel>
         <PasswordInput
-          name='confirm-password'
+          name="confirm-password"
           value={confirmPasswordRes.value}
           required={true}
           minLength={6}

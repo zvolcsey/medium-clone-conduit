@@ -38,7 +38,7 @@ const Pagination: FC<{ pages: number }> = (props) => {
 
   let prevPage = (
     <span className={`${styles['item--disabled']} ${styles.prev}`}>
-      <FontAwesomeIcon icon={faChevronLeft} size='sm' />
+      <FontAwesomeIcon icon={faChevronLeft} size="sm" />
       Prev
     </span>
   );
@@ -48,7 +48,7 @@ const Pagination: FC<{ pages: number }> = (props) => {
         to={`${location.pathname}?page=${currentPage - 1}`}
         className={styles.prev}
       >
-        <FontAwesomeIcon icon={faChevronLeft} size='sm' />
+        <FontAwesomeIcon icon={faChevronLeft} size="sm" />
         Prev
       </Link>
     );
@@ -56,7 +56,7 @@ const Pagination: FC<{ pages: number }> = (props) => {
 
   let nextPage = (
     <span className={`${styles['item--disabled']} ${styles.next}`}>
-      Next <FontAwesomeIcon icon={faChevronRight} size='sm' />
+      Next <FontAwesomeIcon icon={faChevronRight} size="sm" />
     </span>
   );
   if (currentPage !== pages) {
@@ -65,7 +65,7 @@ const Pagination: FC<{ pages: number }> = (props) => {
         to={`${location.pathname}?page=${currentPage + 1}`}
         className={styles.next}
       >
-        Next <FontAwesomeIcon icon={faChevronRight} size='sm' />
+        Next <FontAwesomeIcon icon={faChevronRight} size="sm" />
       </Link>
     );
   }

@@ -28,7 +28,7 @@ const Editor: FC<{
 
   return (
     <Card className={styles.card}>
-      <h1 className='centered'>
+      <h1 className="centered">
         {resourceId ? 'Edit Article' : 'Create Article'}
       </h1>
       <Errors errors={errors} className={styles.errors} />

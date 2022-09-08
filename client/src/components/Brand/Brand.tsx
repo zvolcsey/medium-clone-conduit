@@ -10,7 +10,7 @@ const Brand: FC<{}> = () => {
   const appName = useAppSelector(selectAppName);
 
   return (
-    <Link to='/' className={`${styles.brand} bold`}>
+    <Link to="/" className={`${styles.brand} bold`}>
       {appName.toLowerCase()}
     </Link>
   );

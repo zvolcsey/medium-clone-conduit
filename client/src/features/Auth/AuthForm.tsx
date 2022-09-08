@@ -76,7 +76,7 @@ const AuthForm: FC<{
       usernameRes.reset();
       passwordRes.reset();
       confirmPasswordRes.reset();
-      return <Navigate to='/feed' state={{ from: location }} replace />;
+      return <Navigate to="/feed" state={{ from: location }} replace />;
     }
 
     return;
@@ -95,9 +95,9 @@ const AuthForm: FC<{
   return (
     <form onSubmit={submitHandler} className={styles.form} noValidate>
       <FormControl>
-        <FormLabel htmlFor='username'>Username</FormLabel>
+        <FormLabel htmlFor="username">Username</FormLabel>
         <TextInput
-          name='username'
+          name="username"
           required
           value={usernameRes.value}
           onChange={usernameRes.valueChangedHandler}
@@ -105,9 +105,9 @@ const AuthForm: FC<{
         {usernameInfo}
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor='password'>Password</FormLabel>
+        <FormLabel htmlFor="password">Password</FormLabel>
         <PasswordInput
-          name='password'
+          name="password"
           required
           value={passwordRes.value}
           onChange={passwordRes.valueChangedHandler}
@@ -122,9 +122,9 @@ const AuthForm: FC<{
       </FormControl>
       {type === 'sign-up' && (
         <FormControl>
-          <FormLabel htmlFor='confirm-password'>Confirm Password</FormLabel>
+          <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
           <PasswordInput
-            name='confirm-password'
+            name="confirm-password"
             required
             value={confirmPasswordRes.value}
             onChange={confirmPasswordRes.valueChangedHandler}

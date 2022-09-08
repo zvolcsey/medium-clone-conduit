@@ -21,7 +21,7 @@ const TagsInput: FC<
   return (
     <div className={styles['input-container']}>
       <InputTagList tags={tags} onRemoveTag={removeTagHandler} />
-      {!maximumTag && <input type='text' className={styles.input} {...props} />}
+      {!maximumTag && <input type="text" className={styles.input} {...props} />}
     </div>
   );
 };

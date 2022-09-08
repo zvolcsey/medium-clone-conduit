@@ -103,9 +103,9 @@ const EditorForm: FC<{
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <FormControl>
-        <FormLabel htmlFor='title'>Title</FormLabel>
+        <FormLabel htmlFor="title">Title</FormLabel>
         <TextInput
-          name='title'
+          name="title"
           value={titleRes.value}
           required={true}
           minLength={6}
@@ -114,9 +114,9 @@ const EditorForm: FC<{
         />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor='description'>What's this article about?</FormLabel>
+        <FormLabel htmlFor="description">What's this article about?</FormLabel>
         <TextArea
-          name='description'
+          name="description"
           rows={3}
           cols={2}
           required
@@ -125,11 +125,11 @@ const EditorForm: FC<{
         />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor='body'>
+        <FormLabel htmlFor="body">
           {'Write your article (in markdown)'}
         </FormLabel>
         <TextArea
-          name='body'
+          name="body"
           rows={4}
           cols={2}
           required
@@ -138,9 +138,9 @@ const EditorForm: FC<{
         />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor='tags-input'>Hashtags</FormLabel>
+        <FormLabel htmlFor="tags-input">Hashtags</FormLabel>
         <TagsInput
-          name='tags-input'
+          name="tags-input"
           value={tagsInputRes.value}
           onChange={tagsInputRes.valueChangedHandler}
           onKeyDown={tagsInputRes.keyDownHandler}

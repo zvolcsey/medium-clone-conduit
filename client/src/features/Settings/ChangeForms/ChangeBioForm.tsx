@@ -56,9 +56,9 @@ const ChangeBioForm: FC<{ username: string; bio?: string; token: string }> = (
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <FormControl className={styles['form-control']}>
-        <FormLabel htmlFor='bio'>Bio</FormLabel>
+        <FormLabel htmlFor="bio">Bio</FormLabel>
         <TextArea
-          name='bio'
+          name="bio"
           rows={4}
           cols={2}
           required

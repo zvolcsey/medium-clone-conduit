@@ -5,7 +5,7 @@ import Input from './Input';
 const TextInput: FC<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 > = (props) => {
-  return <Input type='text' {...props} />;
+  return <Input type="text" {...props} />;
 };
 
 export default TextInput;

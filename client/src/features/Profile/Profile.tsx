@@ -10,7 +10,7 @@ import { ProfileProperties } from '../../../../server/src/types/appClasses';
 const Profile: FC<{ profile: ProfileProperties }> = (props) => {
   const { profile } = props;
 
-  let bio = <p className='centered italic'>No biography</p>;
+  let bio = <p className="centered italic">No biography</p>;
 
   if (profile.bio) {
     bio = <p>{profile.bio}</p>;

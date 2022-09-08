@@ -17,7 +17,7 @@ const Auth: FC<{ type: 'sign-in' | 'sign-up'; title: string }> = (props) => {
 
   return (
     <Card className={styles.card}>
-      <h1 className='centered'>{title}</h1>
+      <h1 className="centered">{title}</h1>
       <Link to={type === 'sign-in' ? '/sign-up' : '/sign-in'}>
         {type === 'sign-in' ? 'Need an account?' : 'Have an account?'}
       </Link>

@@ -62,9 +62,9 @@ const NewCommentForm: FC<{
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <FormControl>
-        <FormLabel htmlFor='comment'>New Comment</FormLabel>
+        <FormLabel htmlFor="comment">New Comment</FormLabel>
         <TextArea
-          name='comment'
+          name="comment"
           rows={2}
           cols={2}
           required

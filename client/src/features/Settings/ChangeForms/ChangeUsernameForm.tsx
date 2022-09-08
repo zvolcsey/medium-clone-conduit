@@ -56,9 +56,9 @@ const ChangeUsernameForm: FC<{ username: string; token: string }> = (props) => {
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <FormControl className={styles['form-control']}>
-        <FormLabel htmlFor='username'>Username</FormLabel>
+        <FormLabel htmlFor="username">Username</FormLabel>
         <TextInput
-          name='username'
+          name="username"
           value={usernameRes.value}
           required={true}
           minLength={6}

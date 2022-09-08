@@ -19,7 +19,7 @@ const PopularTags: FC<{}> = () => {
         {status === 'loading' && <Loading />}
         {status === 'success' && <TagList tags={popularTags} />}
         {status === 'failed' && (
-          <p className='centered bold'>
+          <p className="centered bold">
             Loading popular tags was not successfully!
           </p>
         )}

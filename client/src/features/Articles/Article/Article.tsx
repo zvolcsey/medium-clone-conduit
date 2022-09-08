@@ -49,9 +49,9 @@ const Article: FC<{ article: ArticleProperties }> = (props) => {
       </Card>
       <ArticleMeta metaData={articleMetaData} />
       <Routes>
-        <Route path='/' element={loadCommentsLink} />
+        <Route path="/" element={loadCommentsLink} />
         <Route
-          path='comments'
+          path="comments"
           element={<Comments articleResourceId={article.resourceId} />}
         />
       </Routes>

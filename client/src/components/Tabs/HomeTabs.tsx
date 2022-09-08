@@ -12,8 +12,8 @@ const HomeTabs: FC<{}> = () => {
   return (
     <Tabs>
       <TabsList>
-        <PublicTabItem path='/'>Global Feed</PublicTabItem>
-        <PrivateTabItem path='/feed'>Your Feed</PrivateTabItem>
+        <PublicTabItem path="/">Global Feed</PublicTabItem>
+        <PrivateTabItem path="/feed">Your Feed</PrivateTabItem>
         {param.tagName && (
           <PublicTabItem path={undefined} displayIfActive={true}>
             #{param.tagName}

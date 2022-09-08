@@ -12,7 +12,7 @@ const SubmitButton: FC<{ className?: string; disabled?: boolean }> = (
 
   return (
     <Button
-      type='submit'
+      type="submit"
       className={`${styles.button} ${className}`}
       onClick={undefined}
       disabled={disabled || false}

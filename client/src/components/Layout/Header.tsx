@@ -15,7 +15,7 @@ const Header: FC<{ onHamburgerButtonClick: () => void }> = (props) => {
       <Container className={styles.container}>
         <Brand />
         <nav aria-labelledby={`main-navigation`} className={styles.nav}>
-          <NavList id='main-navigation' className={styles['nav-list']} />
+          <NavList id="main-navigation" className={styles['nav-list']} />
         </nav>
         <MenuButton onClick={onHamburgerButtonClick} />
       </Container>

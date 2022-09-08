@@ -47,19 +47,19 @@ const App: FC<{}> = () => {
 
   const routes = (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path='feed'
+          path="feed"
           element={
             <Private>
               <Home />
             </Private>
           }
         />
-        <Route path='tag/:tagName' element={<Home />} />
+        <Route path="tag/:tagName" element={<Home />} />
         <Route
-          path='sign-in'
+          path="sign-in"
           element={
             <Auth>
               <AuthPage />
@@ -67,16 +67,16 @@ const App: FC<{}> = () => {
           }
         />
         <Route
-          path='sign-up'
+          path="sign-up"
           element={
             <Auth>
               <AuthPage />
             </Auth>
           }
         />
-        <Route path='profile/@:username/*' element={<ProfilePage />} />
+        <Route path="profile/@:username/*" element={<ProfilePage />} />
         <Route
-          path='editor'
+          path="editor"
           element={
             <Private>
               <EditorPage />
@@ -84,16 +84,16 @@ const App: FC<{}> = () => {
           }
         />
         <Route
-          path='editor/:slug-:resourceId'
+          path="editor/:slug-:resourceId"
           element={
             <Private>
               <EditorPage />
             </Private>
           }
         />
-        <Route path='settings' element={<SettingsPage />} />
-        <Route path='article/:slug-:resourceId/*' element={<ArticlePage />} />
-        <Route path='*' element={<PageNotFound />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="article/:slug-:resourceId/*" element={<ArticlePage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
   );

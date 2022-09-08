@@ -19,7 +19,7 @@ const ProfileActions: FC<{ username: string; following: boolean }> = (
   return (
     <ul className={styles.actions}>
       <li className={styles.item}>
-        {isYou && <span className='bold'>You</span>}
+        {isYou && <span className="bold">You</span>}
         {!isYou && (
           <FollowingButton username={username} following={following} />
         )}

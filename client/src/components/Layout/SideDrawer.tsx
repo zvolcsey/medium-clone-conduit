@@ -31,7 +31,7 @@ const SideDrawer: FC<{
             className={styles.nav}
           >
             <NavList
-              id='side-drawer-navigation'
+              id="side-drawer-navigation"
               className={styles['nav-list']}
               onItemClick={onClose}
             />

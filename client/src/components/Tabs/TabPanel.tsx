@@ -38,17 +38,17 @@ const TabPanel: FC<{}> = () => {
   }
 
   if (status === 'success' && articlesCount === 0) {
-    content = <p className='centered bold'>No articles here... yet!</p>;
+    content = <p className="centered bold">No articles here... yet!</p>;
   }
 
   if (status === 'failed') {
     content = (
-      <p className='centered bold'>Loading articles was not successfully!</p>
+      <p className="centered bold">Loading articles was not successfully!</p>
     );
   }
 
   if (!pageIsExist) {
-    content = <p className='centered bold'>Page is not exist!</p>;
+    content = <p className="centered bold">Page is not exist!</p>;
   }
 
   return (

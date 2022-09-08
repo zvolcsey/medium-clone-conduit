@@ -8,7 +8,7 @@ const Private: FC<{}> = (props) => {
   const token = localStorage.getItem('Token');
 
   if (!token) {
-    return <Navigate to='/sign-up' state={{ from: location }} replace />;
+    return <Navigate to="/sign-up" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;
