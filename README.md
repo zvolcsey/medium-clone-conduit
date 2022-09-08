@@ -143,6 +143,8 @@ I added to my project the routes, that was in the [routing guideline](https://re
   - `@babel/preset-typescript`
   - `@babel/preset-env`
   - `@babel/core`
+- Prettier
+  - `prettier`
 
 ## Authentication
 
