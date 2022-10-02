@@ -2,7 +2,6 @@ import { AxiosRequestHeaders } from 'axios';
 
 import type { ArticleProperties } from '../../../server/src/types/appClasses';
 import type { InputHookRes } from '../app/types/hooks.types';
-import type { EditorType } from '../app/types/redux.types';
 
 export const createRequestHeaders = (token: string | null) => {
   let headers: AxiosRequestHeaders = { 'Content-Type': 'application/json' };
@@ -76,7 +75,7 @@ export const checkFormIsValid = (
   formIsValid = checkFieldsAreValid(title, description, body, tags);
 
   if (resourceId && article && formIsValid) {
-    let isDefault = checkFieldsAreDefault(
+    const isDefault = checkFieldsAreDefault(
       title,
       description,
       body,

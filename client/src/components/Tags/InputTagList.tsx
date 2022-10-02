@@ -14,9 +14,7 @@ const InputTagList: FC<{
     onRemoveTag!(tag);
   };
 
-  let tagItems: JSX.Element[] | undefined;
-
-  tagItems = tags.map((tag) => (
+  const tagItems = tags.map((tag) => (
     <TagSpanItem key={tag} tag={tag} onRemove={removeTagHandler} />
   ));
 

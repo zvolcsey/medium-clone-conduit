@@ -90,7 +90,7 @@ const AuthForm: FC<{
     <InfoText>Password must be between 8 and 64 characters</InfoText>
   );
 
-  let buttonName = type === 'sign-in' ? 'Sign In' : 'Sign Up';
+  const buttonName = type === 'sign-in' ? 'Sign In' : 'Sign Up';
 
   return (
     <form onSubmit={submitHandler} className={styles.form} noValidate>

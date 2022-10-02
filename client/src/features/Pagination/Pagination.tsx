@@ -70,7 +70,7 @@ const Pagination: FC<{ pages: number }> = (props) => {
     );
   }
 
-  let pageItems = getPaginationGroup().map((item) => {
+  const pageItems = getPaginationGroup().map((item) => {
     if (currentPage === item) {
       return (
         <li key={item} className={styles.item}>

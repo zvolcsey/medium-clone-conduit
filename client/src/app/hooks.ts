@@ -17,7 +17,7 @@ export const useInput = (data?: string): InputHookRes => {
   const tags = useAppSelector(selectTags);
   const tagRegex = /^#([a-z0-9&\-_]+)/g;
 
-  let valid = enteredValue.length > 0;
+  const valid = enteredValue.length > 0;
 
   const valueChangedHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

@@ -51,7 +51,7 @@ const EditorForm: FC<{
   const tagsInputRes = useInput();
 
   useEffect(() => {
-    let valid = checkFormIsValid(
+    const valid = checkFormIsValid(
       titleRes,
       descriptionRes,
       bodyRes,

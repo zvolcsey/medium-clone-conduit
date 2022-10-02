@@ -21,7 +21,7 @@ const TabPanel: FC<{}> = () => {
 
   const [searchParam] = useSearchParams();
 
-  let pageSearchParam = searchParam.get('page') ?? 1;
+  const pageSearchParam = searchParam.get('page') ?? 1;
 
   const pages =
     Math.ceil((articlesCount ?? 0) / DEFAULT_ARTICLES_LIMIT) === 0

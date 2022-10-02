@@ -23,7 +23,7 @@ const ArticlePage: FC<{}> = () => {
   const article = useAppSelector(selectArticle);
   const status = useAppSelector(selectArticleStatus);
 
-  let param = useParams();
+  const param = useParams();
   const resourceId = param.resourceId!;
 
   useEffect(() => {
