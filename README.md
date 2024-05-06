@@ -288,7 +288,7 @@ create a .env file in the server folder, that has this values
   set DATABASE_URL=postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>&&npm run migrate up
 ```
 
-- Windows wiht Powershell
+- Windows with Powershell
 
 ```
   $env:DATABASE_URL="postgres://<DB_USER>:<DB_PASS>@localhost:<DB_PORT>/<DB_NAME>";
